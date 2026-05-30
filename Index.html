@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ediciones Mundo — El conocimiento a tu alcance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Style.css" />
+  <link rel="stylesheet" href="splash.css" />
+  <link rel="stylesheet" href="clientes.css">
+  <link rel="stylesheet" href="dashboard-catalago.css">
+</head>
+<body>
+
+
+  <!--SPLASH SCREEN-->
+
+<div id="splash-screen">
+
+  <div class="splash-container">
+
+    <!-- círculo -->
+    <div class="splash-ring">
+      <div class="splash-logo"></div>
+    </div>
+
+    <!-- textos -->
+    <h1 class="splash-title">Ediciones Mundo</h1>
+
+    <p class="splash-loading-text" id="loadingText">
+      Preparando conocimiento...
+    </p>
+
+    <!-- barra -->
+    <div class="splash-progress">
+      <div class="splash-progress-bar" id="progressBar"></div>
+    </div>
+
+    <span class="splash-percent" id="progressText">0%</span>
+
+  </div>
+
+</div>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#inicio" class="navbar__brand">
+        <div class="navbar__logo-slot" title="Espacio para logo">
+          <span class="navbar__logo-text"></span>
+        </div>
+        <span class="navbar__name">EMundo</span>
+      </a>
+      <nav class="navbar__links" id="navLinks">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#mision">Visión y Misión</a>
+        <a href="#valores">Valores</a>
+        <a href="#informacion">Información</a>
+        <a href="#cliente">Cliente</a>
+      </nav>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio">
+      <!--
+        ===================================================
+        IMAGEN DE FONDO INSTITUCIONAL
+        Para agregar tu imagen edita en style.css:
+          .hero { background-image: url('tu-imagen.jpg'); }
+        ===================================================
+      -->
+      <div class="hero__overlay"></div>
+      <div class="hero__content reveal">
+        <p class="hero__eyebrow">Editorial &middot; Centroam&eacute;rica &middot; Desde 2000</p>
+        <h1 class="hero__title">
+          Donde cada<br /><em>P&aacute;gina</em> es<br />un Mundo.
+        </h1>
+        <p class="hero__subtitle">El conocimiento a tu alcance</p>
+        <div class="hero__actions">
+          <a href="#informacion" class="btn btn--primary">Ver informaci&oacute;n</a>
+          <a href="#nosotros"    class="btn btn--ghost">Con&oacute;cenos</a>
+        </div>
+      </div>
+      <div class="hero__scroll-hint">
+        <div class="hero__scroll-dot"></div>
+      </div>
+    </section>
+
+    <!-- QUIENES SOMOS -->
+    <section class="section nosotros" id="nosotros">
+      <div class="section__inner">
+        <div class="nosotros__text">
+          <span class="section__label reveal">&#8212; Qui&eacute;nes somos</span>
+          <h2 class="section__title reveal">Una Editorial con<br /><em>alma propia.</em></h2>
+          <p class="reveal">Ediciones Mundo naci&oacute; en el a&ntilde;o 2000 en Costa Rica, en donde tiene su casa matriz y ha logrado posicionarse desde entonces, a nivel centroamericano, incluyendo Nicaragua.</p>
+          <p class="reveal">Nuestro prop&oacute;sito siempre ha sido suplir las necesidades y requerimientos de materiales educativos y publicaciones especiales con un enfoque did&aacute;ctico, creativo y de autoaprendizaje, siendo el aliado perfecto en el desarrollo cognitivo de ni&ntilde;os, adolescentes y j&oacute;venes en los diferentes niveles acad&eacute;micos de la regi&oacute;n centroamericana.</p>
+          <p class="reveal">Ediciones Mundo trabaja incansablemente en la visi&oacute;n de aportar valor con obras de calidad y de gran contenido asociado al servicio integral que brindan nuestros equipos de exitosos colaboradores, lo que nos ha llevado a conseguir el posicionamiento y reconocimiento de nuestros clientes.</p>
+          <p class="reveal">A trav&eacute;s de todos estos a&ntilde;os, hemos ido creciendo con la colaboraci&oacute;n de nuestros aliados comerciales, las m&aacute;s prestigiosas editoras a nivel internacional: <strong>Grupo Clasa, Editorial San Pablo, Harper Collins, Holman</strong> y otros socios, con quienes hemos cumplido nuestro compromiso de servir y ayudar a transformar la vida de miles de familias.</p>
+        </div>
+        <div class="nosotros__arrow-wrap reveal">
+          <button class="nosotros__arrow-btn" id="toggleGallery" aria-expanded="false" aria-controls="gallerySection">
+            <span class="nosotros__arrow-label">Ver galer&iacute;a</span>
+            <span class="nosotros__arrow-icon" aria-hidden="true">&#8595;</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERIA -->
+    <section class="gallery-section" id="gallerySection" aria-hidden="true">
+  <div class="section__inner">
+    <p class="gallery__hint">Imágenes institucionales</p>
+    <div class="gallery__grid">
+
+      <div class="gallery__card gallery__card--large">
+        <img src="Image/EificoEMundo.png" alt="Edificio Ediciones Mundo" class="gallery__img" />
+      </div>
+
+      <div class="gallery__card">
+        <img src="Image/dentro1.png" alt="Foto institucional 2" class="gallery__img" />
+      </div>
+
+      <div class="gallery__card">
+        <img src="Image/dentro2.png" alt="Foto institucional 3" class="gallery__img" />
+      </div>
+
+      <div class="gallery__card">
+        <img src="Image/dentro3.png" alt="Foto institucional 4" class="gallery__img" />
+      </div>
+
+      <div class="gallery__card">
+        <img src="Image/LogoEMundo.png" alt="Logo Ediciones Mundo" class="gallery__img" />
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- MISION Y VISION -->
+    <section class="section mv" id="mision">
+      <div class="section__inner">
+        <span class="section__label reveal" style="text-align:center;display:block;">&#8212; Misi&oacute;n y Visi&oacute;n</span>
+        <h2 class="section__title reveal" style="text-align:center;">Comprometidos con<br /><em>la Sociedad.</em></h2>
+        <div class="mv__cards">
+          <div class="mv__card reveal">
+            <div class="mv__card-tag">Misi&oacute;n</div>
+            
+            <h3>Nuestra Misi&oacute;n</h3>
+            <p>Consolidar nuestra presencia en el mercado de libros, materiales autodid&aacute;cticos y publicaciones especiales, siendo referente de calidad y buen servicio, generando beneficios integrales tanto a nuestros clientes como a nuestra compa&ntilde;&iacute;a.</p>
+            <div class="mv__card-bar"></div>
+          </div>
+          <div class="mv__card reveal">
+            <div class="mv__card-tag">Visi&oacute;n</div>
+         
+            <h3>Nuestra Visi&oacute;n</h3>
+            <p>Somos la editorial L&iacute;der Regional con enfoque nacional que ofrece conocimiento, aprendizaje y liderazgo a nuestro mercado, mediante una oferta variada, original y con gran contenido de valor.</p>
+            <div class="mv__card-bar"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VALORES -->
+    <section class="section valores" id="valores">
+      <div class="section__inner">
+        <span class="section__label reveal">&#8212; Nuestros valores</span>
+        <h2 class="section__title reveal">Lo que nos<br /><em>define.</em></h2>
+        <div class="valores__grid">
+          <div class="valor__card reveal">
+            <div class="valor__card-num">01</div>
+            
+            <h3>Responsabilidad</h3>
+            <p>Asumimos cada tarea con seriedad y profesionalismo, cumpliendo nuestros compromisos y contribuyendo al desarrollo educativo y organizacional de manera eficiente y sostenible.</p>
+          </div>
+          <div class="valor__card reveal">
+            <div class="valor__card-num">02</div>
+            
+            <h3>Transparencia</h3>
+            <p>Manejamos nuestros procesos y relaciones con claridad y apertura, promoviendo la confianza mediante decisiones honestas, informaci&oacute;n precisa y una gesti&oacute;n &eacute;tica en cada &aacute;rea.</p>
+          </div>
+          <div class="valor__card reveal">
+            <div class="valor__card-num">03</div>
+           
+            <h3>Lealtad</h3>
+            <p>Construimos relaciones s&oacute;lidas y duraderas basadas en la confianza, el respeto y el apoyo mutuo con nuestros colaboradores, clientes y socios comerciales.</p>
+          </div>
+          <div class="valor__card reveal">
+            <div class="valor__card-num">04</div>
+          
+            <h3>Honestidad</h3>
+            <p>Actuamos con integridad y &eacute;tica en todas nuestras acciones, manteniendo una comunicaci&oacute;n clara y sincera que fortalezca la confianza de quienes trabajan con nosotros.</p>
+          </div>
+          <div class="valor__card reveal">
+            <div class="valor__card-num">05</div>
+          
+            <h3>Compromiso</h3>
+            <p>Cumplimos con responsabilidad cada una de nuestras metas y obligaciones, garantizando atenci&oacute;n eficiente, productos de calidad y soluciones que aporten valor al sector educativo.</p>
+          </div>
+          <div class="valor__card reveal">
+            <div class="valor__card-num">06</div>
+          
+            <h3>Pasi&oacute;n</h3>
+            <p>Trabajamos con entusiasmo y dedicaci&oacute;n en cada proyecto, impulsando el acceso a la educaci&oacute;n y al conocimiento, innovando constantemente para brindar un servicio de calidad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INFORMACION + MAPAS -->
+    <section class="section informacion" id="informacion">
+      <div class="section__inner">
+        <span class="section__label reveal">&#8212; Informaci&oacute;n</span>
+        <h2 class="section__title reveal">Todo lo que necesitas<br /><em>saber sobre nosotros.</em></h2>
+
+        <div class="horario reveal">
+          <div class="horario__label">
+            <span>&#128336;</span>
+            <strong>Horario de atenci&oacute;n en oficina</strong>
+          </div>
+          <div class="horario__slots">
+            <div class="horario__slot">
+              <span>Lunes &ndash; Viernes</span>
+              <strong>8:00 am &ndash; 4:00 pm</strong>
+            </div>
+            <div class="horario__divider"></div>
+            <div class="horario__slot">
+              <span>S&aacute;bado</span>
+              <strong>8:00 am &ndash; 12:00 pm</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="sedes__grid">
+
+          <!-- Nicaragua -->
+          <div class="sede reveal">
+            <div class="sede__header">
+              <span class="sede__flag">&#127475;&#127470;</span>
+              <div>
+                <h3 class="sede__country">Nicaragua</h3>
+                <p class="sede__city">Managua</p>
+              </div>
+            </div>
+            <div class="sede__info">
+              <p class="sede__address">Club Terraza, 350 metros al Norte, Managua.</p>
+              <ul class="sede__contacts">
+                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>+(505) 2227 0716 / +(505) 5849 0046</span></li>
+                <li><span class="sede__contact-label">Email</span><a href="mailto:ventas@edicionesmundo.com">ventas@edicionesmundo.com</a></li>
+                <li><span class="sede__contact-label"></span><a href="mailto:emundonicaragua@yahoo.com.mx">emundonicaragua@yahoo.com.mx</a></li>
+                <li><span class="sede__contact-label"></span><a href="mailto:faviolagarcia@edicionesmundo.com">faviolagarcia@edicionesmundo.com</a></li>
+              </ul>
+            </div>
+            <div class="sede__map">
+              <iframe title="Mapa Nicaragua" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.2900%2C12.1200%2C-86.2300%2C12.1700&layer=mapnik&marker=12.1450%2C-86.2600" loading="lazy"></iframe>
+              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=12.1450&mlon=-86.2600#map=15/12.1450/-86.2600" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
+            </div>
+          </div>
+
+          <!-- Costa Rica -->
+          <div class="sede reveal">
+            <div class="sede__header">
+              <span class="sede__flag">&#127464;&#127479;</span>
+              <div>
+                <h3 class="sede__country">Costa Rica</h3>
+                <p class="sede__city">San Jos&eacute;</p>
+              </div>
+            </div>
+            <div class="sede__info">
+              <p class="sede__address">San Jos&eacute;; 250 m oeste de la iglesia cat&oacute;lica a mano derecha.</p>
+              <ul class="sede__contacts">
+                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>(506) 2226 9961 / 2226 9075</span></li>
+                <li><span class="sede__contact-label">Email</span><a href="mailto:emundo@ice.co.cr">emundo@ice.co.cr</a></li>
+                <li><span class="sede__contact-label"></span><a href="mailto:kesslercr@edicionesmundo.com">kesslercr@edicionesmundo.com</a></li>
+              </ul>
+            </div>
+            <div class="sede__map">
+              <iframe title="Mapa Costa Rica" src="https://www.openstreetmap.org/export/embed.html?bbox=-84.1100%2C9.9100%2C-84.0600%2C9.9500&layer=mapnik&marker=9.9281%2C-84.0850" loading="lazy"></iframe>
+              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=9.9281&mlon=-84.0850#map=15/9.9281/-84.0850" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
+            </div>
+          </div>
+
+          <!-- Honduras -->
+          <div class="sede reveal">
+            <div class="sede__header">
+              <span class="sede__flag">&#127469;&#127475;</span>
+              <div>
+                <h3 class="sede__country">Honduras</h3>
+                <p class="sede__city">Tegucigalpa</p>
+              </div>
+            </div>
+            <div class="sede__info">
+              <p class="sede__address">Colonia 15 de septiembre, Avenida Independencia, 8va Calle, Bloque Q6, Casa 1805.</p>
+              <ul class="sede__contacts">
+                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>(504) 2234 3761 / 2233 1559</span></li>
+                <li><span class="sede__contact-label">Email</span><a href="mailto:anielka@edicionesmundo.com">anielka@edicionesmundo.com</a></li>
+              </ul>
+            </div>
+            <div class="sede__map">
+              <iframe title="Mapa Honduras" src="https://www.openstreetmap.org/export/embed.html?bbox=-87.2300%2C14.0600%2C-87.1700%2C14.1000&layer=mapnik&marker=14.0818%2C-87.2060" loading="lazy"></iframe>
+              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=14.0818&mlon=-87.2060#map=15/14.0818/-87.2060" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
+            </div>
+          </div>
+
+          <!-- Panama -->
+          <div class="sede reveal">
+            <div class="sede__header">
+              <span class="sede__flag">&#127477;&#127462;</span>
+              <div>
+                <h3 class="sede__country">Panam&aacute;</h3>
+                <p class="sede__city">Ciudad de Panam&aacute;</p>
+              </div>
+            </div>
+            <div class="sede__info">
+              <p class="sede__address">Urbanizaci&oacute;n La Sonde, v&iacute;a la Universidad Tecnol&oacute;gica, costado de la Escuela de Bellas Artes.</p>
+              <ul class="sede__contacts">
+                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>(507) 7748937 / 6215 0642</span></li>
+                <li><span class="sede__contact-label">Email</span><a href="mailto:edicionesmundo@hotmail.com">edicionesmundo@hotmail.com</a></li>
+              </ul>
+            </div>
+            <div class="sede__map">
+              <iframe title="Mapa Panama" src="https://www.openstreetmap.org/export/embed.html?bbox=-79.5450%2C8.9700%2C-79.4950%2C9.0100&layer=mapnik&marker=8.9936%2C-79.5197" loading="lazy"></iframe>
+              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=8.9936&mlon=-79.5197#map=15/8.9936/-79.5197" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+     BOTÓN FLOTANTE — Registro de Clientes
+     Pégalo antes del cierre </body>
+══════════════════════════════════════════════════ -->
+<div class="registro-wrap">
+  <a href="#cliente" class="btn-registro" id="btnFloatRegistro">
+    <span class="btn-registro__icon">📝</span>
+    <span>Registrarme</span>
+  </a>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════
+     SECCIÓN REGISTRO DE CLIENTES
+     Reemplaza tu <section id="cliente"> actual
+══════════════════════════════════════════════════ -->
+<section id="cliente" class="section section--clientes">
+  <div class="section__inner">
+
+    <!-- Encabezado -->
+    <header class="section__header reveal">
+      <h2 class="section__title">Registro de Clientes</h2>
+      <p class="section__subtitle">Completa la información y cuéntanos tu experiencia</p>
+    </header>
+
+    <!-- Indicador de pasos -->
+    <div class="form-steps reveal">
+      <div class="form-step active" id="step1">
+        <div class="form-step__bubble" id="stepBubble1"><span>1</span></div>
+        <span class="form-step__label">Tu opinión</span>
+      </div>
+      <div class="form-step-line">
+        <div class="form-step-line-fill" id="stepLineFill"></div>
+      </div>
+      <div class="form-step" id="step2">
+        <div class="form-step__bubble" id="stepBubble2"><span>2</span></div>
+        <span class="form-step__label" id="stepLabel2">Tus datos</span>
+      </div>
+    </div>
+
+    <!-- Tarjeta principal -->
+    <div class="clientes__card reveal">
+
+      <!-- ══ PASO 1 — Mini encuesta ══ -->
+      <div class="form-panel active" id="panelEncuesta">
+
+        <div class="encuesta__intro">
+          <h3>💬 Queremos conocerte mejor</h3>
+          <p>Tus respuestas nos ayudan a mejorar. Son rápidas y anónimas.</p>
+        </div>
+
+        <div class="encuesta__list">
+
+          <!-- Pregunta 1 -->
+          <div class="encuesta__item">
+            <p class="encuesta__question">
+              <span class="encuesta__question-num">1</span>
+              ¿Qué te parecen los precios de nuestras Biblias?
+            </p>
+            <div class="encuesta__options">
+              <span class="encuesta__chip" data-group="precios" data-value="muy_accesibles">😊 Muy accesibles</span>
+              <span class="encuesta__chip" data-group="precios" data-value="accesibles">👍 Accesibles</span>
+              <span class="encuesta__chip" data-group="precios" data-value="regulares">😐 Regulares</span>
+              <span class="encuesta__chip" data-group="precios" data-value="elevados">💸 Un poco elevados</span>
+            </div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="encuesta__item">
+            <p class="encuesta__question">
+              <span class="encuesta__question-num">2</span>
+              ¿Cómo ha sido tu experiencia con nosotros?
+            </p>
+            <div class="encuesta__options">
+              <span class="encuesta__chip" data-group="experiencia" data-value="excelente">🌟 Excelente</span>
+              <span class="encuesta__chip" data-group="experiencia" data-value="buena">😊 Buena</span>
+              <span class="encuesta__chip" data-group="experiencia" data-value="regular">😐 Regular</span>
+              <span class="encuesta__chip" data-group="experiencia" data-value="mejorable">🔧 Mejorable</span>
+              <span class="encuesta__chip" data-group="experiencia" data-value="primera_vez">🆕 Es mi primera vez</span>
+            </div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="encuesta__item">
+            <p class="encuesta__question">
+              <span class="encuesta__question-num">3</span>
+              ¿Has realizado alguna compra con nosotros?
+            </p>
+            <div class="encuesta__options">
+              <span class="encuesta__chip" data-group="compra" data-value="si_varias">📚 Sí, varias veces</span>
+              <span class="encuesta__chip" data-group="compra" data-value="si_una">✅ Sí, una vez</span>
+              <span class="encuesta__chip" data-group="compra" data-value="no_pronto">⏳ No, pero pronto</span>
+              <span class="encuesta__chip" data-group="compra" data-value="no_explorando">🔍 Solo estoy explorando</span>
+            </div>
+          </div>
+
+          <!-- Pregunta 4 -->
+          <div class="encuesta__item">
+            <p class="encuesta__question">
+              <span class="encuesta__question-num">4</span>
+              ¿Qué te parece nuestro plan de financiamiento?
+            </p>
+            <div class="encuesta__options">
+              <span class="encuesta__chip" data-group="financiamiento" data-value="excelente">🏆 Excelente opción</span>
+              <span class="encuesta__chip" data-group="financiamiento" data-value="bueno">👌 Bueno</span>
+              <span class="encuesta__chip" data-group="financiamiento" data-value="mejorar_cuotas">📅 Podrían dar más cuotas</span>
+              <span class="encuesta__chip" data-group="financiamiento" data-value="no_conozco">❓ No lo conocía</span>
+            </div>
+          </div>
+
+          <!-- Pregunta 5 — texto libre -->
+          <div class="encuesta__item">
+            <p class="encuesta__question">
+              <span class="encuesta__question-num">5</span>
+              ¿Algo en lo que piensas que podríamos mejorar? <em style="font-weight:400;color:var(--text-light)">(Opcional)</em>
+            </p>
+            <textarea
+              id="encuestaSugerencia"
+              class="encuesta__textarea"
+              placeholder="Cuéntanos tu sugerencia o comentario..."
+              maxlength="300"
+            ></textarea>
+          </div>
+
+        </div>
+
+        <div class="encuesta__next">
+          <button type="button" class="btn btn--primary" id="btnContinuar">
+            Continuar &rarr;
+          </button>
+        </div>
+
+      </div><!-- /panelEncuesta -->
+
+
+      <!-- ══ PASO 2 — Datos del cliente ══ -->
+      <div class="form-panel" id="panelDatos">
+
+        <form id="clienteForm">
+          <input type="hidden" id="clienteId" />
+
+          <div class="form__grid">
+
+            <div class="form__group">
+              <label for="codigo">Código</label>
+              <input type="text" id="codigo" name="codigo" placeholder="CL-001" required />
+            </div>
+
+            <div class="form__group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Juan" required />
+            </div>
+
+            <div class="form__group">
+              <label for="apellido">Apellido</label>
+              <input type="text" id="apellido" name="apellido" placeholder="Pérez" required />
+            </div>
+
+            <div class="form__group">
+              <label for="edad">Edad</label>
+              <input type="number" id="edad" name="edad" min="1" max="120" placeholder="25" required />
+            </div>
+
+            <div class="form__group">
+              <label for="departamento">Departamento</label>
+              <select id="departamento" name="departamento" required>
+                <option value="">Seleccione un departamento</option>
+              </select>
+            </div>
+
+            <div class="form__group">
+              <label for="genero">Sexo</label>
+              <select id="genero" name="genero" required>
+                <option value="">Seleccione</option>
+                <option value="M">Masculino</option>
+                <option value="F">Femenino</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div class="form__actions">
+            <button type="button" class="btn--back" id="btnVolver">
+              &larr; Volver
+            </button>
+            <button type="submit" class="btn btn--primary">
+              Guardar Cliente ✓
+            </button>
+          </div>
+
+        </form>
+
+      </div><!-- /panelDatos -->
+
+    </div><!-- /clientes__card -->
+  </div>
+</section>
+
+
+
+    <!-- REDES SOCIALES -->
+    <section class="section redes" id="redes">
+      <div class="section__inner">
+        <span class="section__label reveal" style="text-align:center;display:block;">&#8212; S&iacute;guenos</span>
+        <h2 class="section__title reveal" style="text-align:center;">&#218;nete a nuestra<br /><em>comunidad digital.</em></h2>
+        <p class="redes__desc reveal">Comparte tus lecturas, descubre novedades y forma parte de una comunidad apasionada por los libros. Estamos en todas las plataformas.</p>
+        <div class="redes__grid reveal">
+
+          <a href="https://www.facebook.com/people/Grupo-SABER/61585523433023/" target="_blank" rel="noopener" class="red__card red__card--fb">
+            <div class="red__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </div>
+            <div class="red__info">
+              <span class="red__name">Facebook</span>
+              <span class="red__handle">Grupo SABER</span>
+            </div>
+            <span class="red__badge red__badge--active">Activo</span>
+            <span class="red__arrow">&#8594;</span>
+          </a>
+
+          <div class="red__card red__card--ig red__card--soon">
+            <div class="red__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            <div class="red__info">
+              <span class="red__name">Instagram</span>
+              <span class="red__handle">@edicionesmundo</span>
+            </div>
+            <span class="red__badge red__badge--soon">Pr&oacute;ximamente</span>
+          </div>
+
+          <div class="red__card red__card--tk red__card--soon">
+            <div class="red__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </div>
+            <div class="red__info">
+              <span class="red__name">TikTok</span>
+              <span class="red__handle">@edicionesmundo</span>
+            </div>
+            <span class="red__badge red__badge--soon">Pr&oacute;ximamente</span>
+          </div>
+
+          <a href="https://wa.me/50578875960" target="_blank" rel="noopener" class="red__card red__card--wa">
+            <div class="red__icon">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </div>
+            <div class="red__info">
+              <span class="red__name">WhatsApp</span>
+              <span class="red__handle">+505 78875960</span>
+            </div>
+            <span class="red__badge red__badge--active">Activo</span>
+            <span class="red__arrow">&#8594;</span>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <div class="footer__logo-slot"><span class="footer__logo-text">EM</span></div>
+        <div>
+          <p class="footer__name">Ediciones Mundo</p>
+          <p class="footer__tagline">El conocimiento a tu alcance</p>
+        </div>
+      </div>
+      <nav class="footer__links">
+        <a href="#nosotros">Nosotros</a>
+        <a href="#mision">Visi&oacute;n y Misi&oacute;n</a>
+        <a href="#valores">Valores</a>
+        <a href="#informacion">Informaci&oacute;n</a>
+      </nav>
+      <div class="footer__copy">
+        <p>&copy; 2025 Ediciones Mundo. Todos los derechos reservados.</p>
+        <p>Centroam&eacute;rica</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Botón flotante Ver Catálogo -->
+<div class="catalogo-wrap">
+
+  </div>
+
+  <!-- Botón flotante -->
+  <a href="DashboardCatalago.html" class="btn-catalogo" target="_blank">
+    <span class="btn-catalogo__icon">📚</span>
+    <span class="btn-catalogo__text">Ver Catálogo</span>
+  </a>
+
+</div>
+<script src="splash.js"></script>
+<script src="Main.js"></script>
+<script src="clientes.js"></script>
+</body>
+</html> 

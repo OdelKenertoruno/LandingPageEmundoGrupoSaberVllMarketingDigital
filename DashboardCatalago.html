@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grupo SABER | Catálogo de Biblias</title>
+  <link rel="stylesheet" href="DashboardCatalago.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+</head>
+<body>
+ 
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-container">
+      <!-- Reemplaza con: <img src="Image/LogoEMundo.png" alt="Grupo SABER" class="logo-img" /> -->
+      <img src="Image/LogoGrupoSaber.jpg" alt="Grupo SABER" class="logo-img" />
+      <div class="logo-text">
+        <span class="logo-name">Grupo SABER</span>
+        <span class="logo-sub">El conocimiento a tu alcance</span>
+      </div>
+    </div>
+ 
+    <div class="header-center">
+      <!-- Barra de búsqueda con autocomplete -->
+      <div class="search-wrapper">
+        <div class="search-container">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Buscar Biblia o Categoría..."
+            autocomplete="off"
+          />
+          <button class="search-clear" id="searchClear" aria-label="Limpiar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <!-- Dropdown autocomplete -->
+        <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
+      </div>
+    </div>
+ 
+    <a href="index.html" class="inicio-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Inicio</span>
+    </a>
+  </header>
+ 
+  <!-- FILTROS DE CATEGORÍA -->
+  <div class="filter-bar">
+    <div class="filter-inner">
+      <button class="filter-pill active" data-cat="todas">
+        <i class="fa-solid fa-border-all"></i> Todas
+      </button>
+      <button class="filter-pill" data-cat="Biblias de Estudio">
+        <i class="fa-solid fa-book-open"></i> Estudio
+      </button>
+      <button class="filter-pill" data-cat="Biblia Letra Grande 12 puntos Dama">
+        <i class="fa-solid fa-venus"></i> Letra Grande Dama
+      </button>
+      <button class="filter-pill" data-cat="Biblia Letra Grande 12 puntos Caballero">
+        <i class="fa-solid fa-mars"></i> Letra Grande Caballero
+      </button>
+      <button class="filter-pill" data-cat="Biblia letra Gigante 14 puntos Dama">
+        <i class="fa-solid fa-venus"></i> Gigante Dama
+      </button>
+      <button class="filter-pill" data-cat="Biblia letra Gigante 14 puntos Caballero">
+        <i class="fa-solid fa-mars"></i> Gigante Caballero
+      </button>
+      <button class="filter-pill" data-cat="Biblia Letra Ultra Gigante 19 puntos">
+        <i class="fa-solid fa-expand"></i> Ultra Gigante
+      </button>
+      <button class="filter-pill" data-cat="Biblia para niños y niñas">
+        <i class="fa-solid fa-child"></i> Niños
+      </button>
+      <button class="filter-pill" data-cat="Diccionario e Enciclopedia Bíblica">
+        <i class="fa-solid fa-book"></i> Diccionario
+      </button>
+    </div>
+  </div>
+ 
+  <!-- MAIN -->
+  <main class="main-container">
+ 
+    <!-- SIDEBAR IZQUIERDO — Publicidad -->
+    <aside class="left-sidebar" id="leftSidebar">
+      <button class="sidebar-toggle" id="toggleSidebar" title="Ocultar/Mostrar publicidad">
+        <i class="fa-solid fa-chevron-left" id="toggleIcon"></i>
+      </button>
+      <div class="promo-inner">
+        <p class="promo-label">Espacio Publicitario</p>
+        <div class="promo-img-slot">
+          <!--
+            IMAGEN PROMOCIONAL:
+            <img src="Image/promo.jpg" alt="Promoción" class="promo-img" />
+          -->
+          <i class="fa-solid fa-tag promo-icon"></i>
+          <span>Sube tu imagen de promoción aquí</span>
+        </div>
+      </div>
+    </aside>
+ 
+    <!-- CATÁLOGO -->
+    <section class="catalog-section" id="catalogSection">
+      <!-- Contador de resultados -->
+      <div class="results-bar">
+        <span id="resultsCount"></span>
+        <span id="activeFilterLabel"></span>
+      </div>
+ 
+      <div class="catalog-grid" id="catalogGrid"></div>
+ 
+      <!-- Estado vacío -->
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <div class="empty-icon"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Sin resultados</h3>
+        <p>No encontramos Biblias que coincidan con tu búsqueda.<br />Intenta con otro término o categoría.</p>
+        <button class="empty-reset" id="emptyReset">Ver todas las Biblias</button>
+      </div>
+    </section>
+ 
+    <!-- SIDEBAR DERECHO — Detalle crédito -->
+    <aside class="right-sidebar" id="rightSidebar">
+      <div class="right-sidebar-inner">
+        <div class="credit-header">
+          <span class="credit-header-title">Plan de Crédito</span>
+          <button class="close-btn" id="closeCreditSidebar" aria-label="Cerrar">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="creditContent"></div>
+      </div>
+    </aside>
+ 
+  </main>
+ 
+  <!-- OVERLAY (fondo oscuro al abrir sidebar derecho) -->
+  <div class="overlay" id="overlay"></div>
+ 
+  <!-- WHATSAPP FLOTANTE -->
+  <div class="speed-dial" id="speedDial">
+
+  <!-- Botones secundarios -->
+  <div class="speed-dial__items" id="speedDialItems">
+
+    <a href="https://www.facebook.com/people/Grupo-SABER/61585523433023/"
+       target="_blank" class="speed-dial__btn speed-dial__btn--fb" title="Facebook">
+      <i class="fa-brands fa-facebook-f"></i>
+      <span class="speed-dial__label">Facebook</span>
+    </a>
+
+    <a href="#" target="_blank"
+       class="speed-dial__btn speed-dial__btn--ig" title="Instagram">
+      <i class="fa-brands fa-instagram"></i>
+      <span class="speed-dial__label">Instagram</span>
+    </a>
+
+    <a href="#" target="_blank"
+       class="speed-dial__btn speed-dial__btn--tk" title="TikTok">
+      <i class="fa-brands fa-tiktok"></i>
+      <span class="speed-dial__label">TikTok</span>
+    </a>
+
+    <a href="https://wa.me/50578875960" target="_blank"
+       class="speed-dial__btn speed-dial__btn--wa" title="WhatsApp">
+      <i class="fa-brands fa-whatsapp"></i>
+      <span class="speed-dial__label">WhatsApp</span>
+    </a>
+
+  </div>
+
+  <!-- Botón principal -->
+  <button class="speed-dial__main" id="speedDialMain" aria-label="Redes sociales">
+    <i class="fa-solid fa-share-nodes" id="speedDialIcon"></i>
+  </button>
+
+</div>
+  <!-- FOOTER -->
+  <footer class="footer">
+     
+    <div>
+
+  <h1>Grupo SABER </h1>
+
+    </div>
+    
+      </div>
+      <div class="footer-copy">
+        <p>© 2025 Ediciones Mundo. Todos los derechos reservados.</p>
+        <p>Managua, Nicaragua</p>
+      </div>
+    </div>
+  </footer>
+ 
+  <script src="DashboardCatalago.js"></script>
+</body>
+</html>
