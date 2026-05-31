@@ -1074,3 +1074,266 @@ a { text-decoration: none; color: inherit; }
   .speed-dial__label { display: none; }
   .speed-dial__btn   { padding: 0; width: 48px; justify-content: center; }
 }
+@media (max-width: 768px) {
+
+  /* Header reorganizado en 2 filas */
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 0.75rem 1rem;
+    gap: 0.6rem;
+  }
+
+  /* Fila 1: logo a la izquierda, botón inicio a la derecha */
+  .logo-container {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .logo-name {
+    font-size: 0.95rem;
+  }
+
+  .inicio-btn {
+    order: 2;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.78rem;
+  }
+
+  /* Fila 2: búsqueda ocupa todo el ancho */
+  .header-center {
+    order: 3;
+    width: 100%;
+    flex-basis: 100%;
+  }
+
+  .search-wrapper {
+    max-width: 100%;
+  }
+
+  .search-container input {
+    font-size: 0.82rem;
+  }
+
+  /* Filtros con mejor padding */
+  .filter-inner {
+    padding: 0.5rem 0.75rem;
+    gap: 0.4rem;
+  }
+
+  .filter-pill {
+    font-size: 0.72rem;
+    padding: 0.38rem 0.75rem;
+  }
+
+  /* Cards en 2 columnas bien proporcionadas */
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .catalog-section {
+    padding: 0.85rem;
+  }
+
+  .card-image {
+    height: 160px;
+  }
+
+  .card-content {
+    padding: 0.65rem;
+  }
+
+  .card-name {
+    font-size: 0.76rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .card-price {
+    font-size: 0.95rem;
+  }
+
+  .card-price-label {
+    font-size: 0.6rem;
+  }
+
+  /* Botones de card más compactos */
+  .card-buttons {
+    gap: 0.35rem;
+  }
+
+  .btn {
+    font-size: 0.68rem;
+    padding: 0.5rem 0.25rem;
+    gap: 0.2rem;
+  }
+
+  .btn i { font-size: 0.75rem; }
+
+  /* Panel crédito a pantalla completa */
+  .right-sidebar {
+    width: 100%;
+    right: -100%;
+  }
+
+  /* Speed dial más pequeño */
+  .speed-dial {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .speed-dial__main {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+  }
+
+  .speed-dial__btn {
+    height: 42px;
+  }
+
+  .speed-dial__btn i {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .speed-dial__label {
+    font-size: 0.72rem;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Pantallas muy pequeñas — 1 columna */
+@media (max-width: 360px) {
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .logo-sub { display: none; }
+
+  .speed-dial__label { display: none; }
+  .speed-dial__btn { padding: 0; width: 42px; justify-content: center; border-radius: 50%; }
+}
+/* ════════════════════════════════════════════════════
+   SIDEBAR PUBLICITARIO — Banner móvil
+════════════════════════════════════════════════════ */
+
+@media (max-width: 1100px) {
+
+  /* En tablet/móvil lo sacamos del sidebar y
+     lo convertimos en banner horizontal */
+  .left-sidebar {
+    display: block !important;
+    width: 100%;
+    position: static;        /* ya no es sticky lateral */
+    border-radius: 0;
+    box-shadow: none;
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+    padding: 0.75rem 1rem;
+    background: var(--white);
+  }
+
+  /* El toggle lo ocultamos en móvil */
+  .sidebar-toggle { display: none; }
+
+  /* El contenido interno se pone en fila */
+  .promo-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .promo-label {
+    display: none;           /* quitamos el label en banner */
+  }
+
+  /* El slot de imagen cambia a banner horizontal */
+  .promo-img-slot {
+    min-height: unset;
+    height: 90px;
+    flex-direction: row;
+    border-radius: var(--radius-sm);
+    animation: none;
+    background: linear-gradient(135deg, var(--bg), #dceef5);
+    border: 1.5px dashed var(--light);
+    font-size: 0.72rem;
+    gap: 0.5rem;
+  }
+
+  .promo-icon { font-size: 1.4rem; }
+
+  /* Si es imagen real también se adapta */
+  .promo-img {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+  }
+
+  /* El main-container vuelve a flex column */
+  .main-container {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .promo-img-slot {
+    height: 72px;
+    font-size: 0.68rem;
+  }
+  .promo-icon { font-size: 1.1rem; }
+}
+/* ════════════════════════════════════════════════════
+   FIX — Tamaños intermedios (ventana PC achicada)
+════════════════════════════════════════════════════ */
+
+@media (min-width: 601px) and (max-width: 1100px) {
+
+  /* El main vuelve a ser columna porque ya no hay sidebar lateral */
+  .main-container {
+    flex-direction: column;
+  }
+
+  /* Grid se adapta al ancho disponible — más columnas */
+  .catalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .catalog-section {
+    padding: 1.25rem 1.5rem;
+    width: 100%;
+  }
+
+  /* Banner publicitario más alto en tablet */
+  .promo-img-slot {
+    height: 110px;
+  }
+
+  .promo-img {
+    height: 110px;
+  }
+
+  /* Cards: imagen un poco más alta en tablet */
+  .card-image {
+    height: 220px;
+  }
+}
+
+/* ── Tablet mediana ── */
+@media (min-width: 768px) and (max-width: 1100px) {
+  .catalog-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Tablet pequeña / landscape móvil ── */
+@media (min-width: 601px) and (max-width: 767px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card-image { height: 190px; }
+}

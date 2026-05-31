@@ -2,10 +2,93 @@
    EDICIONES MUNDO — clientes.css
    Registro de Clientes — Diseño moderno 2 pasos
 ════════════════════════════════════════════════════ */
+/* ════════════════════════════════════════════════════
+   PÁGINA COMPLETA DE REGISTRO
+════════════════════════════════════════════════════ */
+:root {
+  --primary-black:  #000000;
+  --primary-dark:   #00608B;   /* Azul profundo — headers, footer, textos clave */
+  --primary-medium: #0092BA;   /* Azul principal — botones, enlaces, acentos    */
+  --primary-light:  #A0C5CF;   /* Azul suave — fondos, bordes                   */
+  --secondary:      #3E3ECE;   /* Azul-violeta — contraste, destacados           */
+  --accent:         #66C9D3;   /* Turquesa — hover, iconos, detalles             */
+  --paper:          #FDFAF4;
+  --white:          #FFFFFF;
+  --gray-soft:      #F2F6F8;
+  --gray-mid:       #C8D8DF;
+  --text-dark:      #0D2233;
+  --text-mid:       #2D4B5E;
+  --text-light:     #5E7D8C;
 
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'Lora', serif;
+  --font-light:   'Cormorant Garamond', serif;
+
+  --nav-h:    72px;
+  --radius:   6px;
+  --radius-lg:12px;
+  --shadow-sm: 0 2px 12px rgba(0,96,139,.08);
+  --shadow-md: 0 8px 32px rgba(0,96,139,.12);
+  --shadow-lg: 0 16px 48px rgba(0,96,139,.16);
+  --transition: 0.38s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+html,
+body{
+  min-height:100%;
+  margin:0;
+  padding:0;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+/* Contenedor principal de la página */
+.registro-page{
+  min-height:100vh;
+
+  /* AQUÍ COLOCARÁS TU IMAGEN */
+  background-image:url("Image/LogoGrupoSaber.jpg");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+  position:relative;
+}
+
+/* Capa oscura para que destaque el formulario */
+.registro-page__overlay{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:4rem 1rem;
+
+  background:rgba(0,0,0,.35);
+}
+
+/* Ajuste de la sección dentro de la página */
+.section--clientes{
+  width:100%;
+  max-width:1000px;
+
+  margin:auto;
+
+  border-radius:24px;
+
+  backdrop-filter:blur(6px);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.20);
+}
 /* ─── Sección contenedora ─── */
 .section--clientes {
-  background: linear-gradient(160deg, var(--gray-soft) 0%, #e8f3f7 60%, var(--white) 100%);
+  background: rgba(255,255,255,.96);
   position: relative;
   overflow: hidden;
 }

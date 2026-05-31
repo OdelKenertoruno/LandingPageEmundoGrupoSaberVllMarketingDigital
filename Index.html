@@ -53,11 +53,11 @@
         <span class="navbar__name">EMundo</span>
       </a>
       <nav class="navbar__links" id="navLinks">
-        <a href="#nosotros">Nosotros</a>
-        <a href="#mision">Visión y Misión</a>
-        <a href="#valores">Valores</a>
-        <a href="#informacion">Información</a>
-        <a href="#cliente">Cliente</a>
+        <a href="#nosotros" style="color: black; font-weight: bold;">Nosotros</a>
+    <a href="#mision" style="color: black; font-weight: bold;">Visión y Misión</a>
+    <a href="#valores" style="color: black; font-weight: bold;">Valores</a>
+    <a href="#informacion" style="color: black; font-weight: bold;">Información</a>
+    <!-- <a href="#cliente" style="color: black; font-weight: bold;">Cliente</a> -->
       </nav>
       <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -339,7 +339,7 @@
      Pégalo antes del cierre </body>
 ══════════════════════════════════════════════════ -->
 <div class="registro-wrap">
-  <a href="#cliente" class="btn-registro" id="btnFloatRegistro">
+  <a href="clientes.html" class="btn-registro" id="btnFloatRegistro">
     <span class="btn-registro__icon">📝</span>
     <span>Registrarme</span>
   </a>
@@ -350,187 +350,7 @@
      SECCIÓN REGISTRO DE CLIENTES
      Reemplaza tu <section id="cliente"> actual
 ══════════════════════════════════════════════════ -->
-<section id="cliente" class="section section--clientes">
-  <div class="section__inner">
 
-    <!-- Encabezado -->
-    <header class="section__header reveal">
-      <h2 class="section__title">Registro de Clientes</h2>
-      <p class="section__subtitle">Completa la información y cuéntanos tu experiencia</p>
-    </header>
-
-    <!-- Indicador de pasos -->
-    <div class="form-steps reveal">
-      <div class="form-step active" id="step1">
-        <div class="form-step__bubble" id="stepBubble1"><span>1</span></div>
-        <span class="form-step__label">Tu opinión</span>
-      </div>
-      <div class="form-step-line">
-        <div class="form-step-line-fill" id="stepLineFill"></div>
-      </div>
-      <div class="form-step" id="step2">
-        <div class="form-step__bubble" id="stepBubble2"><span>2</span></div>
-        <span class="form-step__label" id="stepLabel2">Tus datos</span>
-      </div>
-    </div>
-
-    <!-- Tarjeta principal -->
-    <div class="clientes__card reveal">
-
-      <!-- ══ PASO 1 — Mini encuesta ══ -->
-      <div class="form-panel active" id="panelEncuesta">
-
-        <div class="encuesta__intro">
-          <h3>💬 Queremos conocerte mejor</h3>
-          <p>Tus respuestas nos ayudan a mejorar. Son rápidas y anónimas.</p>
-        </div>
-
-        <div class="encuesta__list">
-
-          <!-- Pregunta 1 -->
-          <div class="encuesta__item">
-            <p class="encuesta__question">
-              <span class="encuesta__question-num">1</span>
-              ¿Qué te parecen los precios de nuestras Biblias?
-            </p>
-            <div class="encuesta__options">
-              <span class="encuesta__chip" data-group="precios" data-value="muy_accesibles">😊 Muy accesibles</span>
-              <span class="encuesta__chip" data-group="precios" data-value="accesibles">👍 Accesibles</span>
-              <span class="encuesta__chip" data-group="precios" data-value="regulares">😐 Regulares</span>
-              <span class="encuesta__chip" data-group="precios" data-value="elevados">💸 Un poco elevados</span>
-            </div>
-          </div>
-
-          <!-- Pregunta 2 -->
-          <div class="encuesta__item">
-            <p class="encuesta__question">
-              <span class="encuesta__question-num">2</span>
-              ¿Cómo ha sido tu experiencia con nosotros?
-            </p>
-            <div class="encuesta__options">
-              <span class="encuesta__chip" data-group="experiencia" data-value="excelente">🌟 Excelente</span>
-              <span class="encuesta__chip" data-group="experiencia" data-value="buena">😊 Buena</span>
-              <span class="encuesta__chip" data-group="experiencia" data-value="regular">😐 Regular</span>
-              <span class="encuesta__chip" data-group="experiencia" data-value="mejorable">🔧 Mejorable</span>
-              <span class="encuesta__chip" data-group="experiencia" data-value="primera_vez">🆕 Es mi primera vez</span>
-            </div>
-          </div>
-
-          <!-- Pregunta 3 -->
-          <div class="encuesta__item">
-            <p class="encuesta__question">
-              <span class="encuesta__question-num">3</span>
-              ¿Has realizado alguna compra con nosotros?
-            </p>
-            <div class="encuesta__options">
-              <span class="encuesta__chip" data-group="compra" data-value="si_varias">📚 Sí, varias veces</span>
-              <span class="encuesta__chip" data-group="compra" data-value="si_una">✅ Sí, una vez</span>
-              <span class="encuesta__chip" data-group="compra" data-value="no_pronto">⏳ No, pero pronto</span>
-              <span class="encuesta__chip" data-group="compra" data-value="no_explorando">🔍 Solo estoy explorando</span>
-            </div>
-          </div>
-
-          <!-- Pregunta 4 -->
-          <div class="encuesta__item">
-            <p class="encuesta__question">
-              <span class="encuesta__question-num">4</span>
-              ¿Qué te parece nuestro plan de financiamiento?
-            </p>
-            <div class="encuesta__options">
-              <span class="encuesta__chip" data-group="financiamiento" data-value="excelente">🏆 Excelente opción</span>
-              <span class="encuesta__chip" data-group="financiamiento" data-value="bueno">👌 Bueno</span>
-              <span class="encuesta__chip" data-group="financiamiento" data-value="mejorar_cuotas">📅 Podrían dar más cuotas</span>
-              <span class="encuesta__chip" data-group="financiamiento" data-value="no_conozco">❓ No lo conocía</span>
-            </div>
-          </div>
-
-          <!-- Pregunta 5 — texto libre -->
-          <div class="encuesta__item">
-            <p class="encuesta__question">
-              <span class="encuesta__question-num">5</span>
-              ¿Algo en lo que piensas que podríamos mejorar? <em style="font-weight:400;color:var(--text-light)">(Opcional)</em>
-            </p>
-            <textarea
-              id="encuestaSugerencia"
-              class="encuesta__textarea"
-              placeholder="Cuéntanos tu sugerencia o comentario..."
-              maxlength="300"
-            ></textarea>
-          </div>
-
-        </div>
-
-        <div class="encuesta__next">
-          <button type="button" class="btn btn--primary" id="btnContinuar">
-            Continuar &rarr;
-          </button>
-        </div>
-
-      </div><!-- /panelEncuesta -->
-
-
-      <!-- ══ PASO 2 — Datos del cliente ══ -->
-      <div class="form-panel" id="panelDatos">
-
-        <form id="clienteForm">
-          <input type="hidden" id="clienteId" />
-
-          <div class="form__grid">
-
-            <div class="form__group">
-              <label for="codigo">Código</label>
-              <input type="text" id="codigo" name="codigo" placeholder="CL-001" required />
-            </div>
-
-            <div class="form__group">
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" placeholder="Juan" required />
-            </div>
-
-            <div class="form__group">
-              <label for="apellido">Apellido</label>
-              <input type="text" id="apellido" name="apellido" placeholder="Pérez" required />
-            </div>
-
-            <div class="form__group">
-              <label for="edad">Edad</label>
-              <input type="number" id="edad" name="edad" min="1" max="120" placeholder="25" required />
-            </div>
-
-            <div class="form__group">
-              <label for="departamento">Departamento</label>
-              <select id="departamento" name="departamento" required>
-                <option value="">Seleccione un departamento</option>
-              </select>
-            </div>
-
-            <div class="form__group">
-              <label for="genero">Sexo</label>
-              <select id="genero" name="genero" required>
-                <option value="">Seleccione</option>
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
-              </select>
-            </div>
-
-          </div>
-
-          <div class="form__actions">
-            <button type="button" class="btn--back" id="btnVolver">
-              &larr; Volver
-            </button>
-            <button type="submit" class="btn btn--primary">
-              Guardar Cliente ✓
-            </button>
-          </div>
-
-        </form>
-
-      </div><!-- /panelDatos -->
-
-    </div><!-- /clientes__card -->
-  </div>
-</section>
 
 
 

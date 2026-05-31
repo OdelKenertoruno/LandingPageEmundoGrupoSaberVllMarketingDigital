@@ -1164,4 +1164,18 @@ body {
     min-width: 0;
   }
 }
+.registro-page{
+    min-height:100vh;
+    background-image:url("../img/fondo-clientes.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
 
+.registro-page__overlay{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:3rem 1rem;
+}
