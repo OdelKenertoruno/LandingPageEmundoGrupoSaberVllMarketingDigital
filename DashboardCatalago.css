@@ -1271,6 +1271,31 @@ a { text-decoration: none; color: inherit; }
     object-fit: cover;
     border-radius: var(--radius-sm);
   }
+  /* ==========================================
+   CARRUSEL PUBLICIDAD
+========================================== */
+
+.promo-carousel{
+
+    position: relative;
+    overflow: hidden;
+
+}
+
+.promo-slide{
+
+    width:100%;
+    display:none;
+
+    border-radius:12px;
+
+}
+
+.promo-slide.active{
+
+    display:block;
+
+}
 
   /* El main-container vuelve a flex column */
   .main-container {

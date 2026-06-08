@@ -363,3 +363,52 @@ document.addEventListener("click", e => {
     speedDialIcon.className = "fa-solid fa-share-nodes";
   }
 });
+// ==========================================
+// CARRUSEL DE CAMPAÑAS
+// ==========================================
+
+const slides = document.querySelectorAll('.promo-slide');
+
+let currentSlide = 0;
+
+function cambiarCampania() {
+
+    slides[currentSlide].classList.remove('active');
+
+    currentSlide++;
+
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+
+    slides[currentSlide].classList.add('active');
+}
+
+// cambia cada 4 segundos
+setInterval(cambiarCampania, 4000);
+
+
+// ==========================================
+// ANALYTICS - CLICKS DE CAMPAÑA
+// REQUERIMIENTO #7
+// ==========================================
+
+slides.forEach((slide, index) => {
+
+    slide.addEventListener('click', () => {
+
+        console.log("Campaña clickeada:", index + 1);
+
+        // ENVÍA EVENTO A GOOGLE ANALYTICS
+
+        gtag('event', 'campaign_click', {
+
+            campaign_name: `Campania_${index + 1}`,
+
+            campaign_position: index + 1
+
+        });
+
+    });
+
+});

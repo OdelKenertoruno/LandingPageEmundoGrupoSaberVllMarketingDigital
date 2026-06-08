@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Analytics | Grupo Saber</title>
+
+<link rel="stylesheet" href="DashboardAnalisis.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <script src="https://accounts.google.com/gsi/client"></script>
+
+<script src="https://apis.google.com/js/api.js"></script>
+
+<script src="DashboardAnalisis.js"></script>
+
+<header class="analytics-header">
+
+    <div class="header-content">
+
+        <h1>📊 Dashboard Analytics</h1>
+
+        <p>
+            Métricas de comportamiento y rendimiento
+            del Landing Page de Grupo Saber.
+        </p>
+
+    </div>
+
+</header>
+
+<main class="analytics-container">
+
+    <!-- KPIs -->
+
+    <section class="analytics-cards">
+
+        <div class="card">
+            <h3>Total Visitantes</h3>
+            <p id="totalVisitantes">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Porcentaje Rebote</h3>
+            <p id="rebote">0%</p>
+        </div>
+
+        <div class="card">
+            <h3>Clicks Campaña</h3>
+            <p id="clicksCampania">0</p>
+        </div>
+
+    </section>
+
+    <!-- Gráficos -->
+
+    <section class="chart-grid">
+
+        <div class="chart-card">
+            <h2>Tipos de Dispositivos</h2>
+            <canvas id="deviceChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h2>Redes Sociales</h2>
+            <canvas id="socialChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h2>Fuentes de Tráfico</h2>
+            <canvas id="trafficChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h2>Ubicación de Usuarios</h2>
+            <canvas id="geoChart"></canvas>
+        </div>
+
+    </section>
+
+    <!-- GOOGLE ANALYTICS -->
+
+    <!--
+
+    PROPERTY ID:
+    539526506
+
+    MEASUREMENT ID:
+    G-V2QHW0NGQR
+
+    DATOS QUE CONSUMIRÁ EL DASHBOARD:
+
+    1. activeUsers
+
+    2. deviceCategory
+
+    3. sessionSource
+
+    4. bounceRate
+
+    5. sessionDefaultChannelGroup
+
+    6. country / city
+
+    7. campaign_click
+
+    -->
+
+</main>
+
+<footer class="analytics-footer">
+
+    <p>
+        © 2026 Grupo Saber | Dashboard de Analítica Digital
+    </p>
+
+</footer>
+
+<script src="DashboardAnalisis.js"></script>
+
+</body>
+</html>

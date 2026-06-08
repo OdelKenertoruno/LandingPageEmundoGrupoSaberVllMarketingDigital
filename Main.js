@@ -115,6 +115,25 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => heroContent.classList.add('visible'), 200);
   }
 
-  
+  /* ===================================================
+   ANALYTICS - CLICK DASHBOARD
+=================================================== */
+
+const btnAnalytics = document.querySelector('.btn-analytics');
+
+if(btnAnalytics){
+
+    btnAnalytics.addEventListener('click', ()=>{
+
+        gtag('event', 'click_dashboard_analytics', {
+
+            event_category: 'Analytics',
+            event_label: 'Dashboard Analytics'
+
+        });
+
+    });
+
+}
 
 });
