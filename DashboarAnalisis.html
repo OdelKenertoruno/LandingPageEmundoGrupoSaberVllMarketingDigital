@@ -3,88 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Dashboard Analítico | Mundo Grupo</title>
-    <!-- Hoja de estilos -->
-    <link rel="stylesheet" href="DashboardAnalisis.css">
-    <!-- Google Identity Services (para OAuth 2.0) -->
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <!-- Chart.js para gráficos -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <title>Dashboard Analítico | Looker Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background: #f4f7fc;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* Encabezado */
+        .dashboard-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, #1e3c72, #2b4c8a);
+            color: white;
+        }
+
+        .dashboard-header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .dashboard-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Contenedor del iframe responsivo */
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            /* Relación de aspecto: alto/anchO = 443/600 ≈ 0.7383 */
+            padding-bottom: 73.83%; /* (443/600)*100 */
+            background: #f9fafb;
+            overflow: hidden;
+        }
+
+        .iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        /* Pie de página opcional */
+        .dashboard-footer {
+            padding: 1rem 2rem;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.8rem;
+            color: #4a5568;
+            text-align: center;
+        }
+
+        /* Ajustes para móviles */
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .dashboard-header {
+                padding: 1rem 1.5rem;
+            }
+            .dashboard-header h1 {
+                font-size: 1.4rem;
+            }
+            .dashboard-footer {
+                padding: 0.8rem 1rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Pequeño mensaje de carga mientras se renderiza el iframe (mejora UX) */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f9fafb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            color: #2c5f8a;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        /* Cuando el iframe cargue, ocultamos el mensaje */
+        .iframe-container iframe.loaded + .loading-overlay {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <header class="dashboard-header">
-            <h1>📊 Dashboard Analítico</h1>
-            <div id="auth-status" class="auth-status">Conectando...</div>
-            <button id="signout-btn" class="signout-btn" style="display: none;">Cerrar sesión</button>
-        </header>
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>📊 Dashboard Analítico</h1>
+        <p>Visualización de métricas clave de tu proyecto — datos actualizados</p>
+    </div>
 
-        <!-- Pantalla de login no autorizado -->
-        <div id="unauthorized" style="display: none; text-align: center; margin-top: 50px;">
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
-                <h2>🔐 Acceso restringido</h2>
-                <p>Para visualizar las estadísticas, inicia sesión con tu cuenta de Google autorizada.</p>
-                <button id="authorize-button" class="auth-btn">📱 Iniciar sesión con Google</button>
-            </div>
-        </div>
-
-        <!-- Contenido principal del dashboard (oculto hasta login) -->
-        <div id="dashboard-content" style="display: none;">
-            <div class="metrics-grid">
-                <!-- Tarjeta 1: Total visitantes -->
-                <div class="card">
-                    <h3>👥 Total de visitantes</h3>
-                    <div id="total-users" class="big-number">—</div>
-                    <p class="sub">Últimos 30 días</p>
-                </div>
-
-                <!-- Tarjeta 2: Gráfico de dispositivos -->
-                <div class="card">
-                    <h3>📱 Dispositivos utilizados</h3>
-                    <canvas id="devices-chart" width="400" height="200"></canvas>
-                </div>
-
-                <!-- Tarjeta 3: Botones de redes sociales -->
-                <div class="card">
-                    <h3>📢 Compartir en redes</h3>
-                    <div class="social-buttons">
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://edicionesmundogruposaberdigital.netlify.app/" target="_blank" rel="noopener noreferrer" class="social-btn fb">Facebook</a>
-                        <a href="https://twitter.com/intent/tweet?url=https://edicionesmundogruposaberdigital.netlify.app/&text=Mira%20este%20contenido" target="_blank" rel="noopener noreferrer" class="social-btn tw">Twitter</a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://edicionesmundogruposaberdigital.netlify.app/" target="_blank" rel="noopener noreferrer" class="social-btn li">LinkedIn</a>
-                        <a href="https://wa.me/?text=https://edicionesmundogruposaberdigital.netlify.app/" target="_blank" rel="noopener noreferrer" class="social-btn wa">WhatsApp</a>
-                    </div>
-                </div>
-
-                <!-- Tarjeta 4: Porcentaje de rebote y tiempo promedio -->
-                <div class="card">
-                    <h3>⏱️ Comportamiento</h3>
-                    <div><span class="label">Porcentaje de rebote:</span> <span id="bounce-rate" class="big-number" style="font-size: 2rem;">—</span></div>
-                    <div><span class="label">Tiempo promedio:</span> <span id="avg-time">—</span></div>
-                </div>
-
-                <!-- Tarjeta 5: Fuentes de tráfico -->
-                <div class="card">
-                    <h3>🌐 Fuentes de tráfico</h3>
-                    <canvas id="traffic-chart" width="400" height="200"></canvas>
-                </div>
-
-                <!-- Tarjeta 6: Detalles demográficos (países) -->
-                <div class="card">
-                    <h3>📍 Ubicación geográfica</h3>
-                    <canvas id="geo-chart" width="400" height="200"></canvas>
-                </div>
-
-                <!-- Tarjeta 7: Evento de clic en ventana emergente -->
-                <div class="card">
-                    <h3>🖱️ Clics en promoción</h3>
-                    <div id="event-clicks" class="big-number">—</div>
-                    <p class="sub">Evento: <code>click_promo</code> (últimos 30 días)</p>
-                </div>
-            </div>
+    <div class="iframe-container">
+        <!-- Looker Studio (Google Data Studio) embed report -->
+        <iframe
+            src="https://datastudio.google.com/embed/reporting/9d709f3b-dde2-4d48-9db1-3061fb00e263/page/Orf0F"
+            frameborder="0"
+            style="border:0"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            title="Dashboard Looker Studio"
+            loading="lazy"
+            onload="this.classList.add('loaded');"
+        ></iframe>
+        <div class="loading-overlay">
+            <span>Cargando dashboard...</span>
         </div>
     </div>
 
-    <!-- Nuestro script principal -->
-    <script src="DashboardAnalisis.js"></script>
+    <div class="dashboard-footer">
+        <span>📈 Datos en tiempo real — Powered by Looker Studio</span>
+    </div>
+</div>
+
+<!-- Pequeño script para mejorar la experiencia de carga -->
+<script>
+    (function() {
+        // Ocultar el mensaje de carga manualmente después de 4 segundos por si el iframe no dispara el evento 'load'
+        const iframe = document.querySelector('.iframe-container iframe');
+        const overlay = document.querySelector('.loading-overlay');
+        if (iframe && overlay) {
+            setTimeout(function() {
+                if (overlay.style.opacity !== '0') {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => { overlay.style.visibility = 'hidden'; }, 300);
+                }
+            }, 4000);
+        }
+    })();
+</script>
 </body>
 </html>
