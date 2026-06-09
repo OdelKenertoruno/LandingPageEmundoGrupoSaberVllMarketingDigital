@@ -1,79 +1,90 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Dashboard Analytics | Grupo Saber</title>
-
-<link rel="stylesheet" href="DashboardAnalisis.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Dashboard Analítico | Mundo Grupo</title>
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="DashboardAnalisis.css">
+    <!-- Google Identity Services (para OAuth 2.0) -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- Chart.js para gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-
 <body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>📊 Dashboard Analítico</h1>
+            <div id="auth-status" class="auth-status">Conectando...</div>
+            <button id="signout-btn" class="signout-btn" style="display: none;">Cerrar sesión</button>
+        </header>
 
-<header class="analytics-header">
-    <div class="header-content">
-        <h1>📊 Dashboard Analytics</h1>
-        <p>
-            Métricas de comportamiento y rendimiento
-            del Landing Page de Grupo Saber.
-        </p>
+        <!-- Pantalla de login no autorizado -->
+        <div id="unauthorized" style="display: none; text-align: center; margin-top: 50px;">
+            <div class="card" style="max-width: 500px; margin: 0 auto;">
+                <h2>🔐 Acceso restringido</h2>
+                <p>Para visualizar las estadísticas, inicia sesión con tu cuenta de Google autorizada.</p>
+                <button id="authorize-button" class="auth-btn">📱 Iniciar sesión con Google</button>
+            </div>
+        </div>
+
+        <!-- Contenido principal del dashboard (oculto hasta login) -->
+        <div id="dashboard-content" style="display: none;">
+            <div class="metrics-grid">
+                <!-- Tarjeta 1: Total visitantes -->
+                <div class="card">
+                    <h3>👥 Total de visitantes</h3>
+                    <div id="total-users" class="big-number">—</div>
+                    <p class="sub">Últimos 30 días</p>
+                </div>
+
+                <!-- Tarjeta 2: Gráfico de dispositivos -->
+                <div class="card">
+                    <h3>📱 Dispositivos utilizados</h3>
+                    <canvas id="devices-chart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Tarjeta 3: Botones de redes sociales -->
+                <div class="card">
+                    <h3>📢 Compartir en redes</h3>
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://edicionesmundogruposaberdigital.netlify.app/" target="_blank" rel="noopener noreferrer" class="social-btn fb">Facebook</a>
+                        <a href="https://twitter.com/intent/tweet?url=https://edicionesmundogruposaberdigital.netlify.app/&text=Mira%20este%20contenido" target="_blank" rel="noopener noreferrer" class="social-btn tw">Twitter</a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://edicionesmundogruposaberdigital.netlify.app/" target="_blank" rel="noopener noreferrer" class="social-btn li">LinkedIn</a>
+                        <a href="https://wa.me/?text=https://edicionesmundogruposaberdigital.netlify.app/" target="_blank" rel="noopener noreferrer" class="social-btn wa">WhatsApp</a>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 4: Porcentaje de rebote y tiempo promedio -->
+                <div class="card">
+                    <h3>⏱️ Comportamiento</h3>
+                    <div><span class="label">Porcentaje de rebote:</span> <span id="bounce-rate" class="big-number" style="font-size: 2rem;">—</span></div>
+                    <div><span class="label">Tiempo promedio:</span> <span id="avg-time">—</span></div>
+                </div>
+
+                <!-- Tarjeta 5: Fuentes de tráfico -->
+                <div class="card">
+                    <h3>🌐 Fuentes de tráfico</h3>
+                    <canvas id="traffic-chart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Tarjeta 6: Detalles demográficos (países) -->
+                <div class="card">
+                    <h3>📍 Ubicación geográfica</h3>
+                    <canvas id="geo-chart" width="400" height="200"></canvas>
+                </div>
+
+                <!-- Tarjeta 7: Evento de clic en ventana emergente -->
+                <div class="card">
+                    <h3>🖱️ Clics en promoción</h3>
+                    <div id="event-clicks" class="big-number">—</div>
+                    <p class="sub">Evento: <code>click_promo</code> (últimos 30 días)</p>
+                </div>
+            </div>
+        </div>
     </div>
-</header>
 
-<main class="analytics-container">
-
-    <!-- KPIs -->
-    <section class="analytics-cards">
-        <div class="card">
-            <h3>Total Visitantes</h3>
-            <p id="totalVisitantes">0</p>
-        </div>
-        <div class="card">
-            <h3>Porcentaje Rebote</h3>
-            <p id="rebote">0%</p>
-        </div>
-        <div class="card">
-            <h3>Clicks Campaña</h3>
-            <p id="clicksCampania">0</p>
-        </div>
-    </section>
-
-    <!-- Gráficos -->
-    <section class="chart-grid">
-        <div class="chart-card">
-            <h2>Tipos de Dispositivos</h2>
-            <canvas id="deviceChart"></canvas>
-        </div>
-        <div class="chart-card">
-            <h2>Redes Sociales</h2>
-            <canvas id="socialChart"></canvas>
-        </div>
-        <div class="chart-card">
-            <h2>Fuentes de Tráfico</h2>
-            <canvas id="trafficChart"></canvas>
-        </div>
-        <div class="chart-card">
-            <h2>Ubicación de Usuarios</h2>
-            <canvas id="geoChart"></canvas>
-        </div>
-    </section>
-
-</main>
-
-<footer class="analytics-footer">
-    <p>
-        © 2026 Grupo Saber | Dashboard de Analítica Digital
-    </p>
-</footer>
-
-<!-- TODOS LOS SCRIPTS AL FINAL, UN SOLO VEZ -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://accounts.google.com/gsi/client"></script>
-<script src="https://apis.google.com/js/api.js"></script>
-<script src="DashboardAnalisis.js"></script>
-
+    <!-- Nuestro script principal -->
+    <script src="DashboardAnalisis.js"></script>
 </body>
 </html>

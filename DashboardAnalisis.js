@@ -1,207 +1,330 @@
-// ==========================================
-// DASHBOARD ANALYTICS - VERSIÓN FINAL
-// Para: edicionesmundogruposaberdigital.netlify.app
-// ==========================================
+// ============================================================
+// DashboardAnalisis.js
+// Configuración para Google Analytics Data API v1 con OAuth 2.0
+// ============================================================
 
-const CONFIG = {
-    CLIENT_ID: '365167795235-p2dhm2seel9ou621nimjvu3soe38c3sm.apps.googleusercontent.com',
-    PROPERTY_ID: '539526506',
-    SCOPES: 'https://www.googleapis.com/auth/analytics.readonly'
+// Configuración de tu propiedad de GA4 y credenciales de OAuth
+const GA_PROPERTY_ID = '539526506';   // ID de tu propiedad de Google Analytics 4
+const CLIENT_ID = '945211654005-b4m2mbqlfb0i0414lt92fgguavifje1a.apps.googleusercontent.com'; // Tu ID de cliente OAuth
+
+// Alcances (scopes) necesarios: solo lectura de datos de Analytics
+const SCOPES = 'https://www.googleapis.com/auth/analytics.readonly';
+
+// Variables globales
+let tokenClient;
+let accessToken = null;
+let charts = {};          // Para almacenar los objetos Chart.js y poder destruirlos después
+
+// Elementos del DOM
+const authStatus = document.getElementById('auth-status');
+const unauthorizedDiv = document.getElementById('unauthorized');
+const dashboardDiv = document.getElementById('dashboard-content');
+const signoutBtn = document.getElementById('signout-btn');
+const authorizeBtn = document.getElementById('authorize-button');
+
+// ============================================================
+// Inicialización cuando la página ha cargado completamente
+// ============================================================
+window.onload = () => {
+    // Inicializar el cliente de tokens OAuth 2.0 de Google
+    tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: (resp) => {
+            if (resp.error) {
+                console.error('Error en autenticación OAuth:', resp);
+                authStatus.innerText = '❌ Error de autenticación';
+                return;
+            }
+            // Guardar el token de acceso
+            accessToken = resp.access_token;
+            authStatus.innerText = '✅ Sesión activa';
+            // Mostrar el dashboard y ocultar el botón de login
+            unauthorizedDiv.style.display = 'none';
+            dashboardDiv.style.display = 'block';
+            signoutBtn.style.display = 'block';
+            // Cargar todos los datos desde Analytics
+            fetchAllAnalyticsData();
+        },
+    });
+
+    // Comprobar si ya hay una sesión previa (normalmente no, porque el token expira)
+    checkExistingSession();
+
+    // Evento del botón "Iniciar sesión con Google"
+    authorizeBtn.onclick = () => {
+        tokenClient.requestAccessToken();
+    };
+
+    // Evento del botón "Cerrar sesión"
+    signoutBtn.onclick = () => {
+        accessToken = null;
+        authStatus.innerText = '🔒 Sesión cerrada';
+        unauthorizedDiv.style.display = 'block';
+        dashboardDiv.style.display = 'none';
+        signoutBtn.style.display = 'none';
+        // Limpiar gráficos y números
+        clearCharts();
+        // Recargar la página para reiniciar el estado (opcional)
+        // window.location.reload();
+    };
 };
 
-let accessToken = null;
-let tokenClient = null;
-let charts = {};
-
-console.log('🌍 Dashboard iniciando en:', window.location.hostname);
-
-// ==========================================
-// MOSTRAR DATOS DE DEMOSTRACIÓN INMEDIATOS
-// ==========================================
-
-function mostrarDatosDemostracion() {
-    console.log('📊 Mostrando datos de demostración');
-    
-    // KPIs
-    document.getElementById('totalVisitantes').innerHTML = '1,248';
-    document.getElementById('rebote').innerHTML = '42.5%';
-    document.getElementById('clicksCampania').innerHTML = '156';
-    
-    // Gráfico de dispositivos
-    const ctxDevice = document.getElementById('deviceChart');
-    if (ctxDevice) {
-        charts.device = new Chart(ctxDevice, {
-            type: 'doughnut',
-            data: {
-                labels: ['📱 Móvil', '💻 Desktop', '📟 Tablet'],
-                datasets: [{
-                    data: [684, 432, 132],
-                    backgroundColor: ['#00608B', '#0092BA', '#4FB3C9'],
-                    borderWidth: 0
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: true }
-        });
-    }
-    
-    // Gráfico de redes sociales
-    const ctxSocial = document.getElementById('socialChart');
-    if (ctxSocial) {
-        charts.social = new Chart(ctxSocial, {
-            type: 'bar',
-            data: {
-                labels: ['Google', 'Directo', 'Instagram', 'Facebook'],
-                datasets: [{
-                    label: 'Visitantes',
-                    data: [432, 298, 187, 156],
-                    backgroundColor: '#0092BA'
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: true }
-        });
-    }
-    
-    // Gráfico de tráfico
-    const ctxTraffic = document.getElementById('trafficChart');
-    if (ctxTraffic) {
-        charts.traffic = new Chart(ctxTraffic, {
-            type: 'pie',
-            data: {
-                labels: ['Búsqueda', 'Directo', 'Social', 'Referidos'],
-                datasets: [{
-                    data: [523, 345, 267, 123],
-                    backgroundColor: ['#00608B', '#0092BA', '#4FB3C9', '#7EC8E0']
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: true }
-        });
-    }
-    
-    // Gráfico de ubicaciones
-    const ctxGeo = document.getElementById('geoChart');
-    if (ctxGeo) {
-        charts.geo = new Chart(ctxGeo, {
-            type: 'bar',
-            data: {
-                labels: ['Madrid', 'Barcelona', 'Valencia', 'Sevilla'],
-                datasets: [{
-                    label: 'Usuarios',
-                    data: [432, 321, 198, 145],
-                    backgroundColor: '#0092BA'
-                }]
-            },
-            options: { responsive: true, maintainAspectRatio: true }
-        });
-    }
+// ============================================================
+// Verificar si ya hay token (por si acaso)
+// ============================================================
+function checkExistingSession() {
+    // Por simplicidad, siempre pedimos un nuevo inicio de sesión.
+    // Si quisieras mantener la sesión, podrías guardar el token en localStorage,
+    // pero por seguridad es preferible pedir autorización cada vez que se carga la página.
+    authStatus.innerText = '🚫 No autenticado';
+    unauthorizedDiv.style.display = 'block';
+    dashboardDiv.style.display = 'none';
+    signoutBtn.style.display = 'none';
 }
 
-// ==========================================
-// CONECTAR CON GOOGLE ANALYTICS
-// ==========================================
-
-function conectarGoogle() {
-    if (!tokenClient) {
-        alert('Espera a que la página termine de cargar');
-        return;
-    }
-    
-    console.log('🔐 Solicitando acceso a Google Analytics...');
-    tokenClient.requestAccessToken();
-}
-
-async function cargarDatosReales() {
+// ============================================================
+// Obtener todos los datos: se ejecuta en paralelo
+// ============================================================
+async function fetchAllAnalyticsData() {
     if (!accessToken) {
-        console.log('No hay token, usando datos de demostración');
+        console.warn('No hay token de acceso');
         return;
     }
-    
+    // Mostrar mensaje de carga en cada métrica (opcional)
+    document.getElementById('total-users').innerText = 'Cargando...';
+    document.getElementById('bounce-rate').innerText = 'Cargando...';
+    document.getElementById('avg-time').innerText = 'Cargando...';
+    document.getElementById('event-clicks').innerText = 'Cargando...';
+
     try {
-        console.log('🚀 Intentando cargar datos reales...');
-        
-        const response = await fetch(
-            `https://analyticsdata.googleapis.com/v1beta/properties/${CONFIG.PROPERTY_ID}:runReport`,
-            {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
-                    metrics: [{ name: 'activeUsers' }]
-                })
-            }
-        );
-        
-        const data = await response.json();
-        
-        if (data.rows && data.rows[0]) {
-            const total = parseInt(data.rows[0].metricValues[0].value);
-            if (total > 0) {
-                document.getElementById('totalVisitantes').innerHTML = total.toLocaleString();
-                console.log('✅ Datos reales cargados:', total, 'visitantes');
-            }
-        }
-        
+        await Promise.all([
+            fetchTotalUsers(),
+            fetchDevices(),
+            fetchBounceRateAndAvgTime(),
+            fetchTrafficSources(),
+            fetchGeoDetails(),
+            fetchEventClicks()
+        ]);
     } catch (error) {
-        console.log('No se pudieron cargar datos reales:', error.message);
+        console.error('Error al cargar datos:', error);
+        authStatus.innerText = '⚠️ Error al cargar datos';
     }
 }
 
-// ==========================================
-// INICIALIZACIÓN
-// ==========================================
+// ============================================================
+// 1. Total de visitantes (usuarios activos en los últimos 30 días)
+// ============================================================
+async function fetchTotalUsers() {
+    const requestBody = {
+        property: `properties/${GA_PROPERTY_ID}`,
+        dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+        metrics: [{ name: 'activeUsers' }]
+    };
+    const data = await callAnalyticsAPI(requestBody);
+    const total = data.rows?.[0]?.metricValues?.[0]?.value || '0';
+    document.getElementById('total-users').innerText = parseInt(total).toLocaleString();
+}
 
-async function inicializar() {
-    // Mostrar datos de demostración inmediatamente
-    mostrarDatosDemostracion();
-    
-    // Cargar GAPI
-    await new Promise((resolve) => {
-        if (typeof gapi !== 'undefined') {
-            gapi.load('client', resolve);
-        } else {
-            resolve();
+// ============================================================
+// 2. Gráfico de tipos de dispositivos (pie chart)
+// ============================================================
+async function fetchDevices() {
+    const requestBody = {
+        property: `properties/${GA_PROPERTY_ID}`,
+        dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+        metrics: [{ name: 'activeUsers' }],
+        dimensions: [{ name: 'deviceCategory' }]
+    };
+    const data = await callAnalyticsAPI(requestBody);
+    const labels = [];
+    const values = [];
+    if (data.rows) {
+        data.rows.forEach(row => {
+            labels.push(row.dimensionValues[0].value);
+            values.push(parseInt(row.metricValues[0].value));
+        });
+    }
+    // Destruir gráfico anterior si existe
+    if (charts.devices) charts.devices.destroy();
+    const ctx = document.getElementById('devices-chart').getContext('2d');
+    charts.devices = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                data: values,
+                backgroundColor: ['#4285f4', '#ea4335', '#fbbc04', '#34a853', '#aa66cc']
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'bottom' } }
         }
     });
-    
-    // Inicializar OAuth
-    if (typeof google !== 'undefined' && google.accounts) {
-        tokenClient = google.accounts.oauth2.initTokenClient({
-            client_id: CONFIG.CLIENT_ID,
-            scope: CONFIG.SCOPES,
-            callback: async (response) => {
-                if (response.access_token) {
-                    accessToken = response.access_token;
-                    console.log('✅ Conectado a Google Analytics');
-                    await cargarDatosReales();
-                }
-            }
-        });
-    }
-    
-    // Agregar botón de conexión
-    const header = document.querySelector('.header-content');
-    if (header && !document.querySelector('.connect-btn')) {
-        const btn = document.createElement('button');
-        btn.innerHTML = '🔐 Conectar con Google Analytics';
-        btn.className = 'connect-btn';
-        btn.style.cssText = `
-            margin-top: 15px;
-            padding: 10px 25px;
-            background: white;
-            color: #00608B;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-        `;
-        btn.onclick = conectarGoogle;
-        header.appendChild(btn);
-    }
-    
-    console.log('✅ Dashboard listo - Haz clic en "Conectar con Google Analytics"');
 }
 
-// Iniciar cuando la página cargue
-window.onload = inicializar;
+// ============================================================
+// 3. Porcentaje de rebote y tiempo promedio en el sitio
+// ============================================================
+async function fetchBounceRateAndAvgTime() {
+    const requestBody = {
+        property: `properties/${GA_PROPERTY_ID}`,
+        dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+        metrics: [
+            { name: 'bounceRate' },
+            { name: 'averageSessionDuration' }
+        ]
+    };
+    const data = await callAnalyticsAPI(requestBody);
+    const bounce = data.rows?.[0]?.metricValues?.[0]?.value || '0';
+    const avgSec = data.rows?.[0]?.metricValues?.[1]?.value || '0';
+    document.getElementById('bounce-rate').innerText = `${parseFloat(bounce).toFixed(1)}%`;
+    const avgMinutes = (parseFloat(avgSec) / 60).toFixed(1);
+    document.getElementById('avg-time').innerText = `${avgMinutes} minutos`;
+}
+
+// ============================================================
+// 4. Fuentes de tráfico (gráfico de barras)
+// ============================================================
+async function fetchTrafficSources() {
+    const requestBody = {
+        property: `properties/${GA_PROPERTY_ID}`,
+        dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+        metrics: [{ name: 'sessions' }],
+        dimensions: [{ name: 'sessionSource' }],
+        limit: 6   // Mostrar las 6 fuentes principales
+    };
+    const data = await callAnalyticsAPI(requestBody);
+    const labels = [];
+    const values = [];
+    if (data.rows) {
+        data.rows.forEach(row => {
+            labels.push(row.dimensionValues[0].value);
+            values.push(parseInt(row.metricValues[0].value));
+        });
+    }
+    if (charts.traffic) charts.traffic.destroy();
+    const ctx = document.getElementById('traffic-chart').getContext('2d');
+    charts.traffic = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Sesiones',
+                data: values,
+                backgroundColor: '#34a853'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'none' } }
+        }
+    });
+}
+
+// ============================================================
+// 5. Detalles demográficos (países)
+// ============================================================
+async function fetchGeoDetails() {
+    const requestBody = {
+        property: `properties/${GA_PROPERTY_ID}`,
+        dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+        metrics: [{ name: 'activeUsers' }],
+        dimensions: [{ name: 'country' }],
+        limit: 6
+    };
+    const data = await callAnalyticsAPI(requestBody);
+    const labels = [];
+    const values = [];
+    if (data.rows) {
+        data.rows.forEach(row => {
+            labels.push(row.dimensionValues[0].value);
+            values.push(parseInt(row.metricValues[0].value));
+        });
+    }
+    if (charts.geo) charts.geo.destroy();
+    const ctx = document.getElementById('geo-chart').getContext('2d');
+    charts.geo = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Usuarios activos',
+                data: values,
+                backgroundColor: '#fbbc04'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { position: 'none' } }
+        }
+    });
+}
+
+// ============================================================
+// 6. Cantidad de clics en ventana emergente (evento personalizado)
+// ============================================================
+async function fetchEventClicks() {
+    // IMPORTANTE: Asegúrate de que en tu landing page se esté enviando el evento 'click_promo' a GA4.
+    // Si usas otro nombre de evento, cámbialo aquí.
+    const requestBody = {
+        property: `properties/${GA_PROPERTY_ID}`,
+        dateRanges: [{ startDate: '30daysAgo', endDate: 'today' }],
+        metrics: [{ name: 'eventCount' }],
+        dimensionFilter: {
+            filter: {
+                fieldName: 'eventName',
+                stringFilter: { matchType: 'EXACT', value: 'click_promo' }
+            }
+        }
+    };
+    const data = await callAnalyticsAPI(requestBody);
+    const clicks = data.rows?.[0]?.metricValues?.[0]?.value || '0';
+    document.getElementById('event-clicks').innerText = parseInt(clicks).toLocaleString();
+}
+
+// ============================================================
+// Función genérica para llamar a la API de datos de GA4 (runReport)
+// ============================================================
+async function callAnalyticsAPI(requestBody) {
+    if (!accessToken) {
+        throw new Error('No hay token de acceso');
+    }
+    const url = `https://analyticsdata.googleapis.com/v1beta/properties/${GA_PROPERTY_ID}:runReport`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Error en la API de Analytics:', errorText);
+        // Podrías lanzar un error específico
+        return { rows: [] };
+    }
+    return await response.json();
+}
+
+// ============================================================
+// Limpiar todos los gráficos y números al cerrar sesión
+// ============================================================
+function clearCharts() {
+    Object.values(charts).forEach(chart => {
+        if (chart && typeof chart.destroy === 'function') {
+            chart.destroy();
+        }
+    });
+    charts = {};
+    document.getElementById('total-users').innerText = '—';
+    document.getElementById('bounce-rate').innerText = '—';
+    document.getElementById('avg-time').innerText = '—';
+    document.getElementById('event-clicks').innerText = '—';
+}
