@@ -32,7 +32,6 @@
             transition: all 0.2s ease;
         }
 
-        /* Encabezado */
         .dashboard-header {
             padding: 1.5rem 2rem;
             background: linear-gradient(135deg, #1e3c72, #2b4c8a);
@@ -50,12 +49,10 @@
             opacity: 0.9;
         }
 
-        /* Contenedor del iframe responsivo */
         .iframe-container {
             position: relative;
             width: 100%;
-            /* Relación de aspecto: alto/anchO = 443/600 ≈ 0.7383 */
-            padding-bottom: 73.83%; /* (443/600)*100 */
+            padding-bottom: 73.83%;
             background: #f9fafb;
             overflow: hidden;
         }
@@ -70,7 +67,6 @@
             display: block;
         }
 
-        /* Pie de página opcional */
         .dashboard-footer {
             padding: 1rem 2rem;
             background: #f8fafc;
@@ -80,24 +76,13 @@
             text-align: center;
         }
 
-        /* Ajustes para móviles */
         @media (max-width: 768px) {
-            body {
-                padding: 12px;
-            }
-            .dashboard-header {
-                padding: 1rem 1.5rem;
-            }
-            .dashboard-header h1 {
-                font-size: 1.4rem;
-            }
-            .dashboard-footer {
-                padding: 0.8rem 1rem;
-                font-size: 0.7rem;
-            }
+            body { padding: 12px; }
+            .dashboard-header { padding: 1rem 1.5rem; }
+            .dashboard-header h1 { font-size: 1.4rem; }
+            .dashboard-footer { padding: 0.8rem 1rem; font-size: 0.7rem; }
         }
 
-        /* Pequeño mensaje de carga mientras se renderiza el iframe (mejora UX) */
         .loading-overlay {
             position: absolute;
             top: 0;
@@ -114,7 +99,6 @@
             transition: opacity 0.3s ease;
             pointer-events: none;
         }
-        /* Cuando el iframe cargue, ocultamos el mensaje */
         .iframe-container iframe.loaded + .loading-overlay {
             opacity: 0;
             visibility: hidden;
@@ -129,7 +113,7 @@
     </div>
 
     <div class="iframe-container">
-        <!-- Looker Studio (Google Data Studio) embed report -->
+        <!-- ✅ CAMBIA EL src SI TU INFORME DE LOOKER STUDIO ES OTRO -->
         <iframe
             src="https://datastudio.google.com/embed/reporting/9d709f3b-dde2-4d48-9db1-3061fb00e263/page/Orf0F"
             frameborder="0"
@@ -150,10 +134,8 @@
     </div>
 </div>
 
-<!-- Pequeño script para mejorar la experiencia de carga -->
 <script>
     (function() {
-        // Ocultar el mensaje de carga manualmente después de 4 segundos por si el iframe no dispara el evento 'load'
         const iframe = document.querySelector('.iframe-container iframe');
         const overlay = document.querySelector('.loading-overlay');
         if (iframe && overlay) {
