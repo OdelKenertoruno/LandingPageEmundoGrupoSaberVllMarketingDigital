@@ -6,7 +6,7 @@
 const WA_NUMBER = "50578875960";
 
 // ──────────────────────────────────────────────────────────────────────
-//  DATOS DE LAS BIBLIAS (No modifiques a menos que sepas lo que haces)
+//  DATOS DE LAS BIBLIAS
 // ──────────────────────────────────────────────────────────────────────
 const biblias = [
   { id:1,  categoria:"Biblias de Estudio", nombre:"Macarthur",                                      precio:3600, precioCredito:4800, prima:600, cuotas:8, montoCuota:525, imagen:"Categorias/Biblias de Estudio/Macarthur.png" },
@@ -38,11 +38,11 @@ const biblias = [
 // ──────────────────────────────────────────────────────────────────────
 //  ESTADO GLOBAL
 // ──────────────────────────────────────────────────────────────────────
-let currentFilter = "todas";
-let currentSearch = "";
-let searchDebounce = null;
+let currentFilter   = "todas";
+let currentSearch   = "";
+let searchDebounce  = null;
 
-// ── ELEMENTOS DOM ─────────────────────────────────
+// ── ELEMENTOS DOM ──────────────────────────────────────────────────────
 const catalogGrid       = document.getElementById("catalogGrid");
 const rightSidebar      = document.getElementById("rightSidebar");
 const creditContent     = document.getElementById("creditContent");
@@ -59,6 +59,9 @@ const toggleIcon        = document.getElementById("toggleIcon");
 
 const fmt = n => "C$ " + n.toLocaleString("es-NI");
 
+// ──────────────────────────────────────────────────────────────────────
+//  CATÁLOGO
+// ──────────────────────────────────────────────────────────────────────
 function filteredData() {
   return biblias.filter(b => {
     const matchCat    = currentFilter === "todas" || b.categoria === currentFilter;
@@ -112,7 +115,7 @@ function initLazyLoad() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      const img = entry.target;
+      const img  = entry.target;
       const wrap = img.closest(".card-image");
       img.src = img.dataset.src;
       img.removeAttribute("data-src");
@@ -127,7 +130,7 @@ function initLazyLoad() {
 function openCredit(id) {
   const b = biblias.find(item => item.id === id);
   if (!b) return;
-  creditContent.style.opacity = "0";
+  creditContent.style.opacity   = "0";
   creditContent.style.transform = "translateX(30px)";
   rightSidebar.classList.add("active");
   overlay.classList.add("active");
@@ -195,8 +198,10 @@ searchClear.addEventListener("click", () => {
 
 function updateAutocomplete(val) {
   if (val.length < 2) { autocompleteDD.classList.remove("open"); return; }
-  const lower = val.toLowerCase();
-  const matches = biblias.filter(b => b.nombre.toLowerCase().includes(lower) || b.categoria.toLowerCase().includes(lower)).slice(0, 6);
+  const lower   = val.toLowerCase();
+  const matches = biblias.filter(b =>
+    b.nombre.toLowerCase().includes(lower) || b.categoria.toLowerCase().includes(lower)
+  ).slice(0, 6);
   if (matches.length === 0) { autocompleteDD.classList.remove("open"); return; }
   autocompleteDD.innerHTML = matches.map(b => `
     <div class="autocomplete-item" data-id="${b.id}">
@@ -224,7 +229,9 @@ function highlight(text, query) {
   return text.replace(re, '<strong style="color:var(--primary)">$1</strong>');
 }
 
-document.addEventListener("click", e => { if (!e.target.closest(".search-wrapper")) autocompleteDD.classList.remove("open"); });
+document.addEventListener("click", e => {
+  if (!e.target.closest(".search-wrapper")) autocompleteDD.classList.remove("open");
+});
 
 toggleSidebar.addEventListener("click", () => {
   const collapsed = leftSidebar.classList.toggle("collapsed");
@@ -234,8 +241,8 @@ toggleSidebar.addEventListener("click", () => {
 document.getElementById("emptyReset").addEventListener("click", () => {
   searchInput.value = "";
   searchClear.classList.remove("visible");
-  currentSearch  = "";
-  currentFilter  = "todas";
+  currentSearch = "";
+  currentFilter = "todas";
   document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
   document.querySelector('.filter-pill[data-cat="todas"]').classList.add("active");
   activeFilterLabel.classList.remove("visible");
@@ -244,180 +251,125 @@ document.getElementById("emptyReset").addEventListener("click", () => {
 
 renderBiblias(biblias);
 
+// ── SPEED DIAL ─────────────────────────────────────────────────────────
 const speedDial     = document.getElementById("speedDial");
 const speedDialMain = document.getElementById("speedDialMain");
 const speedDialIcon = document.getElementById("speedDialIcon");
+
 speedDialMain.addEventListener("click", () => {
   const isOpen = speedDial.classList.toggle("open");
   speedDialIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-share-nodes";
 });
-document.addEventListener("click", e => { if (!e.target.closest(".speed-dial")) { speedDial.classList.remove("open"); speedDialIcon.className = "fa-solid fa-share-nodes"; } });
-
-// ═══════════════════════════════════════════════════════════════════════
-//  CARRUSEL DE CAMPAÑAS (KPI 7) - Eventos GA4 + apertura de imagen en nueva pestaña
-// ═══════════════════════════════════════════════════════════════════════
-const slides = document.querySelectorAll('.promo-slide');
-let currentSlide = 0;
-
-// Rotación automática cada 4 segundos
-function cambiarCampania() {
-    slides[currentSlide].classList.remove('active');
-    currentSlide = (currentSlide + 1) % slides.length;
-    slides[currentSlide].classList.add('active');
-}
-setInterval(cambiarCampania, 4000);
-
-// Evento click: envía a GA4 y abre la imagen en ventana nueva grande
-slides.forEach((slide) => {
-    slide.addEventListener('click', () => {
-        const campaignName = slide.getAttribute('data-campaign');
-        const campaignPosition = slide.getAttribute('data-position');
-        const imgSrc = slide.getAttribute('src');
-
-        // Enviar evento a Google Analytics 4
-        if (campaignName && campaignPosition) {
-            gtag('event', 'campaign_click', {
-                'campaign_name': campaignName,
-                'campaign_position': parseInt(campaignPosition),
-                'page_location': window.location.href
-            });
-            console.log(`✅ Evento enviado a GA4: ${campaignName} (posición ${campaignPosition})`);
-        } else {
-            console.warn('⚠️ Falta data-campaign o data-position en una imagen del carrusel');
-        }
-
-        // Abrir la imagen en una nueva pestaña con tamaño grande (opcional)
-        if (imgSrc) {
-            window.open(imgSrc, '_blank', 'width=900,height=700,scrollbars=yes,resizable=yes');
-        }
-    });
-    
+document.addEventListener("click", e => {
+  if (!e.target.closest(".speed-dial")) {
+    speedDial.classList.remove("open");
+    speedDialIcon.className = "fa-solid fa-share-nodes";
+  }
 });
-// ==========================================
-// NUEVO CARRUSEL ESTILO CABALLITOS + LIGHTBOX
-// ==========================================
-document.addEventListener('DOMContentLoaded', function() {
-  const track = document.getElementById('carouselTrack');
-  const slides = Array.from(track.children);
-  const nextButton = document.getElementById('carouselNext');
-  const prevButton = document.getElementById('carouselPrev');
+
+// ═══════════════════════════════════════════════════════════════════════
+//  CARRUSEL DE CAMPAÑAS + LIGHTBOX + KPI 7 (GA4)
+//  ✅ Código único — sin duplicados
+// ═══════════════════════════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function () {
+
+  const track         = document.getElementById('carouselTrack');
+  const nextBtn       = document.getElementById('carouselNext');
+  const prevBtn       = document.getElementById('carouselPrev');
   const dotsContainer = document.getElementById('carouselDots');
-  
-  if (!track || slides.length === 0) return;
 
-  let currentIndex = 0;
-  let autoInterval;
-  const autoDelay = 5000; // 5 segundos
+  if (!track) return;
 
-  // Crear puntos indicadores
-  slides.forEach((_, idx) => {
+  const slideEls = Array.from(track.children);
+  let currentIdx = 0;
+  let autoTimer;
+  const AUTO_DELAY = 5000;
+
+  // ── Puntos indicadores ──────────────────────────────────────────────
+  slideEls.forEach((_, i) => {
     const dot = document.createElement('div');
     dot.classList.add('dot');
-    if (idx === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(idx));
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goTo(i));
     dotsContainer.appendChild(dot);
   });
   const dots = Array.from(dotsContainer.children);
 
-  // Función para mover el carrusel
+  // ── Lógica de movimiento ────────────────────────────────────────────
   function updateCarousel() {
-    const slideWidth = slides[0].getBoundingClientRect().width;
-    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    // Actualizar puntos activos
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === currentIndex);
-    });
+    const w = slideEls[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${currentIdx * w}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === currentIdx));
   }
 
-  function goToSlide(index) {
-    if (index < 0) index = 0;
-    if (index >= slides.length) index = slides.length - 1;
-    currentIndex = index;
+  function goTo(idx) {
+    currentIdx = (idx + slideEls.length) % slideEls.length;
     updateCarousel();
-    resetAutoPlay();
+    resetAuto();
   }
 
-  function nextSlide() {
-    goToSlide((currentIndex + 1) % slides.length);
+  function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(currentIdx + 1), AUTO_DELAY);
   }
 
-  function prevSlide() {
-    goToSlide((currentIndex - 1 + slides.length) % slides.length);
-  }
+  nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
+  prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
+  window.addEventListener('resize', updateCarousel);
+  resetAuto();
 
-  // Auto-play
-  function startAutoPlay() {
-    autoInterval = setInterval(() => {
-      nextSlide();
-    }, autoDelay);
-  }
-  function resetAutoPlay() {
-    clearInterval(autoInterval);
-    startAutoPlay();
-  }
-
-  // Eventos de botones
-  nextButton.addEventListener('click', () => {
-    nextSlide();
-    resetAutoPlay();
-  });
-  prevButton.addEventListener('click', () => {
-    prevSlide();
-    resetAutoPlay();
-  });
-
-  // Ajustar al redimensionar ventana
-  window.addEventListener('resize', () => {
-    updateCarousel();
-  });
-
-  // Iniciar auto-play
-  startAutoPlay();
-
-  // ========== LIGHTBOX MODAL ==========
-  // Crear modal dinámicamente
+  // ── Lightbox ────────────────────────────────────────────────────────
   const modal = document.createElement('div');
   modal.className = 'modal-lightbox';
   modal.innerHTML = `
     <span class="close-modal">&times;</span>
-    <img class="modal-content" id="modalImg" src="" alt="Ampliar imagen">
+    <img class="modal-content" id="modalImg" src="" alt="Ampliar campaña">
   `;
   document.body.appendChild(modal);
-  const modalImg = document.getElementById('modalImg');
-  const closeModal = modal.querySelector('.close-modal');
 
-  // Abrir modal al hacer clic en cualquier imagen del carrusel
-  slides.forEach((slide, idx) => {
+  const modalImg      = modal.querySelector('#modalImg');
+  const closeModalBtn = modal.querySelector('.close-modal');
+
+  // ── KPI 7: clic en imagen → GA4 + lightbox ─────────────────────────
+  slideEls.forEach((slide) => {
     const img = slide.querySelector('img');
+    if (!img) return;
+
+    img.style.cursor = 'pointer';
+
     img.addEventListener('click', (e) => {
       e.stopPropagation();
-      // Enviar evento a GA4
-      const campaignName = img.getAttribute('data-campaign');
+
+      const campaignName     = img.getAttribute('data-campaign');
       const campaignPosition = img.getAttribute('data-position');
-      if (campaignName && campaignPosition) {
+
+      // ✅ Evento GA4 — disparo único y limpio
+      if (typeof gtag === 'function' && campaignName) {
         gtag('event', 'campaign_click', {
-          'campaign_name': campaignName,
-          'campaign_position': parseInt(campaignPosition),
-          'page_location': window.location.href
+          campaign_name    : campaignName,
+          campaign_position: parseInt(campaignPosition) || 0,
+          page_location    : window.location.href,
+          page_title       : document.title
         });
-        console.log(`Evento enviado a GA4: ${campaignName} (posición ${campaignPosition})`);
+        console.log(`📊 GA4 ▶ campaign_click | ${campaignName} | pos ${campaignPosition}`);
       }
-      // Abrir modal con la imagen en grande
+
+      // Abrir lightbox
       modalImg.src = img.src;
       modal.classList.add('active');
     });
   });
 
-  // Cerrar modal
-  function closeModalFunc() {
+  // ── Cerrar lightbox ─────────────────────────────────────────────────
+  function cerrarModal() {
     modal.classList.remove('active');
     modalImg.src = '';
   }
-  closeModal.addEventListener('click', closeModalFunc);
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModalFunc();
-  });
+
+  closeModalBtn.addEventListener('click', cerrarModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); });
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) closeModalFunc();
+    if (e.key === 'Escape' && modal.classList.contains('active')) cerrarModal();
   });
+
 });
