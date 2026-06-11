@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Clientes | EMundo</title>
-
-    <link rel="stylesheet" href="clientes.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>EMundo | Registro de Clientes</title>
+    
+<link rel="stylesheet" href="clientes.css">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2QHW0NGQR"></script>
     <script>
@@ -14,222 +14,315 @@
       gtag('js', new Date());
       gtag('config', 'G-V2QHW0NGQR');
     </script>
+
 </head>
 <body>
 
-    <main class="registro-page">
+<main class="registro-page">
+    <div class="registro-page__overlay">
+        <section id="cliente" class="section section--clientes">
+            <div class="section__inner">
+                <header class="section__header">
+                    <h2 class="section__title">Registro de Clientes</h2>
+                    <p class="section__subtitle">Comparte tu opinión y completa tus datos</p>
+                </header>
 
-        <div class="registro-page__overlay">
-
-            <section id="cliente" class="section section--clientes">
-
-                <div class="section__inner">
-
-                    <!-- Encabezado -->
-                    <header class="section__header reveal">
-                        <h2 class="section__title">
-                            Registro de Clientes
-                        </h2>
-                        <p class="section__subtitle">
-                            Completa la información y cuéntanos tu experiencia
-                        </p>
-                    </header>
-
-                    <!-- Indicador de pasos -->
-                    <div class="form-steps reveal">
-
-                        <div class="form-step active" id="step1">
-                            <div class="form-step__bubble" id="stepBubble1">
-                                <span>1</span>
-                            </div>
-                            <span class="form-step__label">Tu opinión</span>
-                        </div>
-
-                        <div class="form-step-line">
-                            <div class="form-step-line-fill" id="stepLineFill"></div>
-                        </div>
-
-                        <div class="form-step" id="step2">
-                            <div class="form-step__bubble" id="stepBubble2">
-                                <span>2</span>
-                            </div>
-                            <span class="form-step__label" id="stepLabel2">Tus datos</span>
-                        </div>
-
+                <!-- Pasos -->
+                <div class="form-steps">
+                    <div class="form-step active" id="step1">
+                        <div class="form-step__bubble"><span>1</span></div>
+                        <span class="form-step__label">Tu opinión</span>
                     </div>
-
-                    <!-- Tarjeta principal -->
-                    <div class="clientes__card reveal">
-
-                        <!-- ══ PASO 1 — Mini encuesta ══ -->
-                        <div class="form-panel active" id="panelEncuesta">
-
-                            <div class="encuesta__intro">
-                                <h3>💬 Queremos conocerte mejor</h3>
-                                <p>Tus respuestas nos ayudan a mejorar. Son rápidas y anónimas.</p>
-                            </div>
-
-                            <div class="encuesta__list">
-
-                                <!-- Pregunta 1 -->
-                                <div class="encuesta__item">
-                                    <p class="encuesta__question">
-                                        <span class="encuesta__question-num">1</span>
-                                        ¿Qué te parecen los precios de nuestras Biblias?
-                                    </p>
-                                    <div class="encuesta__options">
-                                        <span class="encuesta__chip" data-group="precios" data-value="muy_accesibles">😊 Muy accesibles</span>
-                                        <span class="encuesta__chip" data-group="precios" data-value="accesibles">👍 Accesibles</span>
-                                        <span class="encuesta__chip" data-group="precios" data-value="regulares">😐 Regulares</span>
-                                        <span class="encuesta__chip" data-group="precios" data-value="elevados">💸 Un poco elevados</span>
-                                    </div>
-                                </div>
-
-                                <!-- Pregunta 2 -->
-                                <div class="encuesta__item">
-                                    <p class="encuesta__question">
-                                        <span class="encuesta__question-num">2</span>
-                                        ¿Cómo ha sido tu experiencia con nosotros?
-                                    </p>
-                                    <div class="encuesta__options">
-                                        <span class="encuesta__chip" data-group="experiencia" data-value="excelente">🌟 Excelente</span>
-                                        <span class="encuesta__chip" data-group="experiencia" data-value="buena">😊 Buena</span>
-                                        <span class="encuesta__chip" data-group="experiencia" data-value="regular">😐 Regular</span>
-                                        <span class="encuesta__chip" data-group="experiencia" data-value="mejorable">🔧 Mejorable</span>
-                                        <span class="encuesta__chip" data-group="experiencia" data-value="primera_vez">🆕 Es mi primera vez</span>
-                                    </div>
-                                </div>
-
-                                <!-- Pregunta 3 -->
-                                <div class="encuesta__item">
-                                    <p class="encuesta__question">
-                                        <span class="encuesta__question-num">3</span>
-                                        ¿Has realizado alguna compra con nosotros?
-                                    </p>
-                                    <div class="encuesta__options">
-                                        <span class="encuesta__chip" data-group="compra" data-value="si_varias">📚 Sí, varias veces</span>
-                                        <span class="encuesta__chip" data-group="compra" data-value="si_una">✅ Sí, una vez</span>
-                                        <span class="encuesta__chip" data-group="compra" data-value="no_pronto">⏳ No, pero pronto</span>
-                                        <span class="encuesta__chip" data-group="compra" data-value="no_explorando">🔍 Solo estoy explorando</span>
-                                    </div>
-                                </div>
-
-                                <!-- Pregunta 4 -->
-                                <div class="encuesta__item">
-                                    <p class="encuesta__question">
-                                        <span class="encuesta__question-num">4</span>
-                                        ¿Qué te parece nuestro plan de financiamiento?
-                                    </p>
-                                    <div class="encuesta__options">
-                                        <span class="encuesta__chip" data-group="financiamiento" data-value="excelente">🏆 Excelente opción</span>
-                                        <span class="encuesta__chip" data-group="financiamiento" data-value="bueno">👌 Bueno</span>
-                                        <span class="encuesta__chip" data-group="financiamiento" data-value="mejorar_cuotas">📅 Podrían dar más cuotas</span>
-                                        <span class="encuesta__chip" data-group="financiamiento" data-value="no_conozco">❓ No lo conocía</span>
-                                    </div>
-                                </div>
-
-                                <!-- Pregunta 5 -->
-                                <div class="encuesta__item">
-                                    <p class="encuesta__question">
-                                        <span class="encuesta__question-num">5</span>
-                                        ¿Algo en lo que piensas que podríamos mejorar?
-                                    </p>
-                                    <textarea
-                                        id="encuestaSugerencia"
-                                        class="encuesta__textarea"
-                                        placeholder="Cuéntanos tu sugerencia o comentario..."
-                                        maxlength="300"></textarea>
-                                </div>
-
-                            </div>
-
-                            <div class="encuesta__next">
-                                <button type="button" class="btn btn--primary" id="btnContinuar">
-                                    Continuar →
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <!-- ══ PASO 2 — Datos del cliente ══ -->
-                        <div class="form-panel" id="panelDatos">
-
-                            <form id="clienteForm">
-
-                                <input type="hidden" id="clienteId">
-
-                                <!--
-                                    ELIMINADO: campo "codigo"
-                                    El modelo Cliente en Django no tiene ese campo.
-                                    Si se necesita en el futuro, agregar al modelo primero.
-                                -->
-
-                                <div class="form__grid">
-
-                                    <div class="form__group">
-                                        <label for="nombre">Nombre</label>
-                                        <input type="text" id="nombre" required>
-                                    </div>
-
-                                    <div class="form__group">
-                                        <label for="apellido">Apellido</label>
-                                        <input type="text" id="apellido" required>
-                                    </div>
-
-                                    <div class="form__group">
-                                        <label for="edad">Edad</label>
-                                        <!--
-                                            min="1" max="100" coincide con
-                                            MinValueValidator(1) / MaxValueValidator(100) del modelo
-                                        -->
-                                        <input type="number" id="edad" min="1" max="100" required>
-                                    </div>
-
-                                    <div class="form__group">
-                                        <label for="departamento">Departamento</label>
-                                        <select id="departamento" required>
-                                            <option value="">Seleccione un departamento</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form__group">
-                                        <label for="genero">Sexo</label>
-                                        <select id="genero" required>
-                                            <option value="">Seleccione</option>
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
-                                        </select>
-                                    </div>
-
-                                </div>
-
-                                <div class="form__actions">
-
-                                    <button type="button" class="btn--back" id="btnVolver">
-                                        ← Volver
-                                    </button>
-
-                                    <button type="submit" class="btn btn--primary">
-                                        Guardar Cliente ✓
-                                    </button>
-
-                                </div>
-
-                            </form>
-
-                        </div>
-
+                    <div class="form-step-line">
+                        <div class="form-step-line-fill" id="stepLineFill"></div>
                     </div>
-
+                    <div class="form-step" id="step2">
+                        <div class="form-step__bubble"><span>2</span></div>
+                        <span class="form-step__label">Tus datos</span>
+                    </div>
                 </div>
 
-            </section>
+                <!-- Tarjeta dinámica -->
+                <div class="clientes__card">
+                    <!-- PASO 1: Encuesta -->
+                    <div class="form-panel active" id="panelEncuesta">
+                        <div class="encuesta__intro">
+                            <h3>📖 Queremos conocerte mejor</h3>
+                            <p>Tus respuestas nos ayudan a mejorar.</p>
+                        </div>
+                        <div class="encuesta__list">
+                            <!-- Pregunta 1 -->
+                            <div class="encuesta__item">
+                                <p class="encuesta__question"><span class="encuesta__question-num">1</span> ¿Qué te parecen los precios de nuestras Biblias?</p>
+                                <div class="encuesta__options" data-question="precios">
+                                    <span class="encuesta__chip" data-value="muy_accesibles">😊 Muy accesibles</span>
+                                    <span class="encuesta__chip" data-value="accesibles">👍 Accesibles</span>
+                                    <span class="encuesta__chip" data-value="regulares">😐 Regulares</span>
+                                    <span class="encuesta__chip" data-value="elevados">💸 Algo elevados</span>
+                                </div>
+                            </div>
+                            <!-- Pregunta 2 -->
+                            <div class="encuesta__item">
+                                <p class="encuesta__question"><span class="encuesta__question-num">2</span> ¿Cómo ha sido tu experiencia con nosotros?</p>
+                                <div class="encuesta__options" data-question="experiencia">
+                                    <span class="encuesta__chip" data-value="excelente">🌟 Excelente</span>
+                                    <span class="encuesta__chip" data-value="buena">😊 Buena</span>
+                                    <span class="encuesta__chip" data-value="regular">😐 Regular</span>
+                                    <span class="encuesta__chip" data-value="mejorable">🔧 Mejorable</span>
+                                </div>
+                            </div>
+                            <!-- Pregunta 3 -->
+                            <div class="encuesta__item">
+                                <p class="encuesta__question"><span class="encuesta__question-num">3</span> ¿Has realizado alguna compra con nosotros?</p>
+                                <div class="encuesta__options" data-question="compra">
+                                    <span class="encuesta__chip" data-value="si_varias">📚 Sí, varias veces</span>
+                                    <span class="encuesta__chip" data-value="si_una">✅ Sí, una vez</span>
+                                    <span class="encuesta__chip" data-value="no_pronto">⏳ No, pero pronto</span>
+                                </div>
+                            </div>
+                            <!-- Pregunta 4 con texto -->
+                            <div class="encuesta__item">
+                                <p class="encuesta__question"><span class="encuesta__question-num">4</span> ¿Algo en lo que podríamos mejorar?</p>
+                                <textarea id="encuestaSugerencia" rows="2" placeholder="Escribe tu sugerencia..." class="encuesta__textarea"></textarea>
+                            </div>
+                        </div>
+                        <div class="encuesta__next">
+                            <button class="btn btn--primary" id="btnContinuar">Continuar →</button>
+                        </div>
+                    </div>
 
-        </div>
+                    <!-- PASO 2: Datos personales -->
+                    <div class="form-panel" id="panelDatos">
+                        <form id="clienteForm">
+                            <div class="form__grid">
+                                <div class="form__group">
+                                    <label>Nombre</label>
+                                    <input type="text" id="nombre" required placeholder="Escribe tu nombre">
+                                </div>
+                                <div class="form__group">
+                                    <label>Apellido</label>
+                                    <input type="text" id="apellido" required placeholder="Apellido">
+                                </div>
+                                <div class="form__group">
+                                    <label>Edad</label>
+                                    <input type="number" id="edad" min="1" max="100" required>
+                                </div>
+                                <div class="form__group">
+                                    <label>Departamento</label>
+                                    <select id="departamento" required>
+                                        <option value="">Seleccionar</option>
+                                        <option value="Artigas">Artigas</option>
+                                        <option value="Canelones">Canelones</option>
+                                        <option value="Cerro Largo">Cerro Largo</option>
+                                        <option value="Colonia">Colonia</option>
+                                        <option value="Durazno">Durazno</option>
+                                        <option value="Flores">Flores</option>
+                                        <option value="Florida">Florida</option>
+                                        <option value="Lavalleja">Lavalleja</option>
+                                        <option value="Maldonado">Maldonado</option>
+                                        <option value="Montevideo">Montevideo</option>
+                                        <option value="Paysandú">Paysandú</option>
+                                        <option value="Río Negro">Río Negro</option>
+                                        <option value="Rivera">Rivera</option>
+                                        <option value="Rocha">Rocha</option>
+                                        <option value="Salto">Salto</option>
+                                        <option value="San José">San José</option>
+                                        <option value="Soriano">Soriano</option>
+                                        <option value="Tacuarembó">Tacuarembó</option>
+                                        <option value="Treinta y Tres">Treinta y Tres</option>
+                                    </select>
+                                </div>
+                                <div class="form__group">
+                                    <label>Sexo</label>
+                                    <select id="genero" required>
+                                        <option value="">Seleccionar</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Femenino</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form__actions">
+                                <button type="button" class="btn btn--back" id="btnVolver">← Volver</button>
+                                <button type="submit" class="btn btn--primary">Guardar Cliente ✓</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
 
-    </main>
+<div id="toast" class="toast">✅ Cliente registrado con éxito</div>
 
-    <script src="clientes.js"></script>
+<script>
+    (function() {
+        // -------- CHIPS (selección múltiple por grupo pero uno por grupo)
+        const chips = document.querySelectorAll('.encuesta__chip');
+        chips.forEach(chip => {
+            chip.addEventListener('click', function(e) {
+                const parentOptions = this.closest('.encuesta__options');
+                if(parentOptions) {
+                    // Remover selected de hermanos
+                    parentOptions.querySelectorAll('.encuesta__chip').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                } else {
+                    this.classList.toggle('selected');
+                }
+            });
+        });
 
+        // -------- Cambio entre paneles + validación mínima (paso1 -> paso2)
+        const panelEncuesta = document.getElementById('panelEncuesta');
+        const panelDatos = document.getElementById('panelDatos');
+        const btnContinuar = document.getElementById('btnContinuar');
+        const btnVolver = document.getElementById('btnVolver');
+        const step1Div = document.getElementById('step1');
+        const step2Div = document.getElementById('step2');
+        const lineFill = document.getElementById('stepLineFill');
+
+        function updateSteps(step) {
+            // step = 1 o 2
+            if(step === 2) {
+                step1Div.classList.remove('active');
+                step1Div.classList.add('done');
+                step2Div.classList.add('active');
+                step2Div.classList.remove('done');
+                lineFill.style.width = '100%';
+                panelEncuesta.classList.remove('active');
+                panelDatos.classList.add('active');
+            } else {
+                step1Div.classList.add('active');
+                step1Div.classList.remove('done');
+                step2Div.classList.remove('active');
+                step2Div.classList.remove('done');
+                lineFill.style.width = '0%';
+                panelEncuesta.classList.add('active');
+                panelDatos.classList.remove('active');
+            }
+        }
+
+        // Verificar que haya al menos una respuesta en la encuesta (algún chip seleccionado)
+        function tieneRespuestasEncuesta() {
+            const grupos = document.querySelectorAll('.encuesta__options');
+            let algunaRespuesta = false;
+            grupos.forEach(grupo => {
+                const selected = grupo.querySelector('.encuesta__chip.selected');
+                if(selected) algunaRespuesta = true;
+            });
+            const sugerencia = document.getElementById('encuestaSugerencia').value.trim();
+            if(sugerencia !== "") algunaRespuesta = true;
+            return algunaRespuesta;
+        }
+
+        btnContinuar.addEventListener('click', () => {
+            if(tieneRespuestasEncuesta()) {
+                updateSteps(2);
+            } else {
+                mostrarToast("Por favor selecciona al menos una opción antes de continuar", 3000, "#8b1a1a");
+            }
+        });
+
+        btnVolver.addEventListener('click', () => {
+            updateSteps(1);
+        });
+
+        // Mostrar toast personalizable
+        function mostrarToast(mensaje, duracion = 3000, bgColor = "#00608B") {
+            let toast = document.getElementById('toast');
+            if(!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.className = 'toast';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = mensaje;
+            toast.style.background = bgColor;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, duracion);
+        }
+
+        // Simular guardado en BD (aquí conectarás con Django)
+        async function enviarClienteABaseDeDatos(datosCliente) {
+            // Simulación de fetch a tu backend
+            console.log("Enviando a la base de datos:", datosCliente);
+            // Aquí pegas tu código real de Django:
+            /*
+            try {
+                const response = await fetch('/api/registro-cliente/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datosCliente)
+                });
+                if(response.ok) return true;
+            } catch(error) { return false; }
+            */
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(true);
+                }, 800);
+            });
+        }
+
+        // Manejo del submit del formulario
+        const form = document.getElementById('clienteForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Capturar respuestas de la encuesta (opcional pero puedes enviarlas también)
+            const respuestas = {};
+            document.querySelectorAll('.encuesta__options').forEach(group => {
+                const selected = group.querySelector('.encuesta__chip.selected');
+                if(selected) {
+                    const pregunta = group.getAttribute('data-question') || 'pregunta';
+                    respuestas[pregunta] = selected.getAttribute('data-value');
+                }
+            });
+            respuestas.sugerencia = document.getElementById('encuestaSugerencia').value;
+
+            // Capturar datos del cliente
+            const nombre = document.getElementById('nombre').value.trim();
+            const apellido = document.getElementById('apellido').value.trim();
+            const edad = document.getElementById('edad').value;
+            const departamento = document.getElementById('departamento').value;
+            const genero = document.getElementById('genero').value;
+
+            if(!nombre || !apellido || !edad || !departamento || !genero) {
+                mostrarToast("Por favor completa todos los campos del formulario", 3000, "#8b1a1a");
+                return;
+            }
+
+            const clienteData = {
+                nombre,
+                apellido,
+                edad: parseInt(edad),
+                departamento,
+                genero,
+                encuesta: respuestas
+            };
+
+            // Aquí llamas a tu endpoint real
+            const guardadoExitoso = await enviarClienteABaseDeDatos(clienteData);
+            if(guardadoExitoso) {
+                mostrarToast("✅ ¡Gracias! Tus datos han sido guardados correctamente.", 4000);
+                // Opcional: limpiar formulario
+                form.reset();
+                // Reiniciar chips
+                document.querySelectorAll('.encuesta__chip.selected').forEach(chip => chip.classList.remove('selected'));
+                document.getElementById('encuestaSugerencia').value = '';
+                // Regresar al paso 1
+                updateSteps(1);
+            } else {
+                mostrarToast("❌ Error al guardar. Intenta nuevamente.", 4000, "#8b1a1a");
+            }
+        });
+
+        // Inicializar selects y pequeños detalles
+        const today = new Date();
+        console.log("Formulario listo — estilo editorial mundo");
+    })();
+</script>
 </body>
 </html>
