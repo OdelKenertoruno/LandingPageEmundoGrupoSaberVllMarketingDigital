@@ -94,6 +94,7 @@
                     <!-- PASO 2: Datos personales -->
                     <div class="form-panel" id="panelDatos">
                         <form id="clienteForm">
+                            <input type="hidden" id="clienteId">
                             <div class="form__grid">
                                 <div class="form__group">
                                     <label>Nombre</label>
@@ -110,26 +111,7 @@
                                 <div class="form__group">
                                     <label>Departamento</label>
                                     <select id="departamento" required>
-                                        <option value="">Seleccionar</option>
-                                        <option value="Artigas">Artigas</option>
-                                        <option value="Canelones">Canelones</option>
-                                        <option value="Cerro Largo">Cerro Largo</option>
-                                        <option value="Colonia">Colonia</option>
-                                        <option value="Durazno">Durazno</option>
-                                        <option value="Flores">Flores</option>
-                                        <option value="Florida">Florida</option>
-                                        <option value="Lavalleja">Lavalleja</option>
-                                        <option value="Maldonado">Maldonado</option>
-                                        <option value="Montevideo">Montevideo</option>
-                                        <option value="Paysandú">Paysandú</option>
-                                        <option value="Río Negro">Río Negro</option>
-                                        <option value="Rivera">Rivera</option>
-                                        <option value="Rocha">Rocha</option>
-                                        <option value="Salto">Salto</option>
-                                        <option value="San José">San José</option>
-                                        <option value="Soriano">Soriano</option>
-                                        <option value="Tacuarembó">Tacuarembó</option>
-                                        <option value="Treinta y Tres">Treinta y Tres</option>
+                                        <!-- Cargado dinámicamente por clientes.js desde la API -->
                                     </select>
                                 </div>
                                 <div class="form__group">
@@ -153,8 +135,7 @@
     </div>
 </main>
 
-<div id="toast" class="toast">✅ Cliente registrado con éxito</div>
-
+<div id="clienteToast" class="toast"></div>
 <script>
     (function() {
         // -------- CHIPS (selección múltiple por grupo pero uno por grupo)
@@ -324,5 +305,7 @@
         console.log("Formulario listo — estilo editorial mundo");
     })();
 </script>
+
+<script src="clientes.js"></script>
 </body>
 </html>
