@@ -344,9 +344,11 @@ document.addEventListener('DOMContentLoaded', function () {
       const campaignPosition = img.getAttribute('data-position');
 
       // ✅ Evento GA4 — disparo único y limpio
+      // NOTA: usamos "nombre_campania" en lugar de "campaign_name"
+      // porque "campaign_name" es palabra reservada de GA4 y se convierte a "campaign"
       if (typeof gtag === 'function' && campaignName) {
         gtag('event', 'campaign_click', {
-          campaign_name    : campaignName,
+          nombre_campania  : campaignName,
           campaign_position: parseInt(campaignPosition) || 0,
           page_location    : window.location.href,
           page_title       : document.title
