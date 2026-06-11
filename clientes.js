@@ -4,16 +4,16 @@
 // ════════════════════════════════════════════════════
 console.log("🔥 clientes.js CARGADO");
 
-const API_DEPARTAMENTOS = "http://127.0.0.1:8000/catalogo/departamentos/";
-const API_CLIENTES      = "http://127.0.0.1:8000/catalogo/clientes/";
+const API_DEPARTAMENTOS = "https://backendemundo.onrender.com/catalogo/departamentos/";
+const API_CLIENTES      = "https://backendemundo.onrender.com/catalogo/clientes/";
 
 // ── Respuestas de la encuesta (solo en memoria, nunca a la BD) ──
 const encuestaRespuestas = {
-  precios:       null,
-  experiencia:   null,
-  compra:        null,
+  precios:        null,
+  experiencia:    null,
+  compra:         null,
   financiamiento: null,
-  sugerencia:    ""
+  sugerencia:     ""
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,24 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── Elementos del form ──
   const selectDepartamento = document.getElementById("departamento");
   const clienteId          = document.getElementById("clienteId");
-  const codigo             = document.getElementById("codigo");
+  // ELIMINADO: const codigo = document.getElementById("codigo");
   const nombre             = document.getElementById("nombre");
   const apellido           = document.getElementById("apellido");
   const edad               = document.getElementById("edad");
   const genero             = document.getElementById("genero");
 
   // ── Pasos ──
-  const panelEncuesta  = document.getElementById("panelEncuesta");
-  const panelDatos     = document.getElementById("panelDatos");
-  const btnContinuar   = document.getElementById("btnContinuar");
-  const btnVolver      = document.getElementById("btnVolver");
-  const stepBubble1    = document.getElementById("stepBubble1");
-  const stepBubble2    = document.getElementById("stepBubble2");
-  const stepLabel1     = document.getElementById("stepLabel1");
-  const stepLabel2     = document.getElementById("stepLabel2");
-  const stepLine       = document.getElementById("stepLineFill");
-  const step1          = document.getElementById("step1");
-  const step2          = document.getElementById("step2");
+  const panelEncuesta = document.getElementById("panelEncuesta");
+  const panelDatos    = document.getElementById("panelDatos");
+  const btnContinuar  = document.getElementById("btnContinuar");
+  const btnVolver     = document.getElementById("btnVolver");
+  const stepLine      = document.getElementById("stepLineFill");
+  const step1         = document.getElementById("step1");
+  const step2         = document.getElementById("step2");
 
   // ════════════════════════
   // ENCUESTA — chips
@@ -49,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".encuesta__chip").forEach(chip => {
     chip.addEventListener("click", () => {
       const group = chip.dataset.group;
-      // Deseleccionar los demás del mismo grupo
       document.querySelectorAll(`.encuesta__chip[data-group="${group}"]`)
         .forEach(c => c.classList.remove("selected"));
       chip.classList.add("selected");
@@ -68,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── Botón continuar ──
   if (btnContinuar) {
     btnContinuar.addEventListener("click", () => {
-      // Validar que respondió al menos precios y experiencia
       if (!encuestaRespuestas.precios || !encuestaRespuestas.experiencia) {
         showToast("⚠️ Por favor responde las preguntas 1 y 2 para continuar", "error");
         return;
@@ -104,7 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ════════════════════════
   function cargarDepartamentos() {
     fetch(API_DEPARTAMENTOS)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then(data => {
         console.log("📦 Departamentos:", data);
         selectDepartamento.innerHTML = `<option value="">Seleccione un departamento</option>`;
@@ -116,20 +113,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       })
       .catch(err => {
-        console.error("❌ Departamentos:", err);
-        // Fallback con departamentos de Nicaragua
-        const depsFallback = [
-          "Boaco","Carazo","Chinandega","Chontales","Estelí","Granada",
-          "Jinotega","León","Madriz","Managua","Masaya","Matagalpa",
-          "Nueva Segovia","Río San Juan","Rivas","RAAN","RAAS"
-        ];
-        selectDepartamento.innerHTML = `<option value="">Seleccione un departamento</option>`;
-        depsFallback.forEach((dep, i) => {
-          const opt = document.createElement("option");
-          opt.value = i + 1;
-          opt.textContent = dep;
-          selectDepartamento.appendChild(opt);
-        });
+        console.error("❌ Error al cargar departamentos:", err);
+        // NOTA: Se elimina el fallback con IDs ficticios.
+        // Si la API falla, se muestra un mensaje al usuario para evitar
+        // enviar IDs de departamento incorrectos a la BD.
+        selectDepartamento.innerHTML = `<option value="">⚠️ No se pudieron cargar</option>`;
+        showToast("⚠️ No se pudieron cargar los departamentos. Recarga la página.", "error");
       });
   }
 
@@ -141,20 +130,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const id = clienteId.value;
 
-    // Solo estos datos van a la BD — la encuesta NO se incluye
+    // ELIMINADO: campo codigo — no existe en el modelo Django
     const cliente = {
-      codigo:        codigo.value.trim(),
-      nombre:        nombre.value.trim(),
-      apellido:      apellido.value.trim(),
-      edad:          Number(edad.value),
-      departamento:  selectDepartamento.value,
-      genero:        genero.value
+      nombre:       nombre.value.trim(),
+      apellido:     apellido.value.trim(),
+      edad:         Number(edad.value),
+      departamento: selectDepartamento.value,
+      genero:       genero.value
     };
 
     // Validación básica
-    if (!cliente.codigo || !cliente.nombre || !cliente.apellido ||
+    if (!cliente.nombre || !cliente.apellido ||
         !cliente.edad   || !cliente.departamento || !cliente.genero) {
       showToast("⚠️ Por favor completa todos los campos", "error");
+      return;
+    }
+
+    // Validación de edad (coincide con MinValueValidator/MaxValueValidator del modelo)
+    if (cliente.edad < 1 || cliente.edad > 100) {
+      showToast("⚠️ La edad debe estar entre 1 y 100 años", "error");
       return;
     }
 
@@ -181,12 +175,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (txtSugerencia) txtSugerencia.value = "";
         Object.keys(encuestaRespuestas).forEach(k => encuestaRespuestas[k] = null);
         encuestaRespuestas.sugerencia = "";
-        // Volver al paso 1
         irAlPaso(1);
         showToast("✅ Cliente registrado correctamente", "success");
       })
       .catch(err => {
-        console.error("❌ Guardar cliente:", err);
+        console.error("❌ Error al guardar cliente:", err);
         showToast("❌ Error al guardar. Revisa la conexión.", "error");
       });
   });

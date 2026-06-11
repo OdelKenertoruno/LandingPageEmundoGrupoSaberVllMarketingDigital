@@ -5,35 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Clientes | EMundo</title>
 
-    <!-- Tus CSS -->
-     
-  
     <link rel="stylesheet" href="clientes.css">
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2QHW0NGQR"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-V2QHW0NGQR');
-</script>
-    
-
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-V2QHW0NGQR');
+    </script>
 </head>
 <body>
 
-    <!-- ==========================================================
-         CONTENEDOR GENERAL
-         Aquí podrás colocar una imagen de fondo desde CSS
-    =========================================================== -->
     <main class="registro-page">
 
-        <!-- Capa oscura/opcional para mejorar lectura -->
         <div class="registro-page__overlay">
 
-            <!-- ═══════════════════════════════════════════════════════
-                 SECCIÓN REGISTRO DE CLIENTES
-            ═══════════════════════════════════════════════════════ -->
             <section id="cliente" class="section section--clientes">
 
                 <div class="section__inner">
@@ -43,7 +30,6 @@
                         <h2 class="section__title">
                             Registro de Clientes
                         </h2>
-
                         <p class="section__subtitle">
                             Completa la información y cuéntanos tu experiencia
                         </p>
@@ -56,9 +42,7 @@
                             <div class="form-step__bubble" id="stepBubble1">
                                 <span>1</span>
                             </div>
-                            <span class="form-step__label">
-                                Tu opinión
-                            </span>
+                            <span class="form-step__label">Tu opinión</span>
                         </div>
 
                         <div class="form-step-line">
@@ -69,9 +53,7 @@
                             <div class="form-step__bubble" id="stepBubble2">
                                 <span>2</span>
                             </div>
-                            <span class="form-step__label" id="stepLabel2">
-                                Tus datos
-                            </span>
+                            <span class="form-step__label" id="stepLabel2">Tus datos</span>
                         </div>
 
                     </div>
@@ -84,10 +66,7 @@
 
                             <div class="encuesta__intro">
                                 <h3>💬 Queremos conocerte mejor</h3>
-                                <p>
-                                    Tus respuestas nos ayudan a mejorar.
-                                    Son rápidas y anónimas.
-                                </p>
+                                <p>Tus respuestas nos ayudan a mejorar. Son rápidas y anónimas.</p>
                             </div>
 
                             <div class="encuesta__list">
@@ -98,7 +77,6 @@
                                         <span class="encuesta__question-num">1</span>
                                         ¿Qué te parecen los precios de nuestras Biblias?
                                     </p>
-
                                     <div class="encuesta__options">
                                         <span class="encuesta__chip" data-group="precios" data-value="muy_accesibles">😊 Muy accesibles</span>
                                         <span class="encuesta__chip" data-group="precios" data-value="accesibles">👍 Accesibles</span>
@@ -113,7 +91,6 @@
                                         <span class="encuesta__question-num">2</span>
                                         ¿Cómo ha sido tu experiencia con nosotros?
                                     </p>
-
                                     <div class="encuesta__options">
                                         <span class="encuesta__chip" data-group="experiencia" data-value="excelente">🌟 Excelente</span>
                                         <span class="encuesta__chip" data-group="experiencia" data-value="buena">😊 Buena</span>
@@ -129,7 +106,6 @@
                                         <span class="encuesta__question-num">3</span>
                                         ¿Has realizado alguna compra con nosotros?
                                     </p>
-
                                     <div class="encuesta__options">
                                         <span class="encuesta__chip" data-group="compra" data-value="si_varias">📚 Sí, varias veces</span>
                                         <span class="encuesta__chip" data-group="compra" data-value="si_una">✅ Sí, una vez</span>
@@ -144,7 +120,6 @@
                                         <span class="encuesta__question-num">4</span>
                                         ¿Qué te parece nuestro plan de financiamiento?
                                     </p>
-
                                     <div class="encuesta__options">
                                         <span class="encuesta__chip" data-group="financiamiento" data-value="excelente">🏆 Excelente opción</span>
                                         <span class="encuesta__chip" data-group="financiamiento" data-value="bueno">👌 Bueno</span>
@@ -159,7 +134,6 @@
                                         <span class="encuesta__question-num">5</span>
                                         ¿Algo en lo que piensas que podríamos mejorar?
                                     </p>
-
                                     <textarea
                                         id="encuestaSugerencia"
                                         class="encuesta__textarea"
@@ -170,28 +144,27 @@
                             </div>
 
                             <div class="encuesta__next">
-                                <button type="button"
-                                        class="btn btn--primary"
-                                        id="btnContinuar">
+                                <button type="button" class="btn btn--primary" id="btnContinuar">
                                     Continuar →
                                 </button>
                             </div>
 
                         </div>
 
-                        <!-- PASO 2 -->
+                        <!-- ══ PASO 2 — Datos del cliente ══ -->
                         <div class="form-panel" id="panelDatos">
 
                             <form id="clienteForm">
 
                                 <input type="hidden" id="clienteId">
 
-                                <div class="form__grid">
+                                <!--
+                                    ELIMINADO: campo "codigo"
+                                    El modelo Cliente en Django no tiene ese campo.
+                                    Si se necesita en el futuro, agregar al modelo primero.
+                                -->
 
-                                    <!-- <div class="form__group">
-                                        <label for="codigo">Código</label>
-                                        <input type="text" id="codigo" required>
-                                    </div> -->
+                                <div class="form__grid">
 
                                     <div class="form__group">
                                         <label for="nombre">Nombre</label>
@@ -205,15 +178,17 @@
 
                                     <div class="form__group">
                                         <label for="edad">Edad</label>
-                                        <input type="number" id="edad" required>
+                                        <!--
+                                            min="1" max="100" coincide con
+                                            MinValueValidator(1) / MaxValueValidator(100) del modelo
+                                        -->
+                                        <input type="number" id="edad" min="1" max="100" required>
                                     </div>
 
                                     <div class="form__group">
                                         <label for="departamento">Departamento</label>
                                         <select id="departamento" required>
-                                            <option value="">
-                                                Seleccione un departamento
-                                            </option>
+                                            <option value="">Seleccione un departamento</option>
                                         </select>
                                     </div>
 
@@ -230,14 +205,11 @@
 
                                 <div class="form__actions">
 
-                                    <button type="button"
-                                            class="btn--back"
-                                            id="btnVolver">
+                                    <button type="button" class="btn--back" id="btnVolver">
                                         ← Volver
                                     </button>
 
-                                    <button type="submit"
-                                            class="btn btn--primary">
+                                    <button type="submit" class="btn btn--primary">
                                         Guardar Cliente ✓
                                     </button>
 
@@ -257,7 +229,6 @@
 
     </main>
 
-    <!-- Tu JS -->
     <script src="clientes.js"></script>
 
 </body>
