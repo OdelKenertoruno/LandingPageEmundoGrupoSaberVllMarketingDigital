@@ -135,5 +135,26 @@ if(btnAnalytics){
     });
 
 }
+const socialLinksIndex = [
+    { selector: '.red__card--fb',  platform: 'facebook',   location: 'redes_section' },
+    { selector: '.red__card--ig',  platform: 'instagram',  location: 'redes_section' },
+    { selector: '.red__card--tk',  platform: 'tiktok',     location: 'redes_section' },
+    { selector: '.red__card--wa',  platform: 'whatsapp',   location: 'redes_section' },
+  ];
+
+  socialLinksIndex.forEach(({ selector, platform, location }) => {
+    // querySelectorAll porque puede haber varios (ej. dos .red__card--fb)
+    document.querySelectorAll(selector).forEach(el => {
+      el.addEventListener('click', () => {
+        if (typeof gtag !== 'function') return;
+        gtag('event', 'social_click', {
+          platform:  platform,
+          page:      'index',
+          location:  location,
+          link_url:  el.getAttribute('href') || ''
+        });
+      });
+    });
+  });
 
 });

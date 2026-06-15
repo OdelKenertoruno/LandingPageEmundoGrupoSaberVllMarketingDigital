@@ -375,3 +375,33 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
+
+// ════════════════════════════════════════════════════
+//  GA4 — social_click · Catálogo (Speed Dial)
+// ════════════════════════════════════════════════════
+
+(function trackSocialClicksCatalogo() {
+
+  const socialDial = [
+    { selector: '.speed-dial__btn--fb', platform: 'facebook'  },
+    { selector: '.speed-dial__btn--ig', platform: 'instagram' },
+    { selector: '.speed-dial__btn--tk', platform: 'tiktok'    },
+    { selector: '.speed-dial__btn--wa', platform: 'whatsapp'  },
+  ];
+
+  socialDial.forEach(({ selector, platform }) => {
+    const el = document.querySelector(selector);
+    if (!el) return;
+
+    el.addEventListener('click', () => {
+      if (typeof gtag !== 'function') return;
+      gtag('event', 'social_click', {
+        platform:  platform,
+        page:      'catalogo',
+        location:  'speed_dial',
+        link_url:  el.getAttribute('href') || ''
+      });
+    });
+  });
+
+})();

@@ -1,72 +1,87 @@
-document.addEventListener('DOMContentLoaded', () => {
+(function () {
 
-  const splash       = document.getElementById('splash-screen');
-  const progressBar  = document.getElementById('progressBar');
-  const progressText = document.getElementById('progressText');
-  const loadingText  = document.getElementById('loadingText');
-
-  if (!splash) return;
-
-  const loadingMessages = [
-    'Preparando tu espacio de lectura...',
-    'Cargando la Palabra...',
-    'Inspirando nuevos comienzos...',
-    'Conectando fe y conocimiento...',
-    'Todo listo para ti...'
+  /* ── PALETA ── */
+  const BOOKS = [
+    ['#00608B', '#0092BA'],
+    ['#0092BA', '#A0C5CF'],
+    ['#C9A84C', '#E8D5A0'],
+    ['#A0C5CF', '#66C9D3'],
+    ['#005577', '#0092BA'],
+    ['#66C9D3', '#A0C5CF'],
+    ['#00608B', '#66C9D3'],
+    ['#C9A84C', '#0092BA'],
+    ['#0092BA', '#66C9D3'],
+    ['#A0C5CF', '#00608B'],
+    ['#E8D5A0', '#C9A84C'],
+    ['#005577', '#66C9D3'],
+    ['#0092BA', '#E8D5A0'],
+    ['#66C9D3', '#00608B'],
+    ['#C9A84C', '#A0C5CF'],
   ];
 
-  let progress = 0;
-  let msgIndex = 0;
+  const H1 = [78, 108, 92, 118, 86, 104, 112, 88, 98, 110, 84, 106, 96, 114, 90];
+  const H2 = [94, 84, 114, 88, 106, 98, 86, 118, 104, 90, 110, 96, 114, 80, 104];
 
-  // Bloquear scroll mientras carga
-  document.body.style.overflow = 'hidden';
+  function buildShelf(el, heights, delay) {
+    heights.forEach(function (h, i) {
+      var c = BOOKS[i % BOOKS.length];
+      var book = document.createElement('div');
+      book.className = 'splash-book';
+      book.style.height = h + 'px';
+      book.style.background = c[0];
+      book.style.animationDelay = (delay + i * 55) + 'ms';
 
-  // ── Función que oculta el splash definitivamente ──
-  function hideSplash() {
-    splash.classList.add('hide');
-    document.body.style.overflow = '';
-    // Después de la transición lo sacamos del flujo
-    setTimeout(() => {
-      splash.style.display = 'none';
-    }, 1100);
+      var spine = document.createElement('div');
+      spine.className = 'splash-book-spine';
+      spine.style.background = c[1];
+
+      book.appendChild(spine);
+      el.appendChild(book);
+    });
   }
 
-  // ── Failsafe: máximo 5 segundos pase lo que pase ──
-  const failsafe = setTimeout(() => {
-    clearInterval(splashInterval);
-    progressBar.style.width = '100%';
-    progressText.textContent = '100%';
-    hideSplash();
-  }, 5000);
+  buildShelf(document.getElementById('shelf1'), H1, 100);
+  buildShelf(document.getElementById('shelf2'), H2, 950);
 
-  const splashInterval = setInterval(() => {
+  /* ── PROGRESO ── */
+  var bar      = document.getElementById('progressBar');
+  var pctLabel = document.getElementById('progressText');
+  var loadText = document.getElementById('loadingText');
+  var splash   = document.getElementById('splash-screen');
 
-    progress += Math.floor(Math.random() * 12) + 5;
-    if (progress > 100) progress = 100;
+  var messages = [
+    'Preparando conocimiento...',
+    'Cargando colección...',
+    'Ordenando estantes...',
+    'Casi listo...',
+  ];
 
-    progressBar.style.width  = `${progress}%`;
-    progressText.textContent = `${progress}%`;
+  var totalMs   = 3500;
+  var startTime = performance.now();
 
-    // Rotar mensajes
-    if (
-      progress > (msgIndex + 1) * 15 &&
-      msgIndex < loadingMessages.length - 1
-    ) {
-      msgIndex++;
-      loadingText.textContent = loadingMessages[msgIndex];
+  function tick() {
+    var elapsed  = performance.now() - startTime;
+    var progress = Math.min(100, Math.round((elapsed / totalMs) * 100));
+
+    bar.style.width      = progress + '%';
+    pctLabel.textContent = progress + '%';
+
+    var msgIndex = Math.min(
+      Math.floor((progress / 100) * messages.length),
+      messages.length - 1
+    );
+    loadText.textContent = messages[msgIndex];
+
+    if (progress < 100) {
+      requestAnimationFrame(tick);
+    } else {
+      pctLabel.textContent = 'listo';
+      setTimeout(function () {
+        if (splash) splash.classList.add('hidden');
+      }, 500);
     }
+  }
 
-    // Al llegar al 100%
-    if (progress >= 100) {
-      clearInterval(splashInterval);
-      clearTimeout(failsafe);
-      loadingText.textContent = loadingMessages[loadingMessages.length - 1];
+  requestAnimationFrame(tick);
 
-      setTimeout(() => {
-        hideSplash();
-      }, 600);
-    }
-
-  }, 180);
-
-});
+})();
