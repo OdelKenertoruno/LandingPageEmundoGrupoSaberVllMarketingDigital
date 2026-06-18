@@ -146,22 +146,24 @@ body {
   align-items: flex-start;
 }
 
-/* ── Sidebar — carrusel apilado de informes ── */
 .dashboard-sidebar {
   width: 230px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;   /* ← centra todo el bloque verticalmente */
   gap: .9rem;
   opacity: 0;
   transform: translateX(-18px);
   animation: fadeRight .6s ease forwards;
   animation-delay: .18s;
+  align-self: stretch;       /* ← permite que ocupe toda la altura del row */
 }
 
 .tabs-carousel {
   position: relative;
   height: 150px;
+   margin: auto 0;
 }
 
 .tab-card {
@@ -408,11 +410,11 @@ body {
       <div class="tabs-carousel" id="tabsCarousel">
         <button class="tab-card" data-page="Orf0F" data-index="0">
           <span class="tab-card__label">Informe</span>
-          <span class="tab-card__hint">Vista general</span>
+       
         </button>
         <button class="tab-card" data-page="p_8ftts25h4d" data-index="1">
           <span class="tab-card__label">Informe Panorámico</span>
-          <span class="tab-card__hint">Campañas</span>
+
         </button>
       </div>
       <p class="sidebar__hint">Desliza o haz scroll para cambiar de informe</p>
