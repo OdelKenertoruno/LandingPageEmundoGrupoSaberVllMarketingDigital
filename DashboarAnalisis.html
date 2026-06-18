@@ -11,7 +11,7 @@
 
 /* ════════════════════════════════════════════════════
    EDICIONES MUNDO — Dashboard Analítico
-   Optimizado para Android - sin espacios azules vacíos
+   Optimizado para Android sin espacios excesivos
 ════════════════════════════════════════════════════ */
 
 :root {
@@ -133,9 +133,9 @@ body {
 /* ════════════════════════════════════════════════════
    BODY
 ════════════════════════════════════════════════════ */
-.dashboard-body { display: flex; gap: 14px; align-items: stretch; }
+.dashboard-body { display: flex; gap: 14px; align-items: flex-start; }
 
-/* ── Sidebar — lista de informes ── */
+/* ── Sidebar — lista de informes, tarjetas separadas y centradas ── */
 .dashboard-sidebar {
   width: 210px;
   flex-shrink: 0;
@@ -146,6 +146,7 @@ body {
   transform: translateX(-18px);
   animation: fadeRight .6s ease forwards;
   animation-delay: .18s;
+  align-self: stretch;
 }
 
 .reports-list {
@@ -156,6 +157,7 @@ body {
   padding-left: 12px;
 }
 
+/* Barra indicadora que se desliza hacia la tarjeta activa */
 .reports-list__indicator {
   position: absolute;
   left: 0;
@@ -228,27 +230,20 @@ body {
   transform: translateY(18px);
   animation: fadeUp .6s ease forwards;
   animation-delay: .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
 }
 
 .iframe-container {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 500px;
+  padding-bottom: 60%;
   background: var(--gray-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .iframe-container iframe {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 500px;
   border: 0;
   display: block;
   opacity: 0;
@@ -308,7 +303,7 @@ body {
 }
 
 /* ════════════════════════════════════════════════════
-   ANIMACIONES
+   ANIMACIONES DE ENTRADA
 ════════════════════════════════════════════════════ */
 @keyframes shellEnter { to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeDown    { to { opacity: 1; transform: translateY(0); } }
@@ -327,15 +322,16 @@ body {
 }
 
 /* ════════════════════════════════════════════════════
-   RESPONSIVE — Sin espacios azules vacíos en Android
+   RESPONSIVE — Optimizado para Android sin espacios grandes
 ════════════════════════════════════════════════════ */
 
-/* Tablets */
+/* Tablets y pantallas medianas */
 @media (max-width: 1100px) {
   .dashboard-sidebar { width: 190px; }
+  .iframe-container { padding-bottom: 70%; }
 }
 
-/* Móviles y tablets pequeñas */
+/* Móviles grandes y tablets pequeñas */
 @media (max-width: 900px) {
   body { padding: 12px; }
   
@@ -368,15 +364,6 @@ body {
   .dashboard-content { 
     flex: none; 
     width: 100%; 
-    min-height: 400px;
-  }
-
-  .iframe-container { 
-    min-height: 400px;
-  }
-  
-  .iframe-container iframe { 
-    min-height: 400px;
   }
 
   .reports-list {
@@ -401,6 +388,8 @@ body {
     transition: transform .4s cubic-bezier(.4,0,.2,1),
                 width .4s cubic-bezier(.4,0,.2,1);
   }
+
+  .iframe-container { padding-bottom: 100%; }
   
   .dashboard-footer { padding: 0.6rem; }
   .dashboard-footer__tagline { font-size: 0.82rem; }
@@ -427,18 +416,6 @@ body {
 
   .dashboard-body { gap: 10px; }
   
-  .dashboard-content { 
-    min-height: 350px;
-  }
-  
-  .iframe-container { 
-    min-height: 350px;
-  }
-  
-  .iframe-container iframe { 
-    min-height: 350px;
-  }
-  
   .reports-list { gap: 8px; padding-bottom: 8px; }
   .report-card { 
     padding: 0.5rem 0.6rem;
@@ -448,27 +425,22 @@ body {
   .report-card__hint { font-size: 0.5rem; }
 
   .reports-list__indicator { height: 2px !important; }
+
+  .iframe-container { padding-bottom: 130%; }
+  .iframe-container { border-radius: 14px; }
   
   .dashboard-footer { padding: 0.5rem; border-radius: 14px; }
   .dashboard-footer__tagline { font-size: 0.7rem; }
 }
 
-/* Ajuste extra para Android muy pequeño */
+/* Ajuste fino para Android específico */
 @media (max-width: 400px) {
-  .dashboard-content { 
-    min-height: 300px;
-  }
-  .iframe-container { 
-    min-height: 300px;
-  }
-  .iframe-container iframe { 
-    min-height: 300px;
-  }
   .report-card { 
     padding: 0.4rem 0.5rem;
   }
   .report-card__label { font-size: 0.65rem; }
   .report-card__hint { font-size: 0.45rem; }
+  .iframe-container { padding-bottom: 150%; }
 }
 
 </style>
@@ -492,7 +464,11 @@ body {
 
   <div class="dashboard-body">
 
-    <!-- SIDEBAR -->
+    <!-- ══════════════════════════════════════════════════
+         SIDEBAR — Tarjetas de informe independientes.
+         Para agregar un tercer informe, copia un .report-card
+         con su data-page e index correspondiente.
+    ══════════════════════════════════════════════════ -->
     <nav class="dashboard-sidebar">
       <div class="reports-list" id="reportsList">
         <span class="reports-list__indicator" id="reportsIndicator" aria-hidden="true"></span>
@@ -616,6 +592,7 @@ body {
     resizeTimer = setTimeout(updateIndicator, 120);
   });
 
+  // Posición inicial del indicador (tras pintar el layout)
   setTimeout(updateIndicator, 50);
 })();
 </script>
