@@ -11,7 +11,8 @@
 
 /* ════════════════════════════════════════════════════
    EDICIONES MUNDO — Dashboard Analítico
-   Paleta institucional, carrusel de informes apilado
+   Paleta institucional · tarjetas de informe separadas
+   con indicador deslizante
 ════════════════════════════════════════════════════ */
 
 :root {
@@ -34,7 +35,6 @@
   --radius-lg: 20px;
   --shadow-md: 0 10px 32px rgba(0,32,50,.18);
   --shadow-lg: 0 24px 64px rgba(0,26,44,.4);
-  --transition: 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -51,7 +51,7 @@ body {
 }
 
 /* ════════════════════════════════════════════════════
-   CANVAS — el "lienzo" navy donde flotan las tarjetas
+   CANVAS
 ════════════════════════════════════════════════════ */
 .dashboard-shell {
   width: 100%;
@@ -85,12 +85,7 @@ body {
   animation-delay: .05s;
 }
 
-.dashboard-header__brand {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  flex-shrink: 0;
-}
+.dashboard-header__brand { display: flex; align-items: center; gap: 0.85rem; flex-shrink: 0; }
 
 .dashboard-header__logo {
   height: 46px;
@@ -119,7 +114,6 @@ body {
   color: var(--text-light);
 }
 
-/* Acento decorativo que reemplaza la barra gris del boceto */
 .dashboard-header__accent {
   flex: 1;
   height: 9px;
@@ -138,108 +132,93 @@ body {
 }
 
 /* ════════════════════════════════════════════════════
-   BODY — sidebar + contenido
+   BODY
 ════════════════════════════════════════════════════ */
-.dashboard-body {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-}
+.dashboard-body { display: flex; gap: 18px; align-items: flex-start; }
 
+/* ── Sidebar — lista de informes, tarjetas separadas y centradas ── */
 .dashboard-sidebar {
   width: 230px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* ← centra todo el bloque verticalmente */
-  gap: .9rem;
+  justify-content: center;
   opacity: 0;
   transform: translateX(-18px);
   animation: fadeRight .6s ease forwards;
   animation-delay: .18s;
-  align-self: stretch;       /* ← permite que ocupe toda la altura del row */
+  align-self: stretch;
 }
 
-.tabs-carousel {
+.reports-list {
   position: relative;
-  height: 150px;
-   margin: auto 0;
-}
-
-.tab-card {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 106px;
-  border: none;
-  border-radius: 18px;
-  background: var(--white);
-  box-shadow: 0 14px 34px rgba(0,32,50,.3);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 1.1rem 1.3rem;
-  cursor: pointer;
-  text-align: left;
-  font-family: inherit;
-  transition: transform .5s cubic-bezier(.4,0,.2,1),
-              opacity .5s ease,
-              box-shadow .4s ease,
-              filter .4s ease;
+  gap: 14px;
+  padding-left: 14px;
 }
 
-.tab-card__label {
+/* Barra indicadora que se desliza hacia la tarjeta activa */
+.reports-list__indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent), var(--primary-medium));
+  transition: transform .45s cubic-bezier(.4,0,.2,1),
+              height .45s cubic-bezier(.4,0,.2,1),
+              width .45s ease;
+}
+
+.report-card {
+  width: 100%;
+  background: var(--white);
+  border: 1.5px solid var(--gray-mid);
+  border-radius: 16px;
+  padding: 1rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  box-shadow: 0 6px 18px rgba(0,32,50,.12);
+  transition: background .35s ease, box-shadow .35s ease,
+              transform .25s ease, border-color .3s ease;
+}
+
+.report-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,32,50,.18);
+  border-color: var(--primary-light);
+}
+
+.report-card__label {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1rem;
   color: var(--primary-dark);
+  transition: color .3s ease;
 }
 
-.tab-card__hint {
+.report-card__hint {
   font-family: var(--font-light);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--text-light);
-  margin-top: .35rem;
+  transition: color .3s ease;
 }
 
-/* Posiciones del apilado según distancia al activo */
-.tab-card[data-offset="0"] {
-  transform: translate(0,0) scale(1);
-  opacity: 1;
-  z-index: 3;
-  box-shadow: 0 16px 38px rgba(0,32,50,.32);
+.report-card.active {
+  background: linear-gradient(135deg, var(--primary-medium), var(--secondary));
+  border-color: transparent;
+  box-shadow: 0 14px 34px rgba(0,96,139,.35);
 }
-.tab-card[data-offset="1"] {
-  transform: translate(0,-14px) scale(.94);
-  opacity: .45;
-  z-index: 2;
-  filter: saturate(.65);
-}
-.tab-card[data-offset="2"] {
-  transform: translate(0,-26px) scale(.88);
-  opacity: .22;
-  z-index: 1;
-  filter: saturate(.45);
-  pointer-events: none;
-}
-
-.tab-card:not([data-offset="0"]):hover {
-  opacity: .72;
-  filter: none;
-}
-
-.sidebar__hint {
-  font-family: var(--font-light);
-  font-size: 0.68rem;
-  letter-spacing: .04em;
-  color: rgba(255,255,255,.55);
-  text-align: center;
-  padding: 0 .5rem;
-}
+.report-card.active .report-card__label { color: var(--white); }
+.report-card.active .report-card__hint  { color: rgba(255,255,255,.8); }
 
 /* ── Contenido — iframe de Looker Studio ── */
 .dashboard-content {
@@ -341,42 +320,47 @@ body {
     opacity: 1 !important;
     transform: none !important;
   }
-  .tab-card { transition: opacity .3s ease !important; }
+  .report-card, .reports-list__indicator { transition: none !important; }
 }
 
 /* ════════════════════════════════════════════════════
-   RESPONSIVE — modelo horizontal / tablet
+   RESPONSIVE — el cuerpo se mantiene horizontal en escritorio;
+   en pantallas angostas el sidebar pasa a fila horizontal
 ════════════════════════════════════════════════════ */
 @media (max-width: 1100px) {
   .iframe-container { padding-bottom: 72%; }
 }
 
-/* ── Mobile: sidebar pasa a fila horizontal ── */
 @media (max-width: 900px) {
   .dashboard-shell  { padding: 14px; border-radius: 26px; gap: 14px; }
   .dashboard-header { flex-wrap: wrap; padding: 1rem 1.2rem; }
   .dashboard-header__accent,
   .dashboard-header__meta { display: none; }
 
-  .dashboard-body   { flex-direction: column; gap: 14px; }
-  .dashboard-sidebar{ width: 100%; }
+  .dashboard-body    { flex-direction: column; gap: 14px; }
+  .dashboard-sidebar { width: 100%; }
 
-  .tabs-carousel { height: 106px; }
-  .tab-card      { height: 106px; }
+  .reports-list {
+    flex-direction: row;
+    padding-left: 0;
+    padding-bottom: 14px;
+  }
+  .report-card { flex: 1; }
 
-  .tab-card[data-offset="0"] { transform: translate(0,0) scale(1); }
-  .tab-card[data-offset="1"] { transform: translate(14px,0) scale(.94); }
-  .tab-card[data-offset="2"] { transform: translate(26px,0) scale(.88); }
+  .reports-list__indicator {
+    top: auto;
+    bottom: 0;
+    height: 4px !important;
+  }
 
-  .sidebar__hint { display: none; }
   .iframe-container { padding-bottom: 120%; }
 }
 
 @media (max-width: 480px) {
   .dashboard-header__title    { font-size: 1.05rem; }
   .dashboard-header__subtitle { font-size: 0.62rem; }
-  .tab-card__label  { font-size: 0.9rem; }
-  .tab-card__hint   { font-size: 0.62rem; }
+  .report-card__label { font-size: 0.9rem; }
+  .report-card__hint  { font-size: 0.62rem; }
   .dashboard-footer__tagline { font-size: 0.86rem; }
 }
 
@@ -402,22 +386,24 @@ body {
   <div class="dashboard-body">
 
     <!-- ══════════════════════════════════════════════════
-         SIDEBAR — Carrusel apilado de informes.
-         Para agregar un tercer informe, copia un .tab-card
+         SIDEBAR — Tarjetas de informe independientes.
+         Para agregar un tercer informe, copia un .report-card
          con su data-page e index correspondiente.
     ══════════════════════════════════════════════════ -->
     <nav class="dashboard-sidebar">
-      <div class="tabs-carousel" id="tabsCarousel">
-        <button class="tab-card" data-page="Orf0F" data-index="0">
-          <span class="tab-card__label">Informe</span>
-       
-        </button>
-        <button class="tab-card" data-page="p_8ftts25h4d" data-index="1">
-          <span class="tab-card__label">Informe Panorámico</span>
+      <div class="reports-list" id="reportsList">
+        <span class="reports-list__indicator" id="reportsIndicator" aria-hidden="true"></span>
 
+        <button class="report-card active" data-page="Orf0F" data-index="0">
+          <span class="report-card__label">Informe</span>
+          <span class="report-card__hint">Vista general</span>
+        </button>
+
+        <button class="report-card" data-page="p_8ftts25h4d" data-index="1">
+          <span class="report-card__label">Informe Panorámico</span>
+          <span class="report-card__hint">Campañas</span>
         </button>
       </div>
-      <p class="sidebar__hint">Desliza o haz scroll para cambiar de informe</p>
     </nav>
 
     <!-- CONTENIDO -->
@@ -451,17 +437,18 @@ body {
 
 <script>
 (function () {
-  // ID del reporte (la parte entre /reporting/ y /page/)
   const REPORTING_ID = '9d709f3b-dde2-4d48-9db1-3061fb00e263';
   const BASE_URL     = `https://lookerstudio.google.com/embed/reporting/${REPORTING_ID}/page/`;
 
-  const iframe   = document.getElementById('lookerFrame');
-  const overlay  = document.getElementById('loadingOverlay');
-  const carousel = document.getElementById('tabsCarousel');
-  const cards    = Array.from(carousel.querySelectorAll('.tab-card'));
+  const iframe     = document.getElementById('lookerFrame');
+  const overlay    = document.getElementById('loadingOverlay');
+  const list       = document.getElementById('reportsList');
+  const indicator  = document.getElementById('reportsIndicator');
+  const cards      = Array.from(list.querySelectorAll('.report-card'));
 
   let activeIndex = 0;
   let fallbackTimer;
+  let resizeTimer;
 
   function showLoading() {
     overlay.classList.remove('hidden');
@@ -478,21 +465,32 @@ body {
     hideLoading();
   });
 
-  // Fallback por si el iframe no dispara "load" (cross-origin lento)
   fallbackTimer = setTimeout(hideLoading, 6000);
 
-  function updateCarousel() {
-    const count = cards.length;
-    cards.forEach((card, i) => {
-      const offset = (i - activeIndex + count) % count;
-      card.dataset.offset = offset;
-    });
+  function isMobileLayout() {
+    return window.matchMedia('(max-width: 900px)').matches;
+  }
+
+  function updateIndicator() {
+    const card = cards[activeIndex];
+    if (isMobileLayout()) {
+      indicator.style.width  = card.offsetWidth + 'px';
+      indicator.style.height = '4px';
+      indicator.style.transform = `translateX(${card.offsetLeft}px)`;
+    } else {
+      indicator.style.width  = '4px';
+      indicator.style.height = card.offsetHeight + 'px';
+      indicator.style.transform = `translateY(${card.offsetTop}px)`;
+    }
   }
 
   function selectIndex(i) {
     if (i === activeIndex) return;
+
+    cards[activeIndex].classList.remove('active');
     activeIndex = i;
-    updateCarousel();
+    cards[activeIndex].classList.add('active');
+    updateIndicator();
 
     const page = cards[activeIndex].dataset.page;
     showLoading();
@@ -502,36 +500,19 @@ body {
     fallbackTimer = setTimeout(hideLoading, 6000);
   }
 
-  // Click — selecciona directamente la tarjeta tocada
   cards.forEach(card => {
     card.addEventListener('click', () => {
       selectIndex(Number(card.dataset.index));
     });
   });
 
-  // Scroll del mouse sobre el carrusel — cicla entre informes
-  carousel.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    const dir  = e.deltaY > 0 ? 1 : -1;
-    const next = (activeIndex + dir + cards.length) % cards.length;
-    selectIndex(next);
-  }, { passive: false });
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(updateIndicator, 120);
+  });
 
-  // Swipe táctil — soporte para móvil
-  let touchStartY = 0;
-  carousel.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  carousel.addEventListener('touchend', (e) => {
-    const dy = touchStartY - e.changedTouches[0].clientY;
-    if (Math.abs(dy) < 28) return;
-    const dir  = dy > 0 ? 1 : -1;
-    const next = (activeIndex + dir + cards.length) % cards.length;
-    selectIndex(next);
-  }, { passive: true });
-
-  updateCarousel();
+  // Posición inicial del indicador (tras pintar el layout)
+  requestAnimationFrame(updateIndicator);
 })();
 </script>
 
