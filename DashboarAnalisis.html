@@ -9,6 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
 <style>
 
+/* ════════════════════════════════════════════════════
+   EDICIONES MUNDO — Dashboard Analítico
+   Optimizado para móvil — sin espacios azules vacíos
+════════════════════════════════════════════════════ */
+
 :root {
   --primary-dark:   #00608B;
   --primary-medium: #0092BA;
@@ -21,9 +26,11 @@
   --text-dark:      #0D2233;
   --text-mid:       #2D4B5E;
   --text-light:     #5E7D8C;
+
   --font-display: 'Playfair Display', serif;
   --font-body:    'Lora', serif;
   --font-light:   'Cormorant Garamond', serif;
+
   --radius-lg: 20px;
   --shadow-md: 0 10px 32px rgba(0,32,50,.18);
   --shadow-lg: 0 24px 64px rgba(0,26,44,.4);
@@ -42,16 +49,15 @@ body {
   background: linear-gradient(160deg, #001A2C 0%, var(--primary-dark) 55%, #004F75 100%);
   font-family: var(--font-body);
   color: var(--text-dark);
-  /* Desktop: centrado vertical */
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* ══ CANVAS ══ */
+/* ════════════════════════════════════════════════════
+   CANVAS
+════════════════════════════════════════════════════ */
 .dashboard-shell {
   width: 100%;
   max-width: 1480px;
+  margin: 0 auto;
   background: linear-gradient(160deg, var(--primary-dark) 0%, #013a55 100%);
   border-radius: 24px;
   padding: 16px;
@@ -64,7 +70,9 @@ body {
   animation: shellEnter .7s ease forwards;
 }
 
-/* ══ HEADER ══ */
+/* ════════════════════════════════════════════════════
+   HEADER
+════════════════════════════════════════════════════ */
 .dashboard-header {
   background: var(--white);
   border-radius: var(--radius-lg);
@@ -82,72 +90,101 @@ body {
 .dashboard-header__brand { display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
 
 .dashboard-header__logo {
-  height: 38px; width: auto;
-  object-fit: contain; border-radius: 6px; display: block;
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  display: block;
 }
 
 .dashboard-header__text { display: flex; flex-direction: column; gap: 0.05rem; }
 
 .dashboard-header__title {
   font-family: var(--font-display);
-  font-weight: 700; font-size: 1.1rem;
-  color: var(--primary-dark); line-height: 1.1;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+  line-height: 1.1;
 }
 
 .dashboard-header__subtitle {
   font-family: var(--font-light);
-  font-size: 0.6rem; font-weight: 600;
-  letter-spacing: .12em; text-transform: uppercase;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
   color: var(--text-light);
 }
 
 .dashboard-header__accent {
-  flex: 1; height: 7px; border-radius: 50px;
+  flex: 1;
+  height: 7px;
+  border-radius: 50px;
   background: linear-gradient(90deg, var(--gray-mid), var(--primary-light), var(--accent));
   margin: 0 .5rem;
 }
 
 .dashboard-header__meta {
   font-family: var(--font-light);
-  font-size: 0.6rem; letter-spacing: .06em;
-  color: var(--text-light); white-space: nowrap; flex-shrink: 0;
+  font-size: 0.6rem;
+  letter-spacing: .06em;
+  color: var(--text-light);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* ══ BODY ══ */
+/* ════════════════════════════════════════════════════
+   BODY
+════════════════════════════════════════════════════ */
 .dashboard-body { display: flex; gap: 14px; align-items: stretch; }
 
-/* Sidebar desktop */
+/* ── Sidebar ── */
 .dashboard-sidebar {
-  width: 210px; flex-shrink: 0;
-  display: flex; flex-direction: column; justify-content: center;
-  opacity: 0; transform: translateX(-18px);
+  width: 210px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(-18px);
   animation: fadeRight .6s ease forwards;
   animation-delay: .18s;
 }
 
 .reports-list {
   position: relative;
-  display: flex; flex-direction: column;
-  gap: 12px; padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 12px;
 }
 
 .reports-list__indicator {
-  position: absolute; left: 0; top: 0;
-  width: 4px; border-radius: 4px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  border-radius: 4px;
   background: linear-gradient(180deg, var(--accent), var(--primary-medium));
-  transition: transform .4s cubic-bezier(.4,0,.2,1), height .4s cubic-bezier(.4,0,.2,1);
+  transition: transform .4s cubic-bezier(.4,0,.2,1),
+              height .4s cubic-bezier(.4,0,.2,1);
 }
 
 .report-card {
   width: 100%;
   background: var(--white);
   border: 1.5px solid var(--gray-mid);
-  border-radius: 14px; padding: 0.8rem 1rem;
-  text-align: left; cursor: pointer;
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  cursor: pointer;
   font-family: inherit;
-  display: flex; flex-direction: column; gap: .2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
   box-shadow: 0 4px 14px rgba(0,32,50,.1);
-  transition: background .3s, box-shadow .3s, transform .2s, border-color .3s;
+  transition: background .3s ease, box-shadow .3s ease,
+              transform .2s ease, border-color .3s ease;
 }
 
 .report-card:hover {
@@ -157,16 +194,21 @@ body {
 }
 
 .report-card__label {
-  font-family: var(--font-display); font-weight: 700;
-  font-size: 0.9rem; color: var(--primary-dark);
-  transition: color .3s;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  transition: color .3s ease;
 }
 
 .report-card__hint {
-  font-family: var(--font-light); font-size: 0.62rem;
-  font-weight: 600; letter-spacing: .07em;
-  text-transform: uppercase; color: var(--text-light);
-  transition: color .3s;
+  font-family: var(--font-light);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  transition: color .3s ease;
 }
 
 .report-card.active {
@@ -177,40 +219,53 @@ body {
 .report-card.active .report-card__label { color: var(--white); }
 .report-card.active .report-card__hint  { color: rgba(255,255,255,.8); }
 
-/* ══ CONTENIDO DESKTOP ══ */
+/* ════════════════════════════════════════════════════
+   CONTENIDO — iframe Looker Studio
+   KEY FIX: en móvil el iframe se adapta al contenido
+   real usando aspect-ratio en lugar de min-height fija
+════════════════════════════════════════════════════ */
 .dashboard-content {
-  flex: 1; min-width: 0;
+  flex: 1;
+  min-width: 0;
   background: var(--white);
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-md);
-  opacity: 0; transform: translateY(18px);
+  opacity: 0;
+  transform: translateY(18px);
   animation: fadeUp .6s ease forwards;
   animation-delay: .3s;
 }
 
-/* ── iframe wrapper — desktop ── */
-.iframe-wrapper {
+/* Desktop: altura fija como antes */
+.iframe-container {
   position: relative;
   width: 100%;
-  height: 600px;         /* desktop: altura fija */
+  height: 600px;
   background: var(--gray-soft);
 }
 
-.iframe-wrapper iframe {
-  width: 100%; height: 100%;
-  border: 0; display: block;
-  opacity: 0; transition: opacity .5s;
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  opacity: 0;
+  transition: opacity .5s ease;
 }
-.iframe-wrapper iframe.loaded { opacity: 1; }
+.iframe-container iframe.loaded { opacity: 1; }
 
-/* Overlay de carga */
 .loading-overlay {
-  position: absolute; inset: 0;
+  position: absolute;
+  inset: 0;
   background: var(--gray-soft);
-  display: flex; flex-direction: column; gap: 12px;
-  align-items: center; justify-content: center;
-  z-index: 5; transition: opacity .4s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  transition: opacity .4s ease;
 }
 .loading-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
@@ -223,146 +278,162 @@ body {
 }
 
 .loading-overlay span {
-  font-family: var(--font-light); font-size: 0.75rem;
-  letter-spacing: .06em; color: var(--text-light);
+  font-family: var(--font-light);
+  font-size: 0.75rem;
+  letter-spacing: .06em;
+  color: var(--text-light);
 }
 
-/* ══ FOOTER ══ */
+/* ════════════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════════════ */
 .dashboard-footer {
   background: linear-gradient(90deg, #001A2C, var(--primary-dark));
   border-radius: var(--radius-lg);
-  padding: 0.8rem; text-align: center;
+  padding: 0.8rem;
+  text-align: center;
   opacity: 0;
   animation: fadeUp .6s ease forwards;
   animation-delay: .42s;
 }
 
 .dashboard-footer__tagline {
-  font-family: var(--font-display); font-style: italic;
-  font-weight: 700; font-size: 0.95rem;
-  color: var(--white); letter-spacing: .02em;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--white);
+  letter-spacing: .02em;
 }
 
-/* ══ ANIMACIONES ══ */
+/* ════════════════════════════════════════════════════
+   ANIMACIONES
+════════════════════════════════════════════════════ */
 @keyframes shellEnter { to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeDown   { to { opacity: 1; transform: translateY(0); } }
-@keyframes fadeRight  { to { opacity: 1; transform: translateX(0); } }
-@keyframes fadeUp     { to { opacity: 1; transform: translateY(0); } }
-@keyframes spin       { to { transform: rotate(360deg); } }
+@keyframes fadeDown    { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeRight   { to { opacity: 1; transform: translateX(0); } }
+@keyframes fadeUp      { to { opacity: 1; transform: translateY(0); } }
+@keyframes spin        { to { transform: rotate(360deg); } }
 
 @media (prefers-reduced-motion: reduce) {
   .dashboard-shell, .dashboard-header, .dashboard-sidebar,
   .dashboard-content, .dashboard-footer {
-    animation: none !important; opacity: 1 !important; transform: none !important;
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
+  .report-card, .reports-list__indicator { transition: none !important; }
 }
 
 /* ════════════════════════════════════════════════════
-   MÓVIL  ≤ 900 px
+   RESPONSIVE MÓVIL
    
-   PROBLEMAS A RESOLVER:
-   1. Columna blanca lateral → sidebar se oculta completamente
-      y el body.dashboard va en columna sin ese div
-   2. Espacio azul vacío debajo del iframe → el iframe-wrapper
-      usa overflow:hidden + margin-bottom negativo para
-      recortar el footer de Looker Studio (Privacidad | Data Studio)
-      que es la barra de ~48px que genera el espacio vacío
+   SOLUCIÓN PRINCIPAL al espacio azul vacío:
+   - Eliminamos la columna blanca lateral (sidebar oculto en mobile)  
+   - Usamos aspect-ratio para que el iframe tenga altura
+     proporcional al ancho real de pantalla, sin espacio sobrante
+   - El body deja de ser flex centrado y pasa a alinearse arriba
+     para que el dashboard llene naturalmente la pantalla
 ════════════════════════════════════════════════════ */
+
 @media (max-width: 900px) {
 
-  /* Body: sin centrado vertical → el dash ocupa lo justo */
   body {
-    display: block;
     padding: 10px;
-    /* Sin min-height: 100vh para no forzar espacio vacío abajo */
-    min-height: unset;
+    /* Alinear arriba para evitar espacio azul debajo del dashboard */
+    display: block;
   }
 
   .dashboard-shell {
     padding: 10px;
     border-radius: 18px;
     gap: 10px;
+    /* Quitar transform para evitar gaps de layout en Android */
+    margin-bottom: 0;
   }
 
   /* Header compacto */
   .dashboard-header {
     padding: 0.6rem 0.9rem;
-    border-radius: 14px;
     gap: 0.5rem;
+    border-radius: 14px;
   }
-  .dashboard-header__logo   { height: 28px; }
-  .dashboard-header__title  { font-size: 0.88rem; }
-  .dashboard-header__subtitle { font-size: 0.5rem; }
+  .dashboard-header__logo { height: 30px; }
+  .dashboard-header__title { font-size: 0.9rem; }
+  .dashboard-header__subtitle { font-size: 0.52rem; }
   .dashboard-header__accent,
-  .dashboard-header__meta   { display: none; }
+  .dashboard-header__meta { display: none; }
 
-  /* Body vertical */
-  .dashboard-body { flex-direction: column; gap: 10px; }
+  /* Body apilado verticalmente */
+  .dashboard-body {
+    flex-direction: column;
+    gap: 10px;
+  }
 
-  /* ── SIDEBAR: fila horizontal de botones, SIN columna lateral ── */
+  /* Sidebar: fila horizontal compacta, sin columna lateral */
   .dashboard-sidebar {
     width: 100%;
+    flex-shrink: 1;
     transform: none;
-    animation: none;
-    opacity: 1;
   }
 
   .reports-list {
     flex-direction: row;
     padding-left: 0;
+    padding-bottom: 0;
     gap: 8px;
   }
 
-  /* Ocultar indicador en móvil (causaba la columna blanca) */
+  /* Ocultar el indicador vertical en móvil */
   .reports-list__indicator { display: none; }
 
   .report-card {
-    flex: 1; min-width: 0;
-    padding: 0.6rem 0.7rem;
+    flex: 1;
+    min-width: 0;
+    padding: 0.65rem 0.75rem;
     border-radius: 12px;
   }
-  .report-card__label { font-size: 0.8rem; }
-  .report-card__hint  { font-size: 0.52rem; }
+  .report-card__label { font-size: 0.82rem; }
+  .report-card__hint  { font-size: 0.55rem; }
 
-  /* ── IFRAME: recortar el footer de Looker Studio ──
-   
-     Looker Studio agrega internamente una barra de footer
-     de ~48px con "Privacidad | Data Studio | ⛶".
-     Para ocultarla usamos:
-     - height calculado con padding-bottom (aspect-ratio 3:4)
-     - overflow: hidden en el wrapper
-     - el iframe se hace MÁS ALTO que el wrapper (~48px extra)
-       para que la barra quede fuera del área visible
-  ── */
+  /* ─────────────────────────────────────────────
+     IFRAME SIN ESPACIO AZUL VACÍO
+     
+     Looker Studio en móvil renderiza contenido
+     aproximadamente en relación 4:3 o 3:4.
+     Usamos aspect-ratio para que el contenedor
+     sea exactamente tan alto como el contenido,
+     eliminando el espacio vacío azul de abajo.
+  ───────────────────────────────────────────── */
   .dashboard-content {
-    flex: none; width: 100%;
+    flex: none;
+    width: 100%;
     border-radius: 14px;
-    overflow: hidden;          /* recorta lo que sobresale */
+    /* Sin min-height fija: el aspect-ratio controla la altura */
   }
 
-  .iframe-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;          /* clave para recortar el footer */
-    /* Relación 3:4 adaptada al ancho real de pantalla */
-    height: 0;
-    padding-bottom: calc(133.33% - 48px); /* 4/3 ratio menos footer */
-    background: var(--gray-soft);
+  .iframe-container {
+    /* 
+      Looker Studio mobile muestra el reporte con scroll interno.
+      aspect-ratio 3/4 = más alto que ancho, cubre el contenido
+      sin dejar espacio azul vacío abajo.
+      Ajusta el segundo número (4) si quieres más o menos altura.
+    */
+    height: auto;
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+    max-height: 75vh; /* Nunca más alto que 75% de la pantalla */
   }
 
-  .iframe-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%;
-    /* iframe más alto que el wrapper: el footer queda recortado */
-    height: calc(100% + 52px);
+  .iframe-container iframe {
+    height: 100%;
+    min-height: 0;
   }
 
-  /* Footer del dashboard */
+  /* Footer compacto */
   .dashboard-footer {
     padding: 0.6rem;
     border-radius: 14px;
-    animation: none; opacity: 1; transform: none;
   }
   .dashboard-footer__tagline { font-size: 0.78rem; }
 }
@@ -371,34 +442,51 @@ body {
 @media (max-width: 480px) {
   body { padding: 8px; }
 
-  .dashboard-shell { padding: 8px; border-radius: 14px; gap: 8px; }
+  .dashboard-shell {
+    padding: 8px;
+    border-radius: 14px;
+    gap: 8px;
+  }
 
-  .dashboard-header { padding: 0.5rem 0.7rem; border-radius: 12px; }
-  .dashboard-header__logo   { height: 24px; }
-  .dashboard-header__title  { font-size: 0.8rem; }
+  .dashboard-header {
+    padding: 0.5rem 0.7rem;
+    border-radius: 12px;
+  }
+  .dashboard-header__logo { height: 26px; }
+  .dashboard-header__title { font-size: 0.8rem; }
+  .dashboard-header__subtitle { font-size: 0.48rem; }
 
   .reports-list { gap: 6px; }
-  .report-card  { padding: 0.5rem 0.6rem; border-radius: 10px; }
-  .report-card__label { font-size: 0.74rem; }
-  .report-card__hint  { font-size: 0.48rem; }
+  .report-card {
+    padding: 0.55rem 0.6rem;
+    border-radius: 10px;
+  }
+  .report-card__label { font-size: 0.75rem; }
+  .report-card__hint  { font-size: 0.5rem; }
 
-  .iframe-wrapper {
-    /* Un poco menos de altura en pantallas pequeñas */
-    padding-bottom: calc(120% - 48px);
+  .iframe-container {
+    /* En pantallas muy pequeñas, un poco más compacto */
+    aspect-ratio: 3 / 3.5;
+    max-height: 70vh;
   }
 
   .dashboard-footer { padding: 0.5rem; border-radius: 12px; }
   .dashboard-footer__tagline { font-size: 0.7rem; }
 }
 
-/* ── Android muy pequeño ── */
+/* ── Android muy pequeño < 400px ── */
 @media (max-width: 400px) {
   body { padding: 6px; }
+
   .dashboard-shell { padding: 6px; gap: 7px; }
 
-  .iframe-wrapper {
-    padding-bottom: calc(110% - 48px);
+  .iframe-container {
+    aspect-ratio: 1 / 1;
+    max-height: 65vh;
   }
+
+  .report-card__label { font-size: 0.68rem; }
+  .report-card__hint  { font-size: 0.45rem; }
 }
 
 </style>
@@ -441,7 +529,7 @@ body {
 
     <!-- CONTENIDO -->
     <main class="dashboard-content">
-      <div class="iframe-wrapper">
+      <div class="iframe-container">
         <iframe
           id="lookerFrame"
           src="https://lookerstudio.google.com/embed/reporting/9d709f3b-dde2-4d48-9db1-3061fb00e263/page/Orf0F"
@@ -471,13 +559,13 @@ body {
 <script>
 (function () {
   const REPORTING_ID = '9d709f3b-dde2-4d48-9db1-3061fb00e263';
-  const BASE_URL     = 'https://lookerstudio.google.com/embed/reporting/' + REPORTING_ID + '/page/';
+  const BASE_URL     = `https://lookerstudio.google.com/embed/reporting/${REPORTING_ID}/page/`;
 
-  const iframe    = document.getElementById('lookerFrame');
-  const overlay   = document.getElementById('loadingOverlay');
-  const list      = document.getElementById('reportsList');
-  const indicator = document.getElementById('reportsIndicator');
-  const cards     = Array.from(list.querySelectorAll('.report-card'));
+  const iframe     = document.getElementById('lookerFrame');
+  const overlay    = document.getElementById('loadingOverlay');
+  const list       = document.getElementById('reportsList');
+  const indicator  = document.getElementById('reportsIndicator');
+  const cards      = Array.from(list.querySelectorAll('.report-card'));
 
   let activeIndex = 0;
   let fallbackTimer;
@@ -493,45 +581,49 @@ body {
     iframe.classList.add('loaded');
   }
 
-  iframe.addEventListener('load', function() {
+  iframe.addEventListener('load', () => {
     clearTimeout(fallbackTimer);
     hideLoading();
   });
 
   fallbackTimer = setTimeout(hideLoading, 8000);
 
-  function isMobile() {
+  function isMobileLayout() {
     return window.matchMedia('(max-width: 900px)').matches;
   }
 
   function updateIndicator() {
-    if (isMobile()) return;
-    var card = cards[activeIndex];
+    if (isMobileLayout()) return; /* indicador oculto en móvil */
+    const card = cards[activeIndex];
     if (!card) return;
     indicator.style.width     = '4px';
     indicator.style.height    = card.offsetHeight + 'px';
-    indicator.style.transform = 'translateY(' + card.offsetTop + 'px)';
+    indicator.style.transform = `translateY(${card.offsetTop}px)`;
   }
 
   function selectIndex(i) {
     if (i === activeIndex) return;
+
     cards[activeIndex].classList.remove('active');
     activeIndex = i;
     cards[activeIndex].classList.add('active');
     updateIndicator();
+
+    const page = cards[activeIndex].dataset.page;
     showLoading();
-    iframe.src = BASE_URL + cards[activeIndex].dataset.page;
+    iframe.src = BASE_URL + page;
+
     clearTimeout(fallbackTimer);
     fallbackTimer = setTimeout(hideLoading, 8000);
   }
 
-  cards.forEach(function(card) {
-    card.addEventListener('click', function() {
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
       selectIndex(Number(card.dataset.index));
     });
   });
 
-  window.addEventListener('resize', function() {
+  window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(updateIndicator, 120);
   });
