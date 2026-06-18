@@ -11,7 +11,7 @@
 
 /* ════════════════════════════════════════════════════
    EDICIONES MUNDO — Dashboard Analítico
-   Optimizado para Android - sin espacios azules vacíos
+   Optimizado para móvil — sin espacios azules vacíos
 ════════════════════════════════════════════════════ */
 
 :root {
@@ -38,11 +38,13 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 16px;
   background: linear-gradient(160deg, #001A2C 0%, var(--primary-dark) 55%, #004F75 100%);
   font-family: var(--font-body);
@@ -55,6 +57,7 @@ body {
 .dashboard-shell {
   width: 100%;
   max-width: 1480px;
+  margin: 0 auto;
   background: linear-gradient(160deg, var(--primary-dark) 0%, #013a55 100%);
   border-radius: 24px;
   padding: 16px;
@@ -135,7 +138,7 @@ body {
 ════════════════════════════════════════════════════ */
 .dashboard-body { display: flex; gap: 14px; align-items: stretch; }
 
-/* ── Sidebar — lista de informes ── */
+/* ── Sidebar ── */
 .dashboard-sidebar {
   width: 210px;
   flex-shrink: 0;
@@ -216,7 +219,11 @@ body {
 .report-card.active .report-card__label { color: var(--white); }
 .report-card.active .report-card__hint  { color: rgba(255,255,255,.8); }
 
-/* ── Contenido — iframe de Looker Studio ── */
+/* ════════════════════════════════════════════════════
+   CONTENIDO — iframe Looker Studio
+   KEY FIX: en móvil el iframe se adapta al contenido
+   real usando aspect-ratio en lugar de min-height fija
+════════════════════════════════════════════════════ */
 .dashboard-content {
   flex: 1;
   min-width: 0;
@@ -228,27 +235,19 @@ body {
   transform: translateY(18px);
   animation: fadeUp .6s ease forwards;
   animation-delay: .3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 500px;
 }
 
+/* Desktop: altura fija como antes */
 .iframe-container {
   position: relative;
   width: 100%;
-  height: 100%;
-  min-height: 500px;
+  height: 600px;
   background: var(--gray-soft);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .iframe-container iframe {
   width: 100%;
   height: 100%;
-  min-height: 500px;
   border: 0;
   display: block;
   opacity: 0;
@@ -327,148 +326,167 @@ body {
 }
 
 /* ════════════════════════════════════════════════════
-   RESPONSIVE — Sin espacios azules vacíos en Android
+   RESPONSIVE MÓVIL
+   
+   SOLUCIÓN PRINCIPAL al espacio azul vacío:
+   - Eliminamos la columna blanca lateral (sidebar oculto en mobile)  
+   - Usamos aspect-ratio para que el iframe tenga altura
+     proporcional al ancho real de pantalla, sin espacio sobrante
+   - El body deja de ser flex centrado y pasa a alinearse arriba
+     para que el dashboard llene naturalmente la pantalla
 ════════════════════════════════════════════════════ */
 
-/* Tablets */
-@media (max-width: 1100px) {
-  .dashboard-sidebar { width: 190px; }
-}
-
-/* Móviles y tablets pequeñas */
 @media (max-width: 900px) {
-  body { padding: 12px; }
-  
-  .dashboard-shell { 
-    padding: 12px; 
-    border-radius: 20px; 
-    gap: 12px; 
+
+  body {
+    padding: 10px;
+    /* Alinear arriba para evitar espacio azul debajo del dashboard */
+    display: block;
   }
-  
-  .dashboard-header { 
-    padding: 0.7rem 1rem; 
-    gap: 0.6rem;
+
+  .dashboard-shell {
+    padding: 10px;
+    border-radius: 18px;
+    gap: 10px;
+    /* Quitar transform para evitar gaps de layout en Android */
+    margin-bottom: 0;
   }
-  .dashboard-header__logo { height: 32px; }
-  .dashboard-header__title { font-size: 0.95rem; }
-  .dashboard-header__subtitle { font-size: 0.55rem; }
+
+  /* Header compacto */
+  .dashboard-header {
+    padding: 0.6rem 0.9rem;
+    gap: 0.5rem;
+    border-radius: 14px;
+  }
+  .dashboard-header__logo { height: 30px; }
+  .dashboard-header__title { font-size: 0.9rem; }
+  .dashboard-header__subtitle { font-size: 0.52rem; }
   .dashboard-header__accent,
   .dashboard-header__meta { display: none; }
 
-  .dashboard-body { 
-    flex-direction: column; 
-    gap: 12px; 
-  }
-  
-  .dashboard-sidebar { 
-    width: 100%; 
-    flex-shrink: 1;
-  }
-  
-  .dashboard-content { 
-    flex: none; 
-    width: 100%; 
-    min-height: 400px;
+  /* Body apilado verticalmente */
+  .dashboard-body {
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .iframe-container { 
-    min-height: 400px;
-  }
-  
-  .iframe-container iframe { 
-    min-height: 400px;
+  /* Sidebar: fila horizontal compacta, sin columna lateral */
+  .dashboard-sidebar {
+    width: 100%;
+    flex-shrink: 1;
+    transform: none;
   }
 
   .reports-list {
     flex-direction: row;
     padding-left: 0;
-    padding-bottom: 10px;
-    gap: 10px;
+    padding-bottom: 0;
+    gap: 8px;
   }
-  
-  .report-card { 
-    flex: 1; 
+
+  /* Ocultar el indicador vertical en móvil */
+  .reports-list__indicator { display: none; }
+
+  .report-card {
+    flex: 1;
     min-width: 0;
-    padding: 0.6rem 0.8rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 12px;
   }
-  .report-card__label { font-size: 0.8rem; }
-  .report-card__hint { font-size: 0.55rem; }
+  .report-card__label { font-size: 0.82rem; }
+  .report-card__hint  { font-size: 0.55rem; }
 
-  .reports-list__indicator {
-    top: auto;
-    bottom: 0;
-    height: 3px !important;
-    transition: transform .4s cubic-bezier(.4,0,.2,1),
-                width .4s cubic-bezier(.4,0,.2,1);
+  /* ─────────────────────────────────────────────
+     IFRAME SIN ESPACIO AZUL VACÍO
+     
+     Looker Studio en móvil renderiza contenido
+     aproximadamente en relación 4:3 o 3:4.
+     Usamos aspect-ratio para que el contenedor
+     sea exactamente tan alto como el contenido,
+     eliminando el espacio vacío azul de abajo.
+  ───────────────────────────────────────────── */
+  .dashboard-content {
+    flex: none;
+    width: 100%;
+    border-radius: 14px;
+    /* Sin min-height fija: el aspect-ratio controla la altura */
   }
-  
-  .dashboard-footer { padding: 0.6rem; }
-  .dashboard-footer__tagline { font-size: 0.82rem; }
-}
 
-/* Móviles pequeños */
-@media (max-width: 480px) {
-  body { padding: 8px; }
-  
-  .dashboard-shell { 
-    padding: 8px; 
-    border-radius: 16px; 
-    gap: 10px; 
+  .iframe-container {
+    /* 
+      Looker Studio mobile muestra el reporte con scroll interno.
+      aspect-ratio 3/4 = más alto que ancho, cubre el contenido
+      sin dejar espacio azul vacío abajo.
+      Ajusta el segundo número (4) si quieres más o menos altura.
+    */
+    height: auto;
+    aspect-ratio: 3 / 4;
+    min-height: 0;
+    max-height: 75vh; /* Nunca más alto que 75% de la pantalla */
   }
-  
-  .dashboard-header { 
-    padding: 0.5rem 0.8rem; 
-    gap: 0.5rem;
+
+  .iframe-container iframe {
+    height: 100%;
+    min-height: 0;
+  }
+
+  /* Footer compacto */
+  .dashboard-footer {
+    padding: 0.6rem;
     border-radius: 14px;
   }
-  .dashboard-header__logo { height: 28px; }
-  .dashboard-header__title { font-size: 0.82rem; }
-  .dashboard-header__subtitle { font-size: 0.5rem; }
+  .dashboard-footer__tagline { font-size: 0.78rem; }
+}
 
-  .dashboard-body { gap: 10px; }
-  
-  .dashboard-content { 
-    min-height: 350px;
+/* ── Móviles pequeños ── */
+@media (max-width: 480px) {
+  body { padding: 8px; }
+
+  .dashboard-shell {
+    padding: 8px;
+    border-radius: 14px;
+    gap: 8px;
   }
-  
-  .iframe-container { 
-    min-height: 350px;
+
+  .dashboard-header {
+    padding: 0.5rem 0.7rem;
+    border-radius: 12px;
   }
-  
-  .iframe-container iframe { 
-    min-height: 350px;
-  }
-  
-  .reports-list { gap: 8px; padding-bottom: 8px; }
-  .report-card { 
-    padding: 0.5rem 0.6rem;
+  .dashboard-header__logo { height: 26px; }
+  .dashboard-header__title { font-size: 0.8rem; }
+  .dashboard-header__subtitle { font-size: 0.48rem; }
+
+  .reports-list { gap: 6px; }
+  .report-card {
+    padding: 0.55rem 0.6rem;
     border-radius: 10px;
   }
-  .report-card__label { font-size: 0.7rem; }
-  .report-card__hint { font-size: 0.5rem; }
+  .report-card__label { font-size: 0.75rem; }
+  .report-card__hint  { font-size: 0.5rem; }
 
-  .reports-list__indicator { height: 2px !important; }
-  
-  .dashboard-footer { padding: 0.5rem; border-radius: 14px; }
+  .iframe-container {
+    /* En pantallas muy pequeñas, un poco más compacto */
+    aspect-ratio: 3 / 3.5;
+    max-height: 70vh;
+  }
+
+  .dashboard-footer { padding: 0.5rem; border-radius: 12px; }
   .dashboard-footer__tagline { font-size: 0.7rem; }
 }
 
-/* Ajuste extra para Android muy pequeño */
+/* ── Android muy pequeño < 400px ── */
 @media (max-width: 400px) {
-  .dashboard-content { 
-    min-height: 300px;
+  body { padding: 6px; }
+
+  .dashboard-shell { padding: 6px; gap: 7px; }
+
+  .iframe-container {
+    aspect-ratio: 1 / 1;
+    max-height: 65vh;
   }
-  .iframe-container { 
-    min-height: 300px;
-  }
-  .iframe-container iframe { 
-    min-height: 300px;
-  }
-  .report-card { 
-    padding: 0.4rem 0.5rem;
-  }
-  .report-card__label { font-size: 0.65rem; }
-  .report-card__hint { font-size: 0.45rem; }
+
+  .report-card__label { font-size: 0.68rem; }
+  .report-card__hint  { font-size: 0.45rem; }
 }
 
 </style>
@@ -568,25 +586,19 @@ body {
     hideLoading();
   });
 
-  fallbackTimer = setTimeout(hideLoading, 6000);
+  fallbackTimer = setTimeout(hideLoading, 8000);
 
   function isMobileLayout() {
     return window.matchMedia('(max-width: 900px)').matches;
   }
 
   function updateIndicator() {
+    if (isMobileLayout()) return; /* indicador oculto en móvil */
     const card = cards[activeIndex];
     if (!card) return;
-    
-    if (isMobileLayout()) {
-      indicator.style.width  = card.offsetWidth + 'px';
-      indicator.style.height = '3px';
-      indicator.style.transform = `translateX(${card.offsetLeft}px)`;
-    } else {
-      indicator.style.width  = '4px';
-      indicator.style.height = card.offsetHeight + 'px';
-      indicator.style.transform = `translateY(${card.offsetTop}px)`;
-    }
+    indicator.style.width     = '4px';
+    indicator.style.height    = card.offsetHeight + 'px';
+    indicator.style.transform = `translateY(${card.offsetTop}px)`;
   }
 
   function selectIndex(i) {
@@ -602,7 +614,7 @@ body {
     iframe.src = BASE_URL + page;
 
     clearTimeout(fallbackTimer);
-    fallbackTimer = setTimeout(hideLoading, 6000);
+    fallbackTimer = setTimeout(hideLoading, 8000);
   }
 
   cards.forEach(card => {
