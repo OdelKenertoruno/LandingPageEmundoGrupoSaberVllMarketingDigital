@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet" />
   <!-- Google tag (gtag.js) para GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-V2QHW0NGQR"></script>
   <script>
@@ -22,17 +22,19 @@
 
 <header class="header">
   <div class="logo-container">
-    <img src="Image/LogoGrupoSaber.jpg" alt="Grupo SABER" class="logo-img" />
+    <div class="logo-badge">
+      <img src="Image/LogoGrupoSaber.jpg" alt="Grupo SABER" class="logo-img" />
+    </div>
     <div class="logo-text">
       <span class="logo-name">Grupo SABER</span>
-      <span class="logo-sub">El conocimiento a tu alcance</span>
+      <span class="logo-sub">La palabra de Dios a tu alcance</span>
     </div>
   </div>
   <div class="header-center">
     <div class="search-wrapper">
       <div class="search-container">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input type="text" id="searchInput" placeholder="Buscar Biblia o Categoría..." autocomplete="off" />
+        <input type="text" id="searchInput" placeholder="Buscar por título, versión o categoría..." autocomplete="off" />
         <button class="search-clear" id="searchClear" aria-label="Limpiar"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="autocomplete-dropdown" id="autocompleteDropdown"></div>
@@ -41,6 +43,27 @@
   <a href="index.html" class="inicio-btn"><i class="fa-solid fa-house"></i><span>Inicio</span></a>
 </header>
 
+<!-- BANNER INTRODUCTORIO DEL CATÁLOGO -->
+<section class="catalog-hero">
+  <div class="catalog-hero__inner">
+    <div class="catalog-hero__badge">
+      <i class="fa-solid fa-bible"></i> Colección Oficial Grupo SABER
+    </div>
+    <h1 class="catalog-hero__title">
+      Catálogo de <em>Sagradas Escrituras</em>
+    </h1>
+    <p class="catalog-hero__subtitle">
+      Explora nuestra selecta variedad de Biblias en distintas versiones, formatos y tamaños, con cómodos planes de financiamiento a tu alcance.
+    </p>
+    <div class="catalog-hero__chips">
+      <span class="hero-chip"><i class="fa-solid fa-truck-fast"></i> Envíos a toda Nicaragua</span>
+      <span class="hero-chip"><i class="fa-solid fa-credit-card"></i> Planes de crédito accesibles</span>
+      <span class="hero-chip"><i class="fa-solid fa-comments"></i> Asesoría directa por WhatsApp</span>
+    </div>
+  </div>
+</section>
+
+<!-- BARRA DE FILTROS POR CATEGORÍA -->
 <div class="filter-bar">
   <div class="filter-inner">
     <button class="filter-pill active" data-cat="todas"><i class="fa-solid fa-border-all"></i> Todas</button>
@@ -57,59 +80,70 @@
 
 <main class="main-container">
 
-  <!-- SIDEBAR IZQUIERDO — CARRUSEL DE CAMPAÑAS (KPI 7) -->
+  <!-- SIDEBAR IZQUIERDO — PROMOCIONES Y CAMPAÑAS -->
   <aside class="left-sidebar" id="leftSidebar">
-  <button class="sidebar-toggle" id="toggleSidebar" title="Ocultar/Mostrar publicidad">
-    <i class="fa-solid fa-chevron-left" id="toggleIcon"></i>
-  </button>
-  <div class="promo-inner">
-    <p class="promo-label">Espacio Publicitario</p>
-    
-    <!-- NUEVO CARRUSEL ESTILO CABALLITOS -->
-    <div class="carousel-container">
-      <div class="carousel-wrapper">
-        <div class="carousel-track" id="carouselTrack">
-          <!-- Cada imagen debe tener data-campaign y data-position -->
-          <div class="carousel-slide">
-            <img src="Image/PromoPapa.jpeg" alt="Campaña 1" data-campaign="Campania_1" data-position="1">
-          </div>
-          <div class="carousel-slide">
-            <img src="Image/promomama.jpeg" alt="Campaña 2" data-campaign="Campania_2" data-position="2">
-          </div>
-          <div class="carousel-slide">
-            <img src="Image/promonino.jpeg" alt="Campaña 3" data-campaign="Campania_3" data-position="3">
-          </div>
-          <!-- Agrega más slides si quieres -->
-        </div>
+    <button class="sidebar-toggle" id="toggleSidebar" title="Ocultar/Mostrar promociones">
+      <i class="fa-solid fa-chevron-left" id="toggleIcon"></i>
+    </button>
+    <div class="promo-inner">
+      <div class="promo-header">
+        <i class="fa-solid fa-fire-flame-curved"></i>
+        <span class="promo-label">Promociones del Mes</span>
       </div>
-      <!-- Botones de navegación -->
-      <button class="carousel-btn prev" id="carouselPrev"><i class="fa-solid fa-chevron-left"></i></button>
-      <button class="carousel-btn next" id="carouselNext"><i class="fa-solid fa-chevron-right"></i></button>
-      <!-- Indicadores (puntos) -->
-      <div class="carousel-dots" id="carouselDots"></div>
+      
+      <!-- CARRUSEL DE CAMPAÑAS -->
+      <div class="carousel-container">
+        <div class="carousel-wrapper">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <img src="Image/PromoPapa.jpeg" alt="Campaña Día del Padre" data-campaign="Campania_1" data-position="1">
+            </div>
+            <div class="carousel-slide">
+              <img src="Image/promomama.jpeg" alt="Campaña Día de la Madre" data-campaign="Campania_2" data-position="2">
+            </div>
+            <div class="carousel-slide">
+              <img src="Image/promonino.jpeg" alt="Campaña Infantil" data-campaign="Campania_3" data-position="3">
+            </div>
+          </div>
+        </div>
+        <!-- Botones de navegación -->
+        <button class="carousel-btn prev" id="carouselPrev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="carousel-btn next" id="carouselNext" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        <!-- Indicadores -->
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+
+      <a href="https://wa.me/50578875960?text=Hola%20Grupo%20SABER%2C%20deseo%20consultar%20sobre%20las%20promociones%20vigentes" target="_blank" class="promo-wa-btn">
+        <i class="fa-brands fa-whatsapp"></i> Consultar Promociones
+      </a>
     </div>
-    <!-- FIN NUEVO CARRUSEL -->
+  </aside>
 
-  </div>
-</aside>
-
-  <!-- CATÁLOGO -->
+  <!-- SECCIÓN PRINCIPAL DEL CATÁLOGO -->
   <section class="catalog-section" id="catalogSection">
-    <div class="results-bar"><span id="resultsCount"></span><span id="activeFilterLabel"></span></div>
+    <div class="results-bar">
+      <div class="results-left">
+        <span id="resultsCount">Cargando catálogo...</span>
+        <span id="activeFilterLabel"></span>
+      </div>
+    </div>
     <div class="catalog-grid" id="catalogGrid"></div>
     <div class="empty-state" id="emptyState" style="display:none;">
       <div class="empty-icon"><i class="fa-solid fa-book-open"></i></div>
       <h3>Sin resultados</h3>
-      <p>No encontramos Biblias que coincidan con tu búsqueda.<br />Intenta con otro término o categoría.</p>
-      <button class="empty-reset" id="emptyReset">Ver todas las Biblias</button>
+      <p>No encontramos Biblias que coincidan con tu búsqueda.<br />Intenta con otro término o selecciona otra categoría.</p>
+      <button class="empty-reset" id="emptyReset"><i class="fa-solid fa-rotate-left"></i> Ver todas las Biblias</button>
     </div>
   </section>
 
-  <!-- SIDEBAR DERECHO - CRÉDITO -->
+  <!-- SIDEBAR DERECHO - PLAN DE CRÉDITO -->
   <aside class="right-sidebar" id="rightSidebar">
     <div class="right-sidebar-inner">
       <div class="credit-header">
-        <span class="credit-header-title">Plan de Crédito</span>
+        <div class="credit-header-left">
+          <i class="fa-solid fa-hand-holding-dollar"></i>
+          <span class="credit-header-title">Plan de Crédito</span>
+        </div>
         <button class="close-btn" id="closeCreditSidebar" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="creditContent"></div>
@@ -119,7 +153,7 @@
 
 <div class="overlay" id="overlay"></div>
 
-<!-- WHATSAPP FLOTANTE -->
+<!-- SPEED DIAL / BOTÓN FLOTANTE DE REDES SOCIALES -->
 <div class="speed-dial" id="speedDial">
   <div class="speed-dial__items" id="speedDialItems">
     <a href="https://www.facebook.com/people/Grupo-SABER/61585523433023/" target="_blank" class="speed-dial__btn speed-dial__btn--fb" title="Facebook"><i class="fa-brands fa-facebook-f"></i><span class="speed-dial__label">Facebook</span></a>
@@ -131,10 +165,13 @@
 </div>
 
 <footer class="footer">
-  <div><h1>Grupo SABER</h1></div>
+  <div class="footer-brand">
+    <h2>Grupo SABER</h2>
+    <p class="footer-tagline">La palabra de Dios a tu alcance</p>
+  </div>
   <div class="footer-copy">
-    <p>© 2025 Ediciones Mundo. Todos los derechos reservados.</p>
-    <p>Managua, Nicaragua</p>
+    <p>&copy; 2026 Grupo SABER. Todos los derechos reservados.</p>
+    <p>Managua, Nicaragua &middot; Especialistas en Biblias</p>
   </div>
 </footer>
 

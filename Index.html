@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ediciones Mundo — El conocimiento a tu alcance</title>
+  <title>Grupo SABER — La palabra de Dios a tu alcance</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,900;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="Style.css" />
+  <link rel="stylesheet" href="carrusel.css" />
   <link rel="stylesheet" href="splash.css" />
   <link rel="stylesheet" href="clientes.css">
   <link rel="stylesheet" href="dashboard-catalago.css">
@@ -34,9 +35,9 @@
       <div class="shelf" id="shelf2"></div>
     </div>
 
-    <h1 class="splash-title">Ediciones Mundo</h1>
+    <h1 class="splash-title">Grupo SABER</h1>
 
-    <p class="splash-loading-text" id="loadingText">Preparando conocimiento...</p>
+    <p class="splash-loading-text" id="loadingText">La palabra de Dios a tu alcance...</p>
 
     <div class="splash-progress">
       <div class="splash-progress-bar" id="progressBar"></div>
@@ -48,22 +49,22 @@
 
 </div>
 
-</div>
-
   <header class="navbar" id="navbar">
     <div class="navbar__inner">
-      <a href="#inicio" class="navbar__brand">
-        <div class="navbar__logo-slot" title="Espacio para logo">
+      <a href="#carrusel" class="navbar__brand">
+        <div class="navbar__logo-slot" title="Grupo SABER" style="background-image: url('Image/LogoGrupoSaber.jpg');">
           <span class="navbar__logo-text"></span>
         </div>
-        <span class="navbar__name">EMundo</span>
+        <span class="navbar__name">Grupo SABER</span>
       </a>
       <nav class="navbar__links" id="navLinks">
-        <a href="#nosotros" >Nosotros</a>
-    <a href="#mision" >Visión y Misión</a>
-    <a href="#valores" >Valores</a>
-    <a href="#informacion" >Información</a>
-    <!-- <a href="#cliente" style="color: black; font-weight: bold;">Cliente</a> -->
+        <a href="#carrusel">Promesas</a>
+        <a href="#hero">Inicio</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#mision">Visión y Misión</a>
+        <a href="#valores">Valores</a>
+        <a href="#informacion">Información</a>
+        <!-- <a href="#cliente" style="color: black; font-weight: bold;">Cliente</a> -->
       </nav>
       <button class="navbar__hamburger" id="hamburger" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -73,22 +74,146 @@
 
   <main>
 
-    <!-- HERO -->
-    <section class="hero" id="inicio">
-      <!--
-        ===================================================
-        IMAGEN DE FONDO INSTITUCIONAL
-        Para agregar tu imagen edita en style.css:
-          .hero { background-image: url('tu-imagen.jpg'); }
-        ===================================================
-      -->
+    <!-- ══════════════════════════════════════════════════
+         SECCIÓN 1: CARRUSEL DE FOTOS — PROMESAS DE DIOS
+    ══════════════════════════════════════════════════ -->
+    <section class="section carrusel-section" id="carrusel">
+      <div class="section__inner carrusel-section__inner reveal">
+        <div class="carrusel__header">
+          <span class="carrusel__badge">✦ Promesas de Dios ✦</span>
+          <h2 class="carrusel__title">Palabra Viva para<br /><em>tu Vida</em></h2>
+          <p class="carrusel__subtitle">Encuentra fortaleza, paz y esperanza en las Sagradas Escrituras cada d&iacute;a.</p>
+        </div>
+
+        <div class="carrusel" id="carruselPromesas" aria-roledescription="carousel" aria-label="Carrusel de Promesas Bíblicas">
+          <div class="carrusel__track-container">
+            <div class="carrusel__track" id="carruselTrack">
+              <!-- Slide 1: Juan 3:16 -->
+              <div class="carrusel__slide active" data-index="0">
+                <div class="carrusel__card">
+                  <div class="carrusel__card-fallback is-visible">
+                    <div class="carrusel__fallback-icon">✞</div>
+                    <div>
+                      <h3 class="carrusel__fallback-ref">JUAN 3:16</h3>
+                      <p class="carrusel__fallback-quote">«Porque de tal manera am&oacute; Dios al mundo, que ha dado a su Hijo unig&eacute;nito, para que todo aquel que en &eacute;l cree, no se pierda, mas tenga vida eterna.»</p>
+                    </div>
+                    <span class="carrusel__fallback-tag">#PromesasDeDios</span>
+                  </div>
+                  <img src="Image/carrusel-1.jpg" alt="Juan 3:16 - Porque de tal manera amó Dios al mundo" class="carrusel__img" loading="eager" onload="this.previousElementSibling.classList.remove('is-visible');" onerror="this.classList.add('is-hidden'); this.previousElementSibling.classList.add('is-visible');" />
+                  <div class="carrusel__card-caption">
+                    <span class="carrusel__card-ref">Juan 3:16</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 2: Salmo 23:1 -->
+              <div class="carrusel__slide" data-index="1">
+                <div class="carrusel__card">
+                  <div class="carrusel__card-fallback is-visible">
+                    <div class="carrusel__fallback-icon">🕊️</div>
+                    <div>
+                      <h3 class="carrusel__fallback-ref">SALMO 23:1</h3>
+                      <p class="carrusel__fallback-quote">«Jehov&aacute; es mi pastor; nada me faltar&aacute;.»</p>
+                    </div>
+                    <span class="carrusel__fallback-tag">#PromesasDeDios</span>
+                  </div>
+                  <img src="Image/carrusel-2.jpg" alt="Salmo 23:1 - Jehová es mi pastor nada me faltará" class="carrusel__img" loading="lazy" onload="this.previousElementSibling.classList.remove('is-visible');" onerror="this.classList.add('is-hidden'); this.previousElementSibling.classList.add('is-visible');" />
+                  <div class="carrusel__card-caption">
+                    <span class="carrusel__card-ref">Salmo 23:1</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 3: Isaías 41:10 -->
+              <div class="carrusel__slide" data-index="2">
+                <div class="carrusel__card">
+                  <div class="carrusel__card-fallback is-visible">
+                    <div class="carrusel__fallback-icon">🛡️</div>
+                    <div>
+                      <h3 class="carrusel__fallback-ref">ISA&Iacute;AS 41:10</h3>
+                      <p class="carrusel__fallback-quote">«No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; te ayudar&eacute;, siempre te sustentar&eacute; con la diestra de mi justicia.»</p>
+                    </div>
+                    <span class="carrusel__fallback-tag">#PromesasDeDios</span>
+                  </div>
+                  <img src="Image/carrusel-3.jpg" alt="Isaías 41:10 - No temas porque yo estoy contigo" class="carrusel__img" loading="lazy" onload="this.previousElementSibling.classList.remove('is-visible');" onerror="this.classList.add('is-hidden'); this.previousElementSibling.classList.add('is-visible');" />
+                  <div class="carrusel__card-caption">
+                    <span class="carrusel__card-ref">Isa&iacute;as 41:10</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 4: Salmo 91:1-2 -->
+              <div class="carrusel__slide" data-index="3">
+                <div class="carrusel__card">
+                  <div class="carrusel__card-fallback is-visible">
+                    <div class="carrusel__fallback-icon">🏰</div>
+                    <div>
+                      <h3 class="carrusel__fallback-ref">SALMO 91:1-2</h3>
+                      <p class="carrusel__fallback-quote">«El que habita al abrigo del Alt&iacute;simo morar&aacute; bajo la sombra del Omnipotente. Dir&eacute; yo a Jehov&aacute;: Esperanza m&iacute;a, y castillo m&iacute;o; mi Dios, en quien confiar&eacute;.»</p>
+                    </div>
+                    <span class="carrusel__fallback-tag">#PromesasDeDios</span>
+                  </div>
+                  <img src="Image/carrusel-4.jpg" alt="Salmo 91:1-2 - El que habita al abrigo del Altísimo" class="carrusel__img" loading="lazy" onload="this.previousElementSibling.classList.remove('is-visible');" onerror="this.classList.add('is-hidden'); this.previousElementSibling.classList.add('is-visible');" />
+                  <div class="carrusel__card-caption">
+                    <span class="carrusel__card-ref">Salmo 91:1-2</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Slide 5: Salmo 23:1-2 Pergamino -->
+              <div class="carrusel__slide" data-index="4">
+                <div class="carrusel__card">
+                  <div class="carrusel__card-fallback is-visible">
+                    <div class="carrusel__fallback-icon">📜</div>
+                    <div>
+                      <h3 class="carrusel__fallback-ref">SALMO 23:1-2</h3>
+                      <p class="carrusel__fallback-quote">«Jehov&aacute; es mi pastor; nada me faltar&aacute;. En lugares de delicados pastos me har&aacute; descansar; junto a aguas de reposo me pastorear&aacute;.»</p>
+                    </div>
+                    <span class="carrusel__fallback-tag">#PromesasDeDios</span>
+                  </div>
+                  <img src="Image/carrusel-5.jpg" alt="Salmo 23:1-2 - En lugares de delicados pastos me hará descansar" class="carrusel__img" loading="lazy" onload="this.previousElementSibling.classList.remove('is-visible');" onerror="this.classList.add('is-hidden'); this.previousElementSibling.classList.add('is-visible');" />
+                  <div class="carrusel__card-caption">
+                    <span class="carrusel__card-ref">Salmo 23:1-2</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones de navegación -->
+          <button class="carrusel__btn carrusel__btn--prev" id="carruselPrev" aria-label="Versículo anterior">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="carrusel__btn carrusel__btn--next" id="carruselNext" aria-label="Siguiente versículo">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+
+          <!-- Footer con dots e indicador de posición -->
+          <div class="carrusel__footer">
+            <div class="carrusel__dots" id="carruselDots" role="tablist" aria-label="Selector de versículos">
+              <button class="carrusel__dot active" data-index="0" role="tab" aria-selected="true" aria-label="Versículo 1"></button>
+              <button class="carrusel__dot" data-index="1" role="tab" aria-selected="false" aria-label="Versículo 2"></button>
+              <button class="carrusel__dot" data-index="2" role="tab" aria-selected="false" aria-label="Versículo 3"></button>
+              <button class="carrusel__dot" data-index="3" role="tab" aria-selected="false" aria-label="Versículo 4"></button>
+              <button class="carrusel__dot" data-index="4" role="tab" aria-selected="false" aria-label="Versículo 5"></button>
+            </div>
+            <span class="carrusel__counter" id="carruselCounter">1 / 5</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════
+         SECCIÓN 2: HERO (ANTERIORMENTE PRIMERA SECCIÓN)
+    ══════════════════════════════════════════════════ -->
+    <section class="hero" id="hero">
       <div class="hero__overlay"></div>
       <div class="hero__content reveal">
-        <p class="hero__eyebrow">Editorial &middot; Centroam&eacute;rica &middot; Desde 2000</p>
+        <p class="hero__eyebrow">Biblias &middot; Fe &middot; Nicaragua</p>
         <h1 class="hero__title">
-          Donde cada<br /><em>P&aacute;gina</em> es<br />un Mundo.
+          La Palabra<br /><em>de Dios</em> a<br />tu alcance.
         </h1>
-        <p class="hero__subtitle">El conocimiento a tu alcance</p>
+        <p class="hero__subtitle">La palabra de Dios a tu alcance</p>
         <div class="hero__actions">
           <a href="#informacion" class="btn btn--primary">Ver informaci&oacute;n</a>
           <a href="#nosotros"    class="btn btn--ghost">Con&oacute;cenos</a>
@@ -104,69 +229,32 @@
       <div class="section__inner">
         <div class="nosotros__text">
           <span class="section__label reveal">&#8212; Qui&eacute;nes somos</span>
-          <h2 class="section__title reveal">Una Editorial con<br /><em>alma propia.</em></h2>
-          <p class="reveal">Ediciones Mundo naci&oacute; en el a&ntilde;o 2000 en Costa Rica, en donde tiene su casa matriz y ha logrado posicionarse desde entonces, a nivel centroamericano, incluyendo Nicaragua.</p>
-          <p class="reveal">Nuestro prop&oacute;sito siempre ha sido suplir las necesidades y requerimientos de materiales educativos y publicaciones especiales con un enfoque did&aacute;ctico, creativo y de autoaprendizaje, siendo el aliado perfecto en el desarrollo cognitivo de ni&ntilde;os, adolescentes y j&oacute;venes en los diferentes niveles acad&eacute;micos de la regi&oacute;n centroamericana.</p>
-          <p class="reveal">Ediciones Mundo trabaja incansablemente en la visi&oacute;n de aportar valor con obras de calidad y de gran contenido asociado al servicio integral que brindan nuestros equipos de exitosos colaboradores, lo que nos ha llevado a conseguir el posicionamiento y reconocimiento de nuestros clientes.</p>
-          <p class="reveal">A trav&eacute;s de todos estos a&ntilde;os, hemos ido creciendo con la colaboraci&oacute;n de nuestros aliados comerciales, las m&aacute;s prestigiosas editoras a nivel internacional: <strong>Grupo Clasa, Editorial San Pablo, Harper Collins, Holman</strong> y otros socios, con quienes hemos cumplido nuestro compromiso de servir y ayudar a transformar la vida de miles de familias.</p>
-        </div>
-        <div class="nosotros__arrow-wrap reveal">
-          <button class="nosotros__arrow-btn" id="toggleGallery" aria-expanded="false" aria-controls="gallerySection">
-            <span class="nosotros__arrow-label">Ver galer&iacute;a</span>
-            <span class="nosotros__arrow-icon" aria-hidden="true">&#8595;</span>
-          </button>
+          <h2 class="section__title reveal">Dedicados a difundir<br /><em>la Palabra de Dios.</em></h2>
+          <p class="reveal">En <strong>Grupo SABER</strong> nos dedicamos exclusivamente a la venta y distribuci&oacute;n de Biblias, llevando las Sagradas Escrituras al alcance de cada persona, familia, iglesia y comunidad.</p>
+          <p class="reveal">Nos especializamos en ofrecer una selecta y amplia variedad de Biblias en distintas versiones, formatos y tama&ntilde;os: desde Biblias de estudio, devocionales y letra grande, hasta ediciones juveniles e infantiles, dise&ntilde;adas para fortalecer el crecimiento espiritual y enriquecer la lectura diaria.</p>
+          <p class="reveal">Creemos en el poder transformador de la fe y las Sagradas Escrituras. Por eso, trabajamos con calidez, compromiso y devoci&oacute;n para que la Palabra de Dios est&eacute; siempre a tu alcance.</p>
         </div>
       </div>
     </section>
-
-    <!-- GALERIA -->
-    <section class="gallery-section" id="gallerySection" aria-hidden="true">
-  <div class="section__inner">
-    <p class="gallery__hint">Imágenes institucionales</p>
-    <div class="gallery__grid">
-
-      <div class="gallery__card gallery__card--large">
-        <img src="Image/EificoEMundo.png" alt="Edificio Ediciones Mundo" class="gallery__img" />
-      </div>
-
-      <div class="gallery__card">
-        <img src="Image/dentro1.png" alt="Foto institucional 2" class="gallery__img" />
-      </div>
-
-      <div class="gallery__card">
-        <img src="Image/dentro2.png" alt="Foto institucional 3" class="gallery__img" />
-      </div>
-
-      <div class="gallery__card">
-        <img src="Image/dentro3.png" alt="Foto institucional 4" class="gallery__img" />
-      </div>
-
-      <div class="gallery__card">
-        <img src="Image/LogoEMundo.png" alt="Logo Ediciones Mundo" class="gallery__img" />
-      </div>
-
-    </div>
-  </div>
-</section>
 
     <!-- MISION Y VISION -->
     <section class="section mv" id="mision">
       <div class="section__inner">
         <span class="section__label reveal" style="text-align:center;display:block;">&#8212; Misi&oacute;n y Visi&oacute;n</span>
-        <h2 class="section__title reveal" style="text-align:center;">Comprometidos con<br /><em>la Sociedad.</em></h2>
+        <h2 class="section__title reveal" style="text-align:center;">Comprometidos con<br /><em>la Fe y la Sociedad.</em></h2>
         <div class="mv__cards">
           <div class="mv__card reveal">
             <div class="mv__card-tag">Misi&oacute;n</div>
             
             <h3>Nuestra Misi&oacute;n</h3>
-            <p>Consolidar nuestra presencia en el mercado de libros, materiales autodid&aacute;cticos y publicaciones especiales, siendo referente de calidad y buen servicio, generando beneficios integrales tanto a nuestros clientes como a nuestra compa&ntilde;&iacute;a.</p>
+            <p>Poner la Palabra de Dios al alcance de todos a trav&eacute;s de la distribuci&oacute;n de Biblias de la m&aacute;s alta calidad, promoviendo el conocimiento b&iacute;blico, los valores espirituales y la transformaci&oacute;n de vidas y familias.</p>
             <div class="mv__card-bar"></div>
           </div>
           <div class="mv__card reveal">
             <div class="mv__card-tag">Visi&oacute;n</div>
          
             <h3>Nuestra Visi&oacute;n</h3>
-            <p>Somos la editorial L&iacute;der Regional con enfoque nacional que ofrece conocimiento, aprendizaje y liderazgo a nuestro mercado, mediante una oferta variada, original y con gran contenido de valor.</p>
+            <p>Ser la distribuidora de Biblias de referencia y l&iacute;der en la regi&oacute;n, reconocida por su integridad, excelencia en la atenci&oacute;n y fidelidad a las Sagradas Escrituras.</p>
             <div class="mv__card-bar"></div>
           </div>
         </div>
@@ -183,7 +271,7 @@
             <div class="valor__card-num">01</div>
             
             <h3>Responsabilidad</h3>
-            <p>Asumimos cada tarea con seriedad y profesionalismo, cumpliendo nuestros compromisos y contribuyendo al desarrollo educativo y organizacional de manera eficiente y sostenible.</p>
+            <p>Asumimos cada tarea con seriedad y profesionalismo, cumpliendo nuestros compromisos y contribuyendo al desarrollo espiritual y social de manera eficiente y sostenible.</p>
           </div>
           <div class="valor__card reveal">
             <div class="valor__card-num">02</div>
@@ -195,7 +283,7 @@
             <div class="valor__card-num">03</div>
            
             <h3>Lealtad</h3>
-            <p>Construimos relaciones s&oacute;lidas y duraderas basadas en la confianza, el respeto y el apoyo mutuo con nuestros colaboradores, clientes y socios comerciales.</p>
+            <p>Construimos relaciones s&oacute;lidas y duraderas basadas en la confianza, el respeto y el apoyo mutuo con nuestros colaboradores, clientes y comunidad de fe.</p>
           </div>
           <div class="valor__card reveal">
             <div class="valor__card-num">04</div>
@@ -207,13 +295,13 @@
             <div class="valor__card-num">05</div>
           
             <h3>Compromiso</h3>
-            <p>Cumplimos con responsabilidad cada una de nuestras metas y obligaciones, garantizando atenci&oacute;n eficiente, productos de calidad y soluciones que aporten valor al sector educativo.</p>
+            <p>Cumplimos con dedicaci&oacute;n y responsabilidad cada una de nuestras metas y obligaciones, garantizando atenci&oacute;n eficiente, productos de calidad y un servicio enfocado en acercar la Palabra de Dios.</p>
           </div>
           <div class="valor__card reveal">
             <div class="valor__card-num">06</div>
           
             <h3>Pasi&oacute;n</h3>
-            <p>Trabajamos con entusiasmo y dedicaci&oacute;n en cada proyecto, impulsando el acceso a la educaci&oacute;n y al conocimiento, innovando constantemente para brindar un servicio de calidad.</p>
+            <p>Trabajamos con devoci&oacute;n y entusiasmo en cada proyecto, promoviendo el acceso a las Escrituras y enriqueciendo vidas a trav&eacute;s de un servicio de excelencia.</p>
           </div>
         </div>
       </div>
@@ -243,96 +331,27 @@
           </div>
         </div>
 
-        <div class="sedes__grid">
+        <div class="sedes__grid" style="grid-template-columns: 1fr; max-width: 650px; margin: 0 auto;">
 
-          <!-- Nicaragua -->
+          <!-- Sede Nicaragua -->
           <div class="sede reveal">
             <div class="sede__header">
               <span class="sede__flag">&#127475;&#127470;</span>
               <div>
-                <h3 class="sede__country">Nicaragua</h3>
-                <p class="sede__city">Managua</p>
+                <h3 class="sede__country">Grupo SABER</h3>
+                <p class="sede__city">Sucursal Principal &middot; Managua, Nicaragua</p>
               </div>
             </div>
             <div class="sede__info">
-              <p class="sede__address">Club Terraza, 350 metros al Norte, Managua.</p>
+              <p class="sede__address"><strong>Ubicaci&oacute;n:</strong> 12&deg;09'03.8"N 86&deg;10'34.3"W &mdash; Managua, Nicaragua.</p>
               <ul class="sede__contacts">
-                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>+(505) 2227 0716 / +(505) 5849 0046</span></li>
-                <li><span class="sede__contact-label">Email</span><a href="mailto:ventas@edicionesmundo.com">ventas@edicionesmundo.com</a></li>
-                <li><span class="sede__contact-label"></span><a href="mailto:emundonicaragua@yahoo.com.mx">emundonicaragua@yahoo.com.mx</a></li>
-                <li><span class="sede__contact-label"></span><a href="mailto:faviolagarcia@edicionesmundo.com">faviolagarcia@edicionesmundo.com</a></li>
+                <li><span class="sede__contact-label">WhatsApp</span><a href="https://wa.me/50578875960" target="_blank" rel="noopener">+505 7887 5960</a></li>
+                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>+(505) 5849 0046 / +(505) 7887 5960</span></li>
               </ul>
             </div>
             <div class="sede__map">
-              <iframe title="Mapa Nicaragua" src="https://www.openstreetmap.org/export/embed.html?bbox=-86.2900%2C12.1200%2C-86.2300%2C12.1700&layer=mapnik&marker=12.1450%2C-86.2600" loading="lazy"></iframe>
-              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=12.1450&mlon=-86.2600#map=15/12.1450/-86.2600" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
-            </div>
-          </div>
-
-          <!-- Costa Rica -->
-          <div class="sede reveal">
-            <div class="sede__header">
-              <span class="sede__flag">&#127464;&#127479;</span>
-              <div>
-                <h3 class="sede__country">Costa Rica</h3>
-                <p class="sede__city">San Jos&eacute;</p>
-              </div>
-            </div>
-            <div class="sede__info">
-              <p class="sede__address">San Jos&eacute;; 250 m oeste de la iglesia cat&oacute;lica a mano derecha.</p>
-              <ul class="sede__contacts">
-                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>(506) 2226 9961 / 2226 9075</span></li>
-                <li><span class="sede__contact-label">Email</span><a href="mailto:emundo@ice.co.cr">emundo@ice.co.cr</a></li>
-                <li><span class="sede__contact-label"></span><a href="mailto:kesslercr@edicionesmundo.com">kesslercr@edicionesmundo.com</a></li>
-              </ul>
-            </div>
-            <div class="sede__map">
-              <iframe title="Mapa Costa Rica" src="https://www.openstreetmap.org/export/embed.html?bbox=-84.1100%2C9.9100%2C-84.0600%2C9.9500&layer=mapnik&marker=9.9281%2C-84.0850" loading="lazy"></iframe>
-              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=9.9281&mlon=-84.0850#map=15/9.9281/-84.0850" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
-            </div>
-          </div>
-
-          <!-- Honduras -->
-          <div class="sede reveal">
-            <div class="sede__header">
-              <span class="sede__flag">&#127469;&#127475;</span>
-              <div>
-                <h3 class="sede__country">Honduras</h3>
-                <p class="sede__city">Tegucigalpa</p>
-              </div>
-            </div>
-            <div class="sede__info">
-              <p class="sede__address">Colonia 15 de septiembre, Avenida Independencia, 8va Calle, Bloque Q6, Casa 1805.</p>
-              <ul class="sede__contacts">
-                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>(504) 2234 3761 / 2233 1559</span></li>
-                <li><span class="sede__contact-label">Email</span><a href="mailto:anielka@edicionesmundo.com">anielka@edicionesmundo.com</a></li>
-              </ul>
-            </div>
-            <div class="sede__map">
-              <iframe title="Mapa Honduras" src="https://www.openstreetmap.org/export/embed.html?bbox=-87.2300%2C14.0600%2C-87.1700%2C14.1000&layer=mapnik&marker=14.0818%2C-87.2060" loading="lazy"></iframe>
-              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=14.0818&mlon=-87.2060#map=15/14.0818/-87.2060" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
-            </div>
-          </div>
-
-          <!-- Panama -->
-          <div class="sede reveal">
-            <div class="sede__header">
-              <span class="sede__flag">&#127477;&#127462;</span>
-              <div>
-                <h3 class="sede__country">Panam&aacute;</h3>
-                <p class="sede__city">Ciudad de Panam&aacute;</p>
-              </div>
-            </div>
-            <div class="sede__info">
-              <p class="sede__address">Urbanizaci&oacute;n La Sonde, v&iacute;a la Universidad Tecnol&oacute;gica, costado de la Escuela de Bellas Artes.</p>
-              <ul class="sede__contacts">
-                <li><span class="sede__contact-label">Tel&eacute;fonos</span><span>(507) 7748937 / 6215 0642</span></li>
-                <li><span class="sede__contact-label">Email</span><a href="mailto:edicionesmundo@hotmail.com">edicionesmundo@hotmail.com</a></li>
-              </ul>
-            </div>
-            <div class="sede__map">
-              <iframe title="Mapa Panama" src="https://www.openstreetmap.org/export/embed.html?bbox=-79.5450%2C8.9700%2C-79.4950%2C9.0100&layer=mapnik&marker=8.9936%2C-79.5197" loading="lazy"></iframe>
-              <a class="sede__map-link" href="https://www.openstreetmap.org/?mlat=8.9936&mlon=-79.5197#map=15/8.9936/-79.5197" target="_blank" rel="noopener">Ver mapa completo &#8599;</a>
+              <iframe title="Mapa Grupo SABER" src="https://maps.google.com/maps?q=12.151056,-86.176194&amp;z=16&amp;output=embed" loading="lazy"></iframe>
+              <a class="sede__map-link" href="https://www.google.com/maps?q=12%C2%B009'03.8%22N+86%C2%B010'34.3%22W" target="_blank" rel="noopener">Ver en Google Maps &#8599;</a>
             </div>
           </div>
 
@@ -365,7 +384,7 @@
       <div class="section__inner">
         <span class="section__label reveal" style="text-align:center;display:block;">&#8212; S&iacute;guenos</span>
         <h2 class="section__title reveal" style="text-align:center;">&#218;nete a nuestra<br /><em>comunidad digital.</em></h2>
-        <p class="redes__desc reveal">Comparte tus lecturas, descubre novedades y forma parte de una comunidad apasionada por los libros. Estamos en todas las plataformas.</p>
+        <p class="redes__desc reveal">Comparte tus lecturas, descubre novedades y forma parte de una comunidad apasionada por la Palabra de Dios. Estamos en todas las plataformas.</p>
         <div class="redes__grid reveal">
 
           <a href="https://www.facebook.com/people/Grupo-SABER/61585523433023/" target="_blank" rel="noopener" class="red__card red__card--fb">
@@ -389,13 +408,11 @@
             </div>
             <div class="red__info">
               <span class="red__name">Instagram</span>
-              <span class="red__handle">@edicionesmundo</span>
+              <span class="red__handle">@gruposabercomunidadcristiana</span>
             </div>
             <span class="red__badge red__badge--active">Activo</span>
             <span class="red__arrow">&#8594;</span>
-
           </div>
-
           </a>
 
           <a href="https://www.tiktok.com/@grupo_saber_biblias" target="_blank" rel="noopener" class="red__card red__card--tk">
@@ -405,27 +422,24 @@
             </div>
             <div class="red__info">
               <span class="red__name">TikTok</span>
-              <span class="red__handle">@edicionesmundo</span>
+              <span class="red__handle">@grupo_saber_biblias</span>
             </div>
             <span class="red__badge red__badge--active">Activo</span>
             <span class="red__arrow">&#8594;</span>
-
           </div>
           </a>
 
           <a href="https://wa.me/50578875960" target="_blank" rel="noopener" class="red__card red__card--wa">
           <div class="red__card red__card--fb red__card--active">
-            
             <div class="red__icon">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
             </div>
             <div class="red__info">
               <span class="red__name">WhatsApp</span>
-              <span class="red__handle">+505 78875960</span>
+              <span class="red__handle">+505 7887 5960</span>
             </div>
             <span class="red__badge red__badge--active">Activo</span>
             <span class="red__arrow">&#8594;</span>
-
           </div>
           </a>
 
@@ -438,21 +452,23 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__brand">
-        <div class="footer__logo-slot"><span class="footer__logo-text"></div>
+        <div class="footer__logo-slot" style="background-image: url('Image/LogoGrupoSaber.jpg');"><span class="footer__logo-text"></span></div>
         <div>
-          <p class="footer__name">Ediciones Mundo</p>
-          <p class="footer__tagline">El conocimiento a tu alcance</p>
+          <p class="footer__name">Grupo SABER</p>
+          <p class="footer__tagline">La palabra de Dios a tu alcance</p>
         </div>
       </div>
       <nav class="footer__links">
+        <a href="#carrusel">Promesas</a>
+        <a href="#hero">Inicio</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#mision">Visi&oacute;n y Misi&oacute;n</a>
         <a href="#valores">Valores</a>
         <a href="#informacion">Informaci&oacute;n</a>
       </nav>
       <div class="footer__copy">
-        <p>&copy; 2025 Ediciones Mundo. Todos los derechos reservados.</p>
-        <p>Centroam&eacute;rica</p>
+        <p>&copy; 2026 Grupo SABER. Todos los derechos reservados.</p>
+        <p>Nicaragua</p>
       </div>
     </div>
   </footer>
@@ -478,9 +494,11 @@ target="_blank">
 <span class="btn-analytics__text">
 Analytics
 </span>
-</div>
+</a>
+
 <script src="splash.js"></script>
 <script src="Main.js"></script>
 <script src="clientes.js"></script>
+<script src="carrusel.js"></script>
 </body>
-</html> 
+</html>

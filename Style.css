@@ -289,7 +289,7 @@ button {
   border-radius: var(--radius);
   border: 1.5px solid rgba(255, 255, 255, .3);
   background-color: rgba(255, 255, 255, .1);
-  background-image: url('Image/LogoEMundo.png');
+  background-image: url('Image/LogoGrupoSaber.jpg');
   background-size: cover;
   background-position: center;
   flex-shrink: 0;
@@ -383,7 +383,7 @@ button {
   display: flex;
   align-items: center;
   padding-top: var(--nav-h);
-  background-image: url('Image/Portada_EMundo.jpg');
+  background-image: url('Image/LogoGrupoSaber.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -1174,7 +1174,7 @@ button {
   background: rgba(255, 255, 255, .07);
   border: 1px solid rgba(255, 255, 255, .15);
   border-radius: var(--radius);
-  background-image: url('Image/LogoEMundo.png');
+  background-image: url('Image/LogoGrupoSaber.jpg');
   background-size: cover;
   background-position: center;
   flex-shrink: 0;

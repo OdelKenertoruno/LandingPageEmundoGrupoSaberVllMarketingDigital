@@ -76,35 +76,55 @@ function renderBiblias(data) {
   catalogGrid.innerHTML = "";
   if (data.length === 0) {
     emptyState.style.display = "block";
-    resultsCount.textContent = "Sin resultados";
+    resultsCount.textContent = "0 Biblias encontradas";
     return;
   }
   emptyState.style.display = "none";
-  resultsCount.textContent = `${data.length} ${data.length === 1 ? "Biblia encontrada" : "Biblias encontradas"}`;
+  resultsCount.textContent = `${data.length} ${data.length === 1 ? "Biblia disponible" : "Biblias disponibles"}`;
+  
   const fragment = document.createDocumentFragment();
   data.forEach((b, i) => {
     const card = document.createElement("div");
     card.className = "card";
-    card.style.animationDelay = `${i * 0.06}s`;
+    card.style.animationDelay = `${i * 0.04}s`;
     const shortCat = b.categoria.replace("Biblia ", "").replace("Biblias de ", "");
+    
     card.innerHTML = `
-      <span class="card-badge">${shortCat}</span>
+      <div class="card-badge-wrap">
+        <span class="card-badge"><i class="fa-solid fa-bookmark"></i> ${shortCat}</span>
+      </div>
       <div class="card-image loading" id="img-wrap-${b.id}">
         <img data-src="${b.imagen}" alt="${b.nombre}" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" />
       </div>
       <div class="card-content">
-        <p class="card-name">${b.nombre}</p>
-        <div class="card-price-row"><div><span class="card-price-label">Precio contado</span><p class="card-price">${fmt(b.precio)}</p></div></div>
+        <span class="card-cat-label">${b.categoria}</span>
+        <h3 class="card-name">${b.nombre}</h3>
+        <div class="card-price-row">
+          <div>
+            <span class="card-price-label">Precio Contado</span>
+            <p class="card-price">${fmt(b.precio)}</p>
+          </div>
+          <div class="card-credit-chip" title="Cuota estimada de crédito">
+            <span class="credit-chip-sub">O a crédito</span>
+            <span class="credit-chip-val">${fmt(b.montoCuota)}/mes</span>
+          </div>
+        </div>
         <div class="card-buttons">
-          <button class="btn btn-credit" data-id="${b.id}"><i class="fa-solid fa-credit-card"></i> Crédito</button>
-          <a href="https://wa.me/${WA_NUMBER}?text=Hola%2C%20deseo%20información%20sobre%20la%20Biblia%3A%20${encodeURIComponent(b.nombre)}" target="_blank" style="flex:1; display:flex;"><button class="btn btn-whatsapp" style="width:100%"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button></a>
+          <button class="btn btn-credit" data-id="${b.id}" aria-label="Ver plan de crédito">
+            <i class="fa-solid fa-calculator"></i> Plan Crédito
+          </button>
+          <a href="https://wa.me/${WA_NUMBER}?text=Hola%20Grupo%20SABER%2C%20deseo%20informaci%C3%B3n%20sobre%20la%20Biblia%3A%20${encodeURIComponent(b.nombre)}" target="_blank" class="card-wa-link" aria-label="Consultar por WhatsApp">
+            <button class="btn btn-whatsapp"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+          </a>
         </div>
       </div>
     `;
     fragment.appendChild(card);
   });
+  
   catalogGrid.appendChild(fragment);
   initLazyLoad();
+  
   catalogGrid.querySelectorAll(".btn-credit").forEach(btn => {
     btn.addEventListener("click", () => openCredit(Number(btn.dataset.id)));
   });
@@ -120,10 +140,10 @@ function initLazyLoad() {
       img.src = img.dataset.src;
       img.removeAttribute("data-src");
       img.onload  = () => { if (wrap) wrap.classList.remove("loading"); };
-      img.onerror = () => { if (wrap) { wrap.classList.remove("loading"); wrap.style.background = "#dceef5"; } };
+      img.onerror = () => { if (wrap) { wrap.classList.remove("loading"); wrap.style.background = "#eef4f8"; } };
       observer.unobserve(img);
     });
-  }, { rootMargin: "100px" });
+  }, { rootMargin: "120px" });
   imgs.forEach(img => observer.observe(img));
 }
 
@@ -131,29 +151,60 @@ function openCredit(id) {
   const b = biblias.find(item => item.id === id);
   if (!b) return;
   creditContent.style.opacity   = "0";
-  creditContent.style.transform = "translateX(30px)";
+  creditContent.style.transform = "translateX(25px)";
   rightSidebar.classList.add("active");
   overlay.classList.add("active");
+  
   setTimeout(() => {
     creditContent.innerHTML = `
-      <div class="credit-img-wrap"><img src="${b.imagen}" alt="${b.nombre}" /></div>
-      <p class="credit-name">${b.nombre}</p>
-      <p class="credit-cat">${b.categoria}</p>
-      <div class="credit-card">
-        <p class="credit-card-title">Precio de crédito</p>
-        <p class="credit-card-price"><span>C$</span> ${b.precioCredito.toLocaleString("es-NI")}</p>
-        <div class="credit-details">
-          <div class="credit-detail-item"><span class="credit-detail-label">Prima inicial</span><span class="credit-detail-value">${fmt(b.prima)}</span></div>
-          <div class="credit-detail-item"><span class="credit-detail-label">N° de cuotas</span><span class="credit-detail-value">${b.cuotas} cuotas</span></div>
-          <div class="credit-detail-item" style="grid-column:1/-1"><span class="credit-detail-label">Monto por cuota</span><span class="credit-detail-value">${fmt(b.montoCuota)} / mes</span></div>
+      <div class="credit-img-wrap">
+        <img src="${b.imagen}" alt="${b.nombre}" />
+      </div>
+      <span class="credit-badge"><i class="fa-solid fa-tag"></i> ${b.categoria}</span>
+      <h3 class="credit-name">${b.nombre}</h3>
+      
+      <div class="credit-pricing-box">
+        <div class="credit-price-header">
+          <div>
+            <span class="credit-card-sub">Precio a Crédito</span>
+            <p class="credit-card-price"><span>C$</span> ${b.precioCredito.toLocaleString("es-NI")}</p>
+          </div>
+          <div class="credit-contado-tag">
+            <span>Contado:</span>
+            <strong>${fmt(b.precio)}</strong>
+          </div>
+        </div>
+
+        <div class="credit-details-grid">
+          <div class="credit-detail-item">
+            <span class="credit-detail-label"><i class="fa-solid fa-hand-holding-dollar"></i> Prima Inicial</span>
+            <span class="credit-detail-value highlight-prima">${fmt(b.prima)}</span>
+          </div>
+          <div class="credit-detail-item">
+            <span class="credit-detail-label"><i class="fa-solid fa-calendar-days"></i> Plazo</span>
+            <span class="credit-detail-value">${b.cuotas} cuotas mensuales</span>
+          </div>
+          <div class="credit-detail-item full-width">
+            <span class="credit-detail-label"><i class="fa-solid fa-money-bill-wave"></i> Cuota Mensual Estimada</span>
+            <span class="credit-detail-value highlight-cuota">${fmt(b.montoCuota)} / mes</span>
+          </div>
         </div>
       </div>
-      <a href="https://wa.me/${WA_NUMBER}?text=Hola%2C%20me%20interesa%20el%20plan%20de%20crédito%20para%20la%20Biblia%3A%20${encodeURIComponent(b.nombre)}" target="_blank" class="credit-wa-btn"><i class="fa-brands fa-whatsapp"></i> Consultar plan de crédito</a>
+
+      <div class="credit-benefits">
+        <div class="credit-benefit"><i class="fa-solid fa-circle-check"></i> Trámite ágil y personalizado</div>
+        <div class="credit-benefit"><i class="fa-solid fa-circle-check"></i> Sin fiador para clientes calificados</div>
+        <div class="credit-benefit"><i class="fa-solid fa-circle-check"></i> Envíos a todos los departamentos de Nicaragua</div>
+      </div>
+
+      <a href="https://wa.me/${WA_NUMBER}?text=Hola%20Grupo%20SABER%2C%20deseo%20solicitar%20el%20plan%20de%20cr%C3%A9dito%20para%20la%20Biblia%3A%20${encodeURIComponent(b.nombre)}%20(Prima%3A%20${encodeURIComponent(fmt(b.prima))}%2C%20${b.cuotas}%20cuotas%20de%20${encodeURIComponent(fmt(b.montoCuota))})" target="_blank" class="credit-wa-btn">
+        <i class="fa-brands fa-whatsapp"></i> Solicitar este Plan de Crédito
+      </a>
     `;
-    creditContent.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    creditContent.style.transition = "opacity 0.35s ease, transform 0.35s ease";
     creditContent.style.opacity    = "1";
     creditContent.style.transform  = "translateX(0)";
-  }, 120);
+  }, 100);
 }
 
 function closeCredit() {
@@ -170,8 +221,12 @@ document.querySelectorAll(".filter-pill").forEach(pill => {
     document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
     pill.classList.add("active");
     currentFilter = pill.dataset.cat;
-    if (currentFilter === "todas") activeFilterLabel.classList.remove("visible");
-    else { activeFilterLabel.textContent = currentFilter; activeFilterLabel.classList.add("visible"); }
+    if (currentFilter === "todas") {
+      activeFilterLabel.classList.remove("visible");
+    } else {
+      activeFilterLabel.textContent = currentFilter;
+      activeFilterLabel.classList.add("visible");
+    }
     renderBiblias(filteredData());
   });
 });
@@ -184,7 +239,7 @@ searchInput.addEventListener("input", () => {
   searchDebounce = setTimeout(() => {
     currentSearch = val.toLowerCase();
     renderBiblias(filteredData());
-  }, 280);
+  }, 260);
 });
 
 searchClear.addEventListener("click", () => {
@@ -202,14 +257,17 @@ function updateAutocomplete(val) {
   const matches = biblias.filter(b =>
     b.nombre.toLowerCase().includes(lower) || b.categoria.toLowerCase().includes(lower)
   ).slice(0, 6);
+  
   if (matches.length === 0) { autocompleteDD.classList.remove("open"); return; }
+  
   autocompleteDD.innerHTML = matches.map(b => `
     <div class="autocomplete-item" data-id="${b.id}">
-      <i class="fa-solid fa-book"></i>
+      <i class="fa-solid fa-book-bible"></i>
       <span>${highlight(b.nombre, val)}</span>
       <span class="autocomplete-cat">${b.categoria.replace("Biblia ","").replace("Biblias de ","")}</span>
     </div>
   `).join("");
+  
   autocompleteDD.classList.add("open");
   autocompleteDD.querySelectorAll(".autocomplete-item").forEach(item => {
     item.addEventListener("click", () => {
@@ -226,7 +284,7 @@ function updateAutocomplete(val) {
 
 function highlight(text, query) {
   const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
-  return text.replace(re, '<strong style="color:var(--primary)">$1</strong>');
+  return text.replace(re, '<strong style="color:var(--primary); font-weight:700;">$1</strong>');
 }
 
 document.addEventListener("click", e => {
@@ -249,6 +307,7 @@ document.getElementById("emptyReset").addEventListener("click", () => {
   renderBiblias(biblias);
 });
 
+// Render inicial
 renderBiblias(biblias);
 
 // ── SPEED DIAL ─────────────────────────────────────────────────────────
@@ -260,6 +319,7 @@ speedDialMain.addEventListener("click", () => {
   const isOpen = speedDial.classList.toggle("open");
   speedDialIcon.className = isOpen ? "fa-solid fa-xmark" : "fa-solid fa-share-nodes";
 });
+
 document.addEventListener("click", e => {
   if (!e.target.closest(".speed-dial")) {
     speedDial.classList.remove("open");
@@ -269,7 +329,6 @@ document.addEventListener("click", e => {
 
 // ═══════════════════════════════════════════════════════════════════════
 //  CARRUSEL DE CAMPAÑAS + LIGHTBOX + KPI 7 (GA4)
-//  ✅ Código único — sin duplicados
 // ═══════════════════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -283,7 +342,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const slideEls = Array.from(track.children);
   let currentIdx = 0;
   let autoTimer;
-  const AUTO_DELAY = 5000;
+  const AUTO_DELAY = 4500;
 
   // ── Puntos indicadores ──────────────────────────────────────────────
   slideEls.forEach((_, i) => {
@@ -343,9 +402,6 @@ document.addEventListener('DOMContentLoaded', function () {
       const campaignName     = img.getAttribute('data-campaign');
       const campaignPosition = img.getAttribute('data-position');
 
-      // ✅ Evento GA4 — disparo único y limpio
-      // NOTA: usamos "nombre_campania" en lugar de "campaign_name"
-      // porque "campaign_name" es palabra reservada de GA4 y se convierte a "campaign"
       if (typeof gtag === 'function' && campaignName) {
         gtag('event', 'campaign_click', {
           nombre_campania  : campaignName,
@@ -381,7 +437,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // ════════════════════════════════════════════════════
 
 (function trackSocialClicksCatalogo() {
-
   const socialDial = [
     { selector: '.speed-dial__btn--fb', platform: 'facebook'  },
     { selector: '.speed-dial__btn--ig', platform: 'instagram' },
@@ -403,5 +458,4 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
   });
-
 })();

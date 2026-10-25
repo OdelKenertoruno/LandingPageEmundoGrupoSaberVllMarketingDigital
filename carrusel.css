@@ -1,0 +1,359 @@
+/* ════════════════════════════════════════════════════
+   GRUPO SABER — carrusel.css
+   Carrusel de Promesas Bíblicas (Primera Sección)
+   Fondo Profesional & Lujoso para Grupo SABER
+════════════════════════════════════════════════════ */
+
+.carrusel-section {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(var(--nav-h) + 2rem);
+  padding-bottom: 4rem;
+  background-color: #030d17;
+  background-image: 
+    radial-gradient(circle at 50% 45%, rgba(201, 168, 76, 0.14) 0%, rgba(0, 96, 139, 0.18) 38%, transparent 70%),
+    radial-gradient(ellipse at 50% 0%, rgba(0, 96, 139, 0.38) 0%, transparent 60%),
+    linear-gradient(180deg, #04121e 0%, #020911 50%, #01060c 100%);
+  overflow: hidden;
+  color: var(--white);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+}
+
+/* Efecto de destellos sutiles de fondo */
+.carrusel-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(201, 168, 76, 0.35), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 100px 150px, rgba(255, 255, 255, 0.4), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 240px 80px, rgba(201, 168, 76, 0.3), rgba(0,0,0,0)),
+    radial-gradient(2px 2px at 320px 220px, rgba(255, 255, 255, 0.25), rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 360px 360px;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Halo resplandeciente debajo del carrusel */
+.carrusel-section::after {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 260px;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.2) 0%, transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carrusel-section__inner {
+  position: relative;
+  z-index: 2;
+  width: min(var(--max-w), 100% - 2.5rem);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carrusel__header {
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 680px;
+}
+
+.carrusel__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-light);
+  font-size: 0.82rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.18) 0%, rgba(0, 96, 139, 0.25) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.45);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(201, 168, 76, 0.15);
+  padding: 0.4rem 1.4rem;
+  border-radius: 50px;
+  margin-bottom: 0.9rem;
+}
+
+.carrusel__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 4.6vw, 3.2rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--white);
+  margin-bottom: 0.65rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.7);
+}
+
+.carrusel__title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold);
+}
+
+.carrusel__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.55;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.carrusel {
+  position: relative;
+  width: 100%;
+  max-width: 410px;
+  margin: 0 auto;
+}
+
+.carrusel__track-container {
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 
+    0 25px 65px rgba(0, 0, 0, 0.85),
+    0 0 50px rgba(201, 168, 76, 0.28),
+    inset 0 0 0 1.5px rgba(201, 168, 76, 0.45);
+  background: #020a12;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.carrusel__track {
+  display: flex;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+.carrusel__slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carrusel__card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  max-height: 610px;
+  background: #030d17;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carrusel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: #020a12;
+  position: relative;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.carrusel__img.is-hidden {
+  display: none !important;
+}
+
+/* Tarjeta de reserva */
+.carrusel__card-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  padding: 2.5rem 1.8rem;
+  background: radial-gradient(circle at 50% 30%, #0d283c 0%, #041420 80%, #020a10 100%);
+  border: 1.5px solid rgba(201, 168, 76, 0.4);
+  border-radius: inherit;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: var(--white);
+  z-index: 1;
+}
+
+.carrusel__card-fallback.is-visible {
+  display: flex;
+}
+
+.carrusel__fallback-icon {
+  font-size: 2.2rem;
+  color: var(--gold);
+  margin-top: 0.5rem;
+  filter: drop-shadow(0 0 10px rgba(201, 168, 76, 0.4));
+}
+
+.carrusel__fallback-ref {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  margin-bottom: 1rem;
+}
+
+.carrusel__fallback-quote {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 0 0.5rem;
+}
+
+.carrusel__fallback-tag {
+  font-family: var(--font-light);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--gold-light);
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
+}
+
+.carrusel__card-caption {
+  position: absolute;
+  bottom: 0.9rem;
+  right: 0.9rem;
+  background: rgba(0, 15, 26, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 168, 76, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  padding: 0.35rem 0.95rem;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.carrusel__card-ref {
+  color: var(--gold-light);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+/* Botones de navegación */
+.carrusel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(2, 14, 24, 0.88);
+  border: 1.5px solid rgba(201, 168, 76, 0.55);
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 0 15px rgba(201, 168, 76, 0.15);
+}
+
+.carrusel__btn:hover {
+  background: var(--gold);
+  color: #001626;
+  border-color: var(--gold);
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 0 25px rgba(201, 168, 76, 0.7);
+}
+
+.carrusel__btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carrusel__btn--prev {
+  left: -24px;
+}
+
+.carrusel__btn--next {
+  right: -24px;
+}
+
+/* Footer del carrusel: dots + contador */
+.carrusel__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 1.4rem;
+}
+
+.carrusel__dots {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.carrusel__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.35s ease;
+  padding: 0;
+}
+
+.carrusel__dot:hover {
+  background: rgba(201, 168, 76, 0.7);
+}
+
+.carrusel__dot.active {
+  width: 32px;
+  border-radius: 12px;
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 14px rgba(201, 168, 76, 0.75);
+}
+
+.carrusel__counter {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.88rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  background: rgba(2, 14, 24, 0.6);
+  padding: 0.2rem 0.7rem;
+  border-radius: 12px;
+  border: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+@media (max-width: 600px) {
+  .carrusel {
+    max-width: 88vw;
+  }
+  .carrusel__btn {
+    width: 40px;
+    height: 40px;
+  }
+  .carrusel__btn--prev {
+    left: 8px;
+  }
+  .carrusel__btn--next {
+    right: 8px;
+  }
+}
+
+
